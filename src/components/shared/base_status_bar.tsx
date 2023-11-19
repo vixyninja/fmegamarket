@@ -10,7 +10,7 @@ export default function BaseStatusBar() {
       backgroundColor={theme.colors.background}
       animated
       networkActivityIndicatorVisible
-      showHideTransition={"fade"}
+      showHideTransition={"slide"}
     />
   );
 }

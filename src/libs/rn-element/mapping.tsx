@@ -1,4 +1,4 @@
-import { TextProps, createTheme, Theme, Colors } from "@rneui/themed";
+import { Colors, TextProps, Theme, createTheme } from "@rneui/themed";
 import { spacing } from "./dimens";
 
 export const theme = createTheme({
@@ -24,6 +24,17 @@ export const theme = createTheme({
       return {
         style: {
           color: theme.colors.secondary,
+        },
+        ...props,
+      };
+    },
+    Button(props, theme) {
+      return {
+        buttonStyle: {
+          backgroundColor: theme.colors.secondary,
+        },
+        titleStyle: {
+          color: theme.colors.primary,
         },
         ...props,
       };

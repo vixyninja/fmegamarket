@@ -1,9 +1,9 @@
+import { BaseStatusBar } from "@components/shared";
+import { ThemeProvider } from "@wrappers/providers";
 import React from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Metrics, SafeAreaProvider } from "react-native-safe-area-context";
 import { RootNavigation } from "./libs";
-import { ThemeProvider } from "@wrappers/providers";
-import { BaseStatusBar } from "@components/shared";
 
 export default function App() {
   const initialMetrics: Metrics = {

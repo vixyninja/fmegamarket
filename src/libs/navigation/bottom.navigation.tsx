@@ -1,10 +1,11 @@
 import { bottomTabScreenStack } from "@features/Main";
+import { useBackHandler } from "@hooks/useBackHandler";
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import { Colors, Icon, Theme, makeStyles, useTheme } from "@rneui/themed";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import * as Animatable from "react-native-animatable";
 
@@ -12,8 +13,20 @@ export default function BottomTabNavigation() {
   const { theme } = useTheme();
   const styles = useStyles();
   const BottomTab = createBottomTabNavigator();
+
+  const [backButtonEnabled, setBackButtonEnabled] = useState(false);
+
+  useBackHandler(() => {
+    if (backButtonEnabled) {
+      return false;
+    } else {
+      return true;
+    }
+  });
+
   const bottomTabNavigationOptions: BottomTabNavigationOptions = {
     tabBarStyle: styles.tabBar,
+    headerShown: false,
   };
 
   const startAnim = {
@@ -60,16 +73,20 @@ export default function BottomTabNavigation() {
         activeOpacity={1}
         style={styles.container}
       >
-        <Animatable.View ref={viewRef} style={styles.container} duration={1000}>
+        <Animatable.View ref={viewRef} style={styles.container} useNativeDriver>
           <View style={styles.btn}>
-            <Animatable.View ref={circleRef} style={styles.circle} />
+            <Animatable.View
+              ref={circleRef}
+              style={styles.circle}
+              useNativeDriver
+            />
             <Icon
               type={item.type}
               name={item.icon}
               color={focused ? theme.colors.primary : theme.colors.secondary}
             />
           </View>
-          <Animatable.Text ref={textRef} style={styles.text}>
+          <Animatable.Text ref={textRef} style={styles.text} useNativeDriver>
             {item.label}
           </Animatable.Text>
         </Animatable.View>
