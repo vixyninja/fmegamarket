@@ -7,10 +7,12 @@ import {
 import { LabelPosition } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
 import { Icon, Text, normalize, useTheme } from "@rneui/themed";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function BottomTabNavigation() {
   const { theme } = useTheme();
   const BottomTab = createBottomTabNavigator();
+  const { t } = useTranslation();
 
   const [backButtonEnabled, setBackButtonEnabled] = useState(false);
 
@@ -32,9 +34,7 @@ export default function BottomTabNavigation() {
       elevation: 2,
       paddingBottom: 4,
     },
-
     lazy: true,
-    freezeOnBlur: true,
   };
 
   return (
@@ -42,6 +42,7 @@ export default function BottomTabNavigation() {
       screenOptions={bottomTabNavigationOptions}
       backBehavior="initialRoute"
       initialRouteName="Home"
+      i18nIsDynamicList
     >
       {bottomTabScreenStack.map((_, index) => (
         <BottomTab.Screen
@@ -66,11 +67,10 @@ export default function BottomTabNavigation() {
                     fontSize: normalize(11),
                   }}
                 >
-                  {props.children}
+                  {t(bottomTabScreenStack[index].option.label)}
                 </Text>
               );
             },
-            title: bottomTabScreenStack[index].option.label,
             tabBarIcon: (props: {
               focused: boolean;
               color: string;

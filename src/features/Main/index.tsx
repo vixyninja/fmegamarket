@@ -1,14 +1,75 @@
-import { ScreenType } from "@libs/navigation";
-import { ExploreScreen, SubScreen } from "./Explore";
+import { BottomTab, ScreenType } from "@libs/navigation";
+import { CartScreen } from "./Cart";
+import { ExploreScreen } from "./Explore";
 import { HomeScreen } from "./Home";
 import { OrderScreen } from "./Order";
-import { CartScreen } from "./Cart";
-import { WalletScreen } from "./Wallet";
+import { ProfileScreen, SettingScreen } from "./Profile";
+
+export enum AppScreenKeys {
+  BottomTab = "BottomTab",
+  SettingScreen = "SettingScreen",
+}
+
+export enum BottomTabScreenKeys {
+  Home = "Home",
+  Explore = "Explore",
+  Orders = "Orders",
+  Cart = "Cart",
+  Profile = "Profile",
+}
 
 export const bottomTabScreenStack: Array<ScreenType> = [
   {
-    name: "Home",
+    name: BottomTabScreenKeys.Home,
     component: HomeScreen,
+    option: {
+      icon: "home",
+      type: "feather",
+      label: "HOME",
+    },
+  },
+  {
+    name: BottomTabScreenKeys.Explore,
+    component: ExploreScreen,
+    option: {
+      icon: "search",
+      type: "feather",
+      label: "EXPLORE",
+    },
+  },
+  {
+    name: BottomTabScreenKeys.Orders,
+    component: OrderScreen,
+    option: {
+      icon: "shopping-bag",
+      type: "feather",
+      label: "ORDERS",
+    },
+  },
+  {
+    name: BottomTabScreenKeys.Cart,
+    component: CartScreen,
+    option: {
+      icon: "shopping-cart",
+      type: "feather",
+      label: "CART",
+    },
+  },
+  {
+    name: BottomTabScreenKeys.Profile,
+    component: ProfileScreen,
+    option: {
+      icon: "user",
+      type: "feather",
+      label: "PROFILE",
+    },
+  },
+];
+
+export const appScreenStack: Array<ScreenType> = [
+  {
+    name: AppScreenKeys.BottomTab,
+    component: BottomTab,
     option: {
       icon: "home",
       type: "feather",
@@ -16,51 +77,12 @@ export const bottomTabScreenStack: Array<ScreenType> = [
     },
   },
   {
-    name: "Explore",
-    component: ExploreScreen,
+    name: AppScreenKeys.SettingScreen,
+    component: SettingScreen,
     option: {
-      icon: "search",
+      icon: "settings",
       type: "feather",
-      label: "Explore",
+      label: "Setting",
     },
-  },
-  {
-    name: "Orders",
-    component: OrderScreen,
-    option: {
-      icon: "shopping-bag",
-      type: "feather",
-      label: "Orders",
-    },
-  },
-  {
-    name: "Cart",
-    component: CartScreen,
-    option: {
-      icon: "shopping-cart",
-      type: "feather",
-      label: "Cart",
-    },
-  },
-  {
-    name: "Wallet",
-    component: WalletScreen,
-    option: {
-      icon: "credit-card",
-      type: "feather",
-      label: "Wallet",
-    },
-  },
-];
-
-export enum AppScreenKeys {
-  BottomTab = "BottomTab",
-  Sub = "Sub",
-}
-
-export const appScreenStack: Array<ScreenType> = [
-  {
-    name: AppScreenKeys.Sub,
-    component: SubScreen,
   },
 ];

@@ -15,8 +15,8 @@ export const resource = {
 
 i18next.use(initReactI18next).init({
   compatibilityJSON: "v3",
-  lng: "vi",
-  fallbackLng: "vi",
+  lng: "en",
+  fallbackLng: "en",
   resources: resource,
   cache: {
     enabled: true,

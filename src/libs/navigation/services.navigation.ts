@@ -1,5 +1,6 @@
 import {
   CommonActions,
+  DrawerActions,
   NavigationContainerRef,
   StackActions,
 } from "@react-navigation/native";
@@ -63,4 +64,33 @@ export class NavigationServices {
 
   static pop = (count?: number) =>
     navigationRef.current?.dispatch(StackActions.pop(count));
+
+  static drawerOpen = () =>
+    navigationRef.current?.dispatch(DrawerActions.openDrawer());
+
+  static drawerClose = () =>
+    navigationRef.current?.dispatch(DrawerActions.closeDrawer());
+
+  static drawerToggle = () =>
+    navigationRef.current?.dispatch(DrawerActions.toggleDrawer());
+
+  static drawerJumpTo = (route: string) =>
+    navigationRef.current?.dispatch(DrawerActions.jumpTo(route));
+
+  static bottomTabJumpTo = (route: string) =>
+    navigationRef.current?.dispatch(CommonActions.navigate(route));
+
+  static bottomTabJumpToWithParams = (route: string, params: any) =>
+    navigationRef.current?.dispatch(CommonActions.navigate(route, params));
+
+  static bottomTabReset = (
+    routes: { name: string; params?: any }[],
+    index: number,
+  ) =>
+    navigationRef.current?.dispatch(
+      CommonActions.reset({
+        index,
+        routes,
+      }),
+    );
 }

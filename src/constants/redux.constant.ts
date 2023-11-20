@@ -3,4 +3,5 @@ export enum ReduxEnum {
   loading = "loading",
   auth = "auth",
   user = "user",
+  alert = "alert",
 }

@@ -1,4 +1,8 @@
-import { BaseLoadingLottie, BaseStatusBar } from "@components/shared";
+import {
+  BaseAlert,
+  BaseLoadingLottie,
+  BaseStatusBar,
+} from "@components/shared";
 import { persistor, store } from "@libs/app-redux";
 import { ThemeProvider } from "@wrappers/providers";
 import React, { useEffect } from "react";
@@ -31,6 +35,7 @@ export default function App() {
                 <BaseStatusBar />
                 <RootNavigation />
                 <BaseLoadingLottie />
+                <BaseAlert />
               </ThemeProvider>
             </GestureHandlerRootView>
           </I18nextProvider>

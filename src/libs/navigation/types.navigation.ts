@@ -1,5 +1,5 @@
 export type ScreenType = {
-  name: string;
+  name: any;
   component: any;
   key?: string;
   option?: any;

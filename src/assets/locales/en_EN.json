@@ -1,3 +1,10 @@
 {
-  "change_language": "Change language"
+  "change_language": "Change language",
+  "HOME": "Home",
+  "EXPLORE": "Explore",
+  "ORDERS": "Orders",
+  "CART": "Cart",
+  "PROFILE": "Profile",
+  "cancel": "Cancel",
+  "ok": "Ok"
 }

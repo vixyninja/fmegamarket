@@ -4,7 +4,6 @@ import {
   createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import React from "react";
-import BottomTabNavigation from "./bottom.navigation";
 
 export default function AppNavigation() {
   const AppStack = createNativeStackNavigator();
@@ -25,25 +24,8 @@ export default function AppNavigation() {
     <AppStack.Navigator
       screenOptions={authNavigationOptions}
       id="appNavigation"
-      screenListeners={{
-        focus: (e) => {
-          console.log("=================> FOCUS", e);
-        },
-        blur: (e) => {
-          console.log("=================> BLUR", e);
-        },
-        state: (e) => {
-          console.log("=================> STATE", e);
-        },
-      }}
       initialRouteName={AppScreenKeys.BottomTab}
     >
-      <AppStack.Screen
-        key={AppScreenKeys.BottomTab}
-        name={AppScreenKeys.BottomTab}
-        component={BottomTabNavigation}
-      />
-
       {appScreenStack.map((_, index) => (
         <AppStack.Screen
           key={index}

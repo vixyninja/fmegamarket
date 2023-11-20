@@ -24,17 +24,6 @@ export default function AuthNavigation() {
     <AuthStack.Navigator
       screenOptions={authNavigationOptions}
       id="authNavigation"
-      screenListeners={{
-        focus: (e) => {
-          console.log("=================> FOCUS", e);
-        },
-        blur: (e) => {
-          console.log("=================> BLUR", e);
-        },
-        state: (e) => {
-          console.log("=================> STATE", e);
-        },
-      }}
       initialRouteName={AuthScreenKeys.SignIn}
     >
       {authScreenStack.map((_, index) => (
