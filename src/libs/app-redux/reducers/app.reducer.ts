@@ -4,13 +4,11 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 type AppStateType = {
   language: "vi" | "en";
   firstTime: boolean;
-  loading: boolean;
 };
 
 const initialState: AppStateType = {
   language: "en",
   firstTime: true,
-  loading: false,
 };
 
 const reducer = createSlice({
@@ -22,9 +20,6 @@ const reducer = createSlice({
     },
     setFirstTime: (state: AppStateType, action: PayloadAction<boolean>) => {
       state.firstTime = action.payload;
-    },
-    setLoading: (state: AppStateType, action: PayloadAction<boolean>) => {
-      state.loading = action.payload;
     },
   },
 });

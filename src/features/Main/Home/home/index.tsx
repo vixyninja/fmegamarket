@@ -1,5 +1,6 @@
 import { BaseHeader } from "@components/shared";
 import { BASE_IMAGE_URL } from "@constants/system.constant";
+import { useAppDispatch } from "@hooks/useRedux";
 import { Button, Text, useThemeMode } from "@rneui/themed";
 import { BaseRootView } from "@wrappers/hoc";
 import { t } from "i18next";
@@ -7,6 +8,8 @@ import React from "react";
 
 export default function HomeScreen() {
   const { mode, setMode } = useThemeMode();
+
+  const dispatch = useAppDispatch();
 
   function _handleToggleTheme() {
     setMode(mode === "light" ? "dark" : "light");

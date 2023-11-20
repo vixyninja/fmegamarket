@@ -1,10 +1,16 @@
 import { ANIMS_MANAGER } from "@assets/anims";
+import { useAppSelector } from "@hooks/useRedux";
+import { loadingSelector } from "@libs/app-redux/selectors/loading.selector";
 import { Text } from "@rneui/themed";
 import LottieView from "lottie-react-native";
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
 export default function ControllingAnimationProgress() {
+  const loading = useAppSelector(loadingSelector);
+
+  if (!loading.loading) return <View />;
+
   return (
     <View style={styles.root}>
       <LottieView
@@ -16,7 +22,9 @@ export default function ControllingAnimationProgress() {
         speed={0.7}
         useNativeLooping={true}
       />
-      <Text>Loading...</Text>
+      {loading?.title !== "" && (
+        <Text style={styles.text}>{loading?.title}</Text>
+      )}
     </View>
   );
 }
@@ -34,5 +42,10 @@ const styles = StyleSheet.create({
     zIndex: 999,
     width: 50,
     height: 50,
+  },
+  text: {
+    color: "white",
+    marginTop: 6,
+    fontSize: 16,
   },
 });

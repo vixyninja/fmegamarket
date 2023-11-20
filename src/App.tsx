@@ -30,6 +30,7 @@ export default function App() {
               <ThemeProvider>
                 <BaseStatusBar />
                 <RootNavigation />
+                <BaseLoadingLottie />
               </ThemeProvider>
             </GestureHandlerRootView>
           </I18nextProvider>

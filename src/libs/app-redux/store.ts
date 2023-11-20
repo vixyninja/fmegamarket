@@ -5,7 +5,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
 import createSagaMiddleware from "redux-saga";
-import { AppReducer } from "./reducers";
+import { AppReducer, LoadingReducer } from "./reducers";
 import rootSaga from "./sagas/root.saga";
 import { ReduxEnum } from "@constants/redux.constant";
 
@@ -14,11 +14,12 @@ const persistConfig: PersistConfig<RootState> = {
   storage: EncryptedStorage,
   timeout: 30000,
   stateReconciler: autoMergeLevel2,
-  whitelist: [ReduxEnum.app],
+  blacklist: [ReduxEnum.loading],
 };
 
 const rootReducers = combineReducers({
   app: AppReducer,
+  loading: LoadingReducer,
 });
 
 type RootState = ReturnType<typeof rootReducers>;
