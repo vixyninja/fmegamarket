@@ -15,12 +15,11 @@
           { "@services": "./src/services" },
           { "@utils": "./src/utils" },
           { "@wrappers": "./src/wrappers" },
-          { "@assets": "./assets" },
-          { "@tests": "./tests" }
+          { "@assets": "./src/assets" }
         ],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
-    ]
-    //   "react-native-reanimated/plugin"
+    ],
+    "react-native-reanimated/plugin"
   ]
 }

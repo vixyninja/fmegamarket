@@ -1,6 +1,9 @@
 import { ScreenType } from "@libs/navigation";
 import { ExploreScreen, SubScreen } from "./Explore";
 import { HomeScreen } from "./Home";
+import { OrderScreen } from "./Order";
+import { CartScreen } from "./Cart";
+import { WalletScreen } from "./Wallet";
 
 export const bottomTabScreenStack: Array<ScreenType> = [
   {
@@ -16,9 +19,36 @@ export const bottomTabScreenStack: Array<ScreenType> = [
     name: "Explore",
     component: ExploreScreen,
     option: {
-      icon: "home",
+      icon: "search",
       type: "feather",
-      label: "Home",
+      label: "Explore",
+    },
+  },
+  {
+    name: "Orders",
+    component: OrderScreen,
+    option: {
+      icon: "shopping-bag",
+      type: "feather",
+      label: "Orders",
+    },
+  },
+  {
+    name: "Cart",
+    component: CartScreen,
+    option: {
+      icon: "shopping-cart",
+      type: "feather",
+      label: "Cart",
+    },
+  },
+  {
+    name: "Wallet",
+    component: WalletScreen,
+    option: {
+      icon: "credit-card",
+      type: "feather",
+      label: "Wallet",
     },
   },
 ];

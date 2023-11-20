@@ -2,6 +2,7 @@ import { BaseHeader } from "@components/shared";
 import { BASE_IMAGE_URL } from "@constants/system.constant";
 import { Button, Text, useThemeMode } from "@rneui/themed";
 import { BaseRootView } from "@wrappers/hoc";
+import { t } from "i18next";
 import React from "react";
 
 export default function HomeScreen() {
@@ -12,8 +13,10 @@ export default function HomeScreen() {
   }
 
   return (
-    <BaseRootView>
-      <Text>HomeScreen</Text>
+    <BaseRootView padding>
+      {/* <BaseLoadingLottie /> */}
+
+      <Text>{t("change_language")}</Text>
       <Text>Current theme mode: {mode}</Text>
       <Button onPress={_handleToggleTheme} title="Toggle theme" />
       <BaseHeader

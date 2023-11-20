@@ -26,8 +26,6 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
     "paths": {
-      "tests/*": ["tests/*"],
-      "assets/*": ["assets/*"],
       "@components/*": ["src/components/*"],
       "@constants/*": ["src/constants/*"],
       "@features/*": ["src/features/*"],
@@ -36,7 +34,8 @@
       "@models/*": ["src/models/*"],
       "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"],
-      "@wrappers/*": ["src/wrappers/*"]
+      "@wrappers/*": ["src/wrappers/*"],
+      "@assets/*": ["src/assets/*"]
     }
   },
   "extends": "@tsconfig/react-native/tsconfig.json",

@@ -6,7 +6,7 @@ import { View } from "react-native";
 export type BaseRootViewProps = {
   children: React.ReactNode;
   enableBackButton?: boolean;
-  padding?: number;
+  padding?: number | boolean;
 };
 
 export default function BaseRootView(props: BaseRootViewProps) {
@@ -26,7 +26,7 @@ export default function BaseRootView(props: BaseRootViewProps) {
       style={[
         styles.root,
         {
-          padding: padding ? normalize(padding) : 0,
+          padding: padding ? normalize(16 || padding) : 0,
         },
       ]}
     >
