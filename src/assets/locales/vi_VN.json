@@ -6,5 +6,15 @@
   "CART": "Giỏ hàng",
   "PROFILE": "Hồ sơ",
   "cancel": "Đóng",
-  "ok": "Đồng ý"
+  "ok": "Đồng ý",
+  "alert": {
+    "play_services_not_available": {
+      "title": "Google Play Services không khả dụng",
+      "message": "Ứng dụng này cần Google Play Services, hãy cài đặt và cập nhật Google Play Services."
+    },
+    "sign_in_failed": {
+      "title": "Đăng nhập thất bại",
+      "message": "Đăng nhập thất bại, vui lòng thử lại."
+    }
+  }
 }

@@ -6,5 +6,15 @@
   "CART": "Cart",
   "PROFILE": "Profile",
   "cancel": "Cancel",
-  "ok": "Ok"
+  "ok": "Ok",
+  "alert": {
+    "play_services_not_available": {
+      "title": "Google Play Services not available",
+      "message": "Google Play Services not available, please install it."
+    },
+    "sign_in_failed": {
+      "title": "Sign in failed",
+      "message": "Sign in failed, please try again."
+    }
+  }
 }

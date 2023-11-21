@@ -8,7 +8,7 @@ import AuthNavigation from "./auth.navigation";
 import { navigationRef } from "./services.navigation";
 
 export default function RootNavigation() {
-  const isSignedIn = false;
+  const isSignedIn = true;
 
   const language = useAppSelector(appSelector);
 

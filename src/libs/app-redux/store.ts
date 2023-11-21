@@ -4,9 +4,7 @@ import { PersistConfig } from "redux-persist";
 import persistReducer from "redux-persist/es/persistReducer";
 import persistStore from "redux-persist/es/persistStore";
 import autoMergeLevel2 from "redux-persist/es/stateReconciler/autoMergeLevel2";
-import createSagaMiddleware from "redux-saga";
 import { AlertReducer, AppReducer, LoadingReducer } from "./reducers";
-import rootSaga from "./sagas/root.saga";
 import { ReduxEnum } from "@constants/redux.constant";
 
 const persistConfig: PersistConfig<RootState> = {
@@ -26,10 +24,9 @@ const rootReducers = combineReducers({
 type RootState = ReturnType<typeof rootReducers>;
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 
-const sagaMiddleware = createSagaMiddleware();
 const createDebugger = require("redux-flipper").default;
 
-const middlewares = [sagaMiddleware, createDebugger()];
+const middlewares = [createDebugger()];
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -38,7 +35,5 @@ export const store = configureStore({
       serializableCheck: false,
     }).concat(middlewares),
 });
-
-sagaMiddleware.run(rootSaga);
 
 export const persistor = persistStore(store);

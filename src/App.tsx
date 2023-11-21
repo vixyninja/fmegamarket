@@ -14,6 +14,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { RootNavigation } from "./libs";
 import i18Config from "./libs/intl";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 export default function App() {
   const initialMetrics: Metrics = {
@@ -23,6 +24,10 @@ export default function App() {
 
   useEffect(() => {
     LottieSplashScreen.hide();
+    GoogleSignin.configure({
+      webClientId:
+        "705194195270-8hiek6umkvrvn9d7q2u2uam4b6ag6v31.apps.googleusercontent.com",
+    });
   }, []);
 
   return (
