@@ -1,15 +1,17 @@
 import { ReduxEnum } from "@constants/redux.constant";
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type AuthStateType = {
   isAuth: boolean;
   accessToken: string | null;
+  refreshToken: string | null;
   provider: "google" | "facebook" | "email" | null;
   idToken: string | null;
 };
 
 const initialState: AuthStateType = {
   isAuth: false,
+  refreshToken: null,
   accessToken: null,
   provider: null,
   idToken: null,
@@ -20,14 +22,23 @@ const reducer = createSlice({
   initialState: initialState,
   reducers: {
     signInGoogle: (state: AuthStateType) => {},
-    signInGoogleSuccess: (state: AuthStateType, action) => {},
     signOutGoogle: (state: AuthStateType) => {},
     signInEmail: (state: AuthStateType) => {},
-    signInEmailSuccess: (state: AuthStateType, action) => {},
     signOutEmail: (state: AuthStateType) => {},
     signInFacebook: (state: AuthStateType) => {},
-    signInFacebookSuccess: (state: AuthStateType, action) => {},
     signOutFacebook: (state: AuthStateType) => {},
+    setCredentials: (
+      state: AuthStateType,
+      action: PayloadAction<Partial<AuthStateType>>,
+    ) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
+    clearCredentials: (state: AuthStateType) => {
+      Object.assign(state, initialState);
+    },
   },
 });
 

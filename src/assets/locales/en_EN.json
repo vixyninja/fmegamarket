@@ -1,13 +1,18 @@
 {
-  "change_language": "Change language",
-  "HOME": "Home",
-  "EXPLORE": "Explore",
-  "ORDERS": "Orders",
-  "CART": "Cart",
-  "PROFILE": "Profile",
-  "cancel": "Cancel",
-  "ok": "Ok",
+  "bottom_navigation": {
+    "HOME": "Home",
+    "EXPLORE": "Explore",
+    "ORDERS": "Orders",
+    "CART": "Cart",
+    "PROFILE": "Profile"
+  },
   "alert": {
+    "default": {
+      "title": "Notification",
+      "message": "This is a notification",
+      "cancel": "Cancel",
+      "ok": "Accept"
+    },
     "play_services_not_available": {
       "title": "Google Play Services not available",
       "message": "Google Play Services not available, please install it."
@@ -15,6 +20,21 @@
     "sign_in_failed": {
       "title": "Sign in failed",
       "message": "Sign in failed, please try again."
+    },
+    "exit_app": {
+      "title": "Exit app",
+      "message": "Are you sure you want to exit the app?"
     }
+  },
+  "loading": {
+    "sign_in": "Signing in...",
+    "sign_out": "Signing out..."
+  },
+  "button": {
+    "default": "Default",
+    "sign_in": "Sign in",
+    "sign_out": "Sign out",
+    "change_language": "Change language",
+    "change_theme": "Change theme"
   }
 }

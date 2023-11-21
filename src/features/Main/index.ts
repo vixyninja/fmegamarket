@@ -59,7 +59,7 @@ export const bottomTabScreenStack: Array<ScreenType> = [
     name: BottomTabScreenKeys.Profile,
     component: ProfileScreen,
     option: {
-      icon: "user",
+      icon: "person",
       type: "feather",
       label: "PROFILE",
     },

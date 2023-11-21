@@ -21,6 +21,7 @@
     "@reduxjs/toolkit": "^1.9.7",
     "@rneui/base": "^4.0.0-rc.8",
     "@rneui/themed": "^4.0.0-rc.8",
+    "async-mutex": "^0.4.0",
     "axios": "^1.6.2",
     "i18next": "^23.7.6",
     "lottie-react-native": "^6.4.1",
@@ -51,6 +52,7 @@
     "@types/react": "^18.0.24",
     "@types/react-redux": "^7.1.30",
     "@types/react-test-renderer": "^18.0.0",
+    "@types/redux-logger": "^3.0.12",
     "@types/redux-persist": "^4.3.1",
     "babel-jest": "^29.2.1",
     "babel-plugin-module-resolver": "^5.0.0",
@@ -61,6 +63,7 @@
     "react-native-flipper": "^0.212.0",
     "react-test-renderer": "18.2.0",
     "redux-flipper": "^2.0.2",
+    "redux-logger": "^3.0.6",
     "typescript": "4.8.4"
   },
   "engines": {

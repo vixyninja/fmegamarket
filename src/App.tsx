@@ -4,6 +4,7 @@ import {
   BaseStatusBar,
 } from "@components/shared";
 import { persistor, store } from "@libs/app-redux";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { ThemeProvider } from "@wrappers/providers";
 import React, { useEffect } from "react";
 import { I18nextProvider } from "react-i18next";
@@ -14,7 +15,6 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { RootNavigation } from "./libs";
 import i18Config from "./libs/intl";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 export default function App() {
   const initialMetrics: Metrics = {

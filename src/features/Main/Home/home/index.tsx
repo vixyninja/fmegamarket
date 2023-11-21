@@ -1,19 +1,33 @@
 import { BaseHeader } from "@components/shared";
-import { BASE_IMAGE_URL } from "@constants/system.constant";
+import { systemConstant } from "@constants/system.constant";
 import { AppScreenKeys } from "@features/Main";
+import { useGoogleSignin } from "@hooks/useGoogleSignIn";
 import { useAppDispatch, useAppSelector } from "@hooks/useRedux";
-import { AlertAction, AppAction, appSelector } from "@libs/app-redux";
+import {
+  AlertAction,
+  AppAction,
+  AuthAction,
+  appSelector,
+  authSelector,
+  useLazyGetTodoQuery,
+} from "@libs/app-redux";
 import { NavigationServices } from "@libs/navigation";
 import { Button, Text, useThemeMode } from "@rneui/themed";
 import { BaseRootView } from "@wrappers/hoc";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function HomeScreen() {
-  const { mode, setMode } = useThemeMode();
-  const { language } = useAppSelector(appSelector);
-  const { t } = useTranslation();
   const dispatch = useAppDispatch();
+
+  const { mode, setMode } = useThemeMode();
+  const { t } = useTranslation();
+
+  const { language } = useAppSelector(appSelector);
+  const { signOut } = useGoogleSignin();
+  const { isAuth } = useAppSelector(authSelector);
+
+  const [getTodo, { data }] = useLazyGetTodoQuery({});
 
   function _handleToggleTheme() {
     setMode(mode === "light" ? "dark" : "light");
@@ -22,6 +36,10 @@ export default function HomeScreen() {
   function _handleToggleLanguage() {
     dispatch(AppAction.setLanguage(language === "en" ? "vi" : "en"));
   }
+
+  useEffect(() => {
+    console.log("data", data);
+  }, [data]);
 
   function _handleAlert() {
     dispatch(
@@ -40,16 +58,47 @@ export default function HomeScreen() {
     dispatch(AlertAction.showAlert());
   }
 
+  function _handleLogout() {
+    signOut();
+    dispatch(AuthAction.clearCredentials());
+  }
+
   return (
     <BaseRootView padding>
-      <Text>{t("change_language")}</Text>
+      <Text>{t("button.change_language")}</Text>
       <Text>Current theme mode: {mode}</Text>
-      <Button onPress={_handleToggleTheme} title="Toggle theme" />
-      <Button onPress={_handleToggleLanguage} title={t("change_language")} />
+      <Button onPress={_handleToggleTheme} title={t("button.change_theme")} />
+      <Button
+        onPress={_handleToggleLanguage}
+        title={t("button.change_language")}
+      />
       <Button onPress={_handleAlert} title="Handle alert" />
+      {isAuth && (
+        <Button onPress={_handleLogout} title={t("button.sign_out")} />
+      )}
+
+      <Button
+        onPress={() =>
+          getTodo({
+            page: 1,
+            limit: 10,
+          })
+        }
+        title="Get todo"
+      />
+
+      <Button
+        title="Force get todo"
+        onPress={() => {
+          getTodo({
+            page: 1,
+            limit: 10,
+          }).unwrap();
+        }}
+      />
 
       <BaseHeader
-        source={{ uri: BASE_IMAGE_URL }}
+        source={{ uri: systemConstant.BASE_IMAGE_URL }}
         onPress={() => {
           NavigationServices.navigate(AppScreenKeys.SettingScreen);
         }}

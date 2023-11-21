@@ -1,13 +1,18 @@
 {
-  "change_language": "Chuyển đổi ngôn ngữ",
-  "HOME": "Trang chủ",
-  "EXPLORE": "Khám phá",
-  "ORDERS": "Đơn hàng",
-  "CART": "Giỏ hàng",
-  "PROFILE": "Hồ sơ",
-  "cancel": "Đóng",
-  "ok": "Đồng ý",
+  "bottom_navigation": {
+    "HOME": "Trang chủ",
+    "EXPLORE": "Khám phá",
+    "ORDERS": "Đơn hàng",
+    "CART": "Giỏ hàng",
+    "PROFILE": "Hồ sơ"
+  },
   "alert": {
+    "default": {
+      "title": "Thông báo",
+      "message": "Đây là thông báo mặc định.",
+      "cancel": "Đóng",
+      "ok": "Đồng ý"
+    },
     "play_services_not_available": {
       "title": "Google Play Services không khả dụng",
       "message": "Ứng dụng này cần Google Play Services, hãy cài đặt và cập nhật Google Play Services."
@@ -15,6 +20,21 @@
     "sign_in_failed": {
       "title": "Đăng nhập thất bại",
       "message": "Đăng nhập thất bại, vui lòng thử lại."
+    },
+    "exit_app": {
+      "title": "Thoát ứng dụng",
+      "message": "Bạn có chắc chắn muốn thoát ứng dụng không?"
     }
+  },
+  "loading": {
+    "sign_in": "Đang đăng nhập...",
+    "sign_out": "Đang đăng xuất..."
+  },
+  "button": {
+    "default": "Mặc định",
+    "sign_in": "Đăng nhập",
+    "sign_out": "Đăng xuất",
+    "change_language": "Chuyển đổi ngôn ngữ",
+    "change_theme": "Chuyển đổi giao diện"
   }
 }

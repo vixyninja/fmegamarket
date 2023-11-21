@@ -1,12 +1,11 @@
 import { useGoogleSignin } from "@hooks/useGoogleSignIn";
 import { useAppDispatch } from "@hooks/useRedux";
-import { AlertAction } from "@libs/app-redux";
+import { AlertAction, AuthAction, LoadingAction } from "@libs/app-redux";
 import auth from "@react-native-firebase/auth";
 import {
   GoogleSigninButton,
   statusCodes,
 } from "@react-native-google-signin/google-signin";
-import { LoggerUtil } from "@utils/logger.util";
 import { BaseRootView } from "@wrappers/hoc";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -16,8 +15,9 @@ export default function SignInScreen() {
   const { signIn, getTokens } = useGoogleSignin();
   const { t } = useTranslation();
   const [disabled, setDisabled] = React.useState(false);
-  const logger = new LoggerUtil("SignInScreen");
+
   async function onGoogleButtonPress() {
+    dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_in")));
     try {
       setDisabled(true);
       await signIn();
@@ -25,22 +25,12 @@ export default function SignInScreen() {
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       const credential = await auth().signInWithCredential(googleCredential);
 
-      logger.info("credential", credential);
-
       if (credential) {
         dispatch(
-          AlertAction.setAlert({
-            title: t("alert.sign_in_failed.title"),
-            message: t("alert.sign_in_failed.message"),
-            callback: () => {
-              dispatch(AlertAction.disposeAlert());
-              dispatch(AlertAction.hideAlert());
-            },
-            cancel: () => {
-              dispatch(AlertAction.disposeAlert());
-              dispatch(AlertAction.hideAlert());
-            },
-            type: "error",
+          AuthAction.setCredentials({
+            provider: "google",
+            idToken: idToken,
+            isAuth: true,
           }),
         );
       } else {
@@ -56,7 +46,7 @@ export default function SignInScreen() {
               dispatch(AlertAction.disposeAlert());
               dispatch(AlertAction.hideAlert());
             },
-            type: "error",
+            type: "warning",
           }),
         );
       }
@@ -112,6 +102,7 @@ export default function SignInScreen() {
       }
     } finally {
       setDisabled(false);
+      dispatch(LoadingAction.hideLoading());
     }
   }
 
