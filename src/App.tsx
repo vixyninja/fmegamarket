@@ -3,6 +3,7 @@ import {
   BaseLoadingLottie,
   BaseStatusBar,
 } from "@components/shared";
+import RootNavigation from "@navigation/root.navigation";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { ThemeProvider } from "@wrappers/providers";
 import React, { useEffect } from "react";
@@ -15,14 +16,13 @@ import { PersistGate } from "redux-persist/integration/react";
 import { systemConstant } from "./constants";
 import { persistor, store, useNotifee } from "./libs";
 import i18Config from "./libs/intl";
-import RootNavigation from "@navigation/root.navigation";
 
 export default function App() {
   const initialMetrics: Metrics = {
     frame: { x: 0, y: 0, width: 0, height: 0 },
     insets: { top: 0, left: 0, right: 0, bottom: 0 },
   };
-  const { checkPermission, testNotification } = useNotifee();
+  const { checkPermission } = useNotifee();
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -30,7 +30,6 @@ export default function App() {
     });
     LottieSplashScreen.hide();
     checkPermission();
-    testNotification();
   }, []);
 
   return (

@@ -1,4 +1,8 @@
-import { AuthScreenKeys, authScreenStack } from "@features/Auth";
+import { authScreenStack } from "@features/Auth";
+import {
+  OnBoardingScreenKeys,
+  onBoardingScreenStack,
+} from "@features/OnBoarding";
 import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,
@@ -10,7 +14,7 @@ export default function AuthNavigation() {
 
   const authNavigationOptions: NativeStackNavigationOptions = {
     headerShown: false,
-    animation: "slide_from_bottom",
+    animation: "default",
     animationDuration: 300,
     animationTypeForReplace: "pop",
     autoHideHomeIndicator: true,
@@ -24,13 +28,29 @@ export default function AuthNavigation() {
     <AuthStack.Navigator
       screenOptions={authNavigationOptions}
       id="authNavigation"
-      initialRouteName={AuthScreenKeys.SignIn}
+      initialRouteName={OnBoardingScreenKeys.Welcome}
     >
+      <AuthStack.Screen
+        key={onBoardingScreenStack[0].name}
+        name={onBoardingScreenStack[0].name}
+        component={onBoardingScreenStack[0].component}
+      />
+
+      <AuthStack.Screen
+        key={onBoardingScreenStack[1].name}
+        name={onBoardingScreenStack[1].name}
+        component={onBoardingScreenStack[1].component}
+        options={{
+          animation: "slide_from_right",
+        }}
+      />
+
       <AuthStack.Screen
         key={authScreenStack[0].name}
         name={authScreenStack[0].name}
         component={authScreenStack[0].component}
       />
+
       <AuthStack.Screen
         key={authScreenStack[1].name}
         name={authScreenStack[1].name}

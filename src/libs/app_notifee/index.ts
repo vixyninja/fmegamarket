@@ -4,7 +4,6 @@ import notifee, {
   AndroidImportance,
   AndroidVisibility,
   AuthorizationStatus,
-  Event,
   EventType,
   Notification,
 } from "@notifee/react-native";

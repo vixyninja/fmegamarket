@@ -1,6 +1,4 @@
 import { useBackHandler } from "@hooks/useBackHandler";
-import { useAppDispatch } from "@hooks/useRedux";
-import { AlertAction } from "@libs/app_redux";
 import { Colors, Theme, makeStyles, normalize } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,7 +17,7 @@ export default function BaseRootView(props: BaseRootViewProps) {
   const [backButtonEnabled, setBackButtonEnabled] = useState(false);
 
   useBackHandler(() => {
-    if (enableBackButton) return false;
+    if (!enableBackButton) return false;
     Alert.alert(
       t("alert.exit_app.title"),
       t("alert.exit_app.message"),
@@ -66,6 +64,8 @@ export default function BaseRootView(props: BaseRootViewProps) {
 const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({
   root: {
     flex: 1,
+    width: "100%",
+    height: "100%",
     backgroundColor: theme.colors.background,
   },
 }));
