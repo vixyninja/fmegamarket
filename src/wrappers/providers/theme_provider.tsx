@@ -1,4 +1,4 @@
-import { theme } from "@libs/rn-element";
+import { theme } from "@libs/rne";
 import { ThemeProvider } from "@rneui/themed";
 import React from "react";
 

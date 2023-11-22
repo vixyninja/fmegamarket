@@ -1,47 +1,20 @@
 import { bottomTabScreenStack } from "@features/Main";
-import { useBackHandler } from "@hooks/useBackHandler";
-import { useAppDispatch } from "@hooks/useRedux";
-import { AlertAction } from "@libs/app-redux";
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import { LabelPosition } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
 import { Icon, Text, normalize, useTheme } from "@rneui/themed";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { BackHandler } from "react-native";
 
 export default function BottomTabNavigation() {
   const BottomTab = createBottomTabNavigator();
-  const dispatch = useAppDispatch();
+
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const [backButtonEnabled, setBackButtonEnabled] = useState(false);
+
   const badge = [1, 2, 3, 4, 5];
-
-  useBackHandler(() => {
-    dispatch(
-      AlertAction.setAlert({
-        title: t("alert.exit_app.title"),
-        message: t("alert.exit_app.message"),
-        type: "warning",
-        callback: () => {
-          setBackButtonEnabled(true);
-        },
-        cancel() {
-          setBackButtonEnabled(false);
-        },
-      }),
-    );
-    return false;
-  });
-
-  useEffect(() => {
-    if (backButtonEnabled) {
-      BackHandler.exitApp();
-    }
-  }, [backButtonEnabled]);
 
   const bottomTabNavigationOptions: BottomTabNavigationOptions = {
     headerShown: false,

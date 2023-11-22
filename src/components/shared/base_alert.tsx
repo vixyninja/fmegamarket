@@ -1,5 +1,5 @@
 import { useAppSelector } from "@hooks/useRedux";
-import { alertSelector } from "@libs/app-redux";
+import { alertSelector } from "@libs/app_redux";
 import { useThemeMode } from "@rneui/themed";
 import React from "react";
 import { useTranslation } from "react-i18next";

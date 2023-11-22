@@ -1,7 +1,21 @@
+import { usePermission } from "@hooks/usePermission";
 import PushNotification, {
   PushNotificationObject,
   Importance,
 } from "react-native-push-notification";
+
+PushNotification.createChannel(
+  {
+    channelId: "push-notification-channel",
+    channelName: "Mega Market Channel",
+    channelDescription: "A channel to categorise your notifications",
+    playSound: true,
+    soundName: "default",
+    vibrate: true,
+    importance: Importance.HIGH,
+  },
+  (created) => console.log(`createChannel returned '${created}'`), // (optional) callback returns whether the channel was created, false means it already existed.
+);
 
 PushNotification.configure({
   onRegister: function (token) {
@@ -30,41 +44,11 @@ PushNotification.configure({
   requestPermissions: true,
 });
 
-PushNotification.createChannel(
-  {
-    channelId: "fcm_fallback_notification_channel", // (required)
-    channelName: "My channel", // (required)
-    channelDescription: "A channel to categorise your notifications", // (optional) default: undefined.
-    importance: Importance.HIGH, // (optional) default: 4. Int value of the Android notification importance
-    playSound: true,
-    soundName: "default",
-    vibrate: true,
-  },
-  (created) => console.log(`createChannel returned '${created}'`),
-); // (optional) callback returns whether the channel was created, false means it already existed.
-
-PushNotification.localNotification({
-  message: "My Notification Message", // (required)
-  actions: ["Yes", "No"],
-  autoCancel: true,
-  visibility: "public",
-  channelId: "fcm_fallback_notification_channel",
-  ticker: "My Notification Ticker",
-  largeIcon: "ic_launcher",
-  smallIcon: "ic_launcher",
-  bigText: "My big text that will be shown when notification is expanded",
-  subText: "This is a subText",
-  bigLargeIcon: "ic_launcher",
-  playSound: true,
-});
-
-PushNotification.getChannels(function (channel_ids) {
-  console.log(channel_ids); // ['fcm_fallback_notification_channel']
-});
-
 export type PushNotificationType = PushNotificationObject;
 
 const usePushNotification = () => {
+  const { requestPermission } = usePermission();
+
   const clearNotification = () => {
     PushNotification.cancelAllLocalNotifications();
   };
@@ -82,31 +66,37 @@ const usePushNotification = () => {
   };
 
   const testLocalNotification = () => {
+    requestNotificationPermission();
     PushNotification.localNotification({
       message: "My Notification Message", // (required)
       actions: ["Yes", "No"],
-      autoCancel: true,
       visibility: "public",
-      channelId: "fcm_fallback_notification_channel",
+      channelId: "push-notification-channel",
+      id: 0,
+      vibrate: true,
+      importance: "high",
+      priority: "high",
+      title: "My Notification Title",
       ticker: "My Notification Ticker",
       largeIcon: "ic_launcher",
       smallIcon: "ic_launcher",
       bigText: "My big text that will be shown when notification is expanded",
       subText: "This is a subText",
-      bigLargeIcon: "ic_launcher",
     });
   };
 
   const setApplicationIconBadgeNumber = (number: number) => {
+    requestNotificationPermission();
     PushNotification.setApplicationIconBadgeNumber(number);
   };
 
   const createLocalNotification = (obj: PushNotificationType) => {
+    requestNotificationPermission();
     PushNotification.localNotification(obj);
   };
 
-  const requestPermission = () => {
-    PushNotification.requestPermissions();
+  const requestNotificationPermission = () => {
+    requestPermission("android.permission.POST_NOTIFICATIONS");
   };
 
   return {
@@ -116,7 +106,7 @@ const usePushNotification = () => {
     testLocalNotification,
     createLocalNotification,
     setApplicationIconBadgeNumber,
-    requestPermission,
+    requestNotificationPermission,
   };
 };
 

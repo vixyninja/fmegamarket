@@ -18,11 +18,8 @@ import { RootNavigation, persistor, store } from "./libs";
 import i18Config from "./libs/intl";
 
 export default function App() {
-  const {
-    requestPermission,
-    setApplicationIconBadgeNumber,
-    testLocalNotification,
-  } = usePushNotification();
+  const { requestNotificationPermission, setApplicationIconBadgeNumber } =
+    usePushNotification();
 
   const initialMetrics: Metrics = {
     frame: { x: 0, y: 0, width: 0, height: 0 },
@@ -34,10 +31,9 @@ export default function App() {
       webClientId: systemConstant.WEB_CLIENT_ID,
     });
     LottieSplashScreen.hide();
-    requestPermission();
+    requestNotificationPermission();
     setApplicationIconBadgeNumber(0);
-    testLocalNotification();
-  }, [requestPermission]);
+  }, [requestNotificationPermission]);
 
   return (
     <Provider store={store}>

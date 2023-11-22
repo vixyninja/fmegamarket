@@ -23,7 +23,9 @@
     },
     "exit_app": {
       "title": "Exit app",
-      "message": "Are you sure you want to exit the app?"
+      "message": "Are you sure you want to exit the app?",
+      "cancel": "Cancel",
+      "ok": "Exit"
     }
   },
   "loading": {
@@ -36,5 +38,48 @@
     "sign_out": "Sign out",
     "change_language": "Change language",
     "change_theme": "Change theme"
+  },
+  "permission": {
+    "default": {
+      "title": "Permission",
+      "message": "This app needs permission.",
+      "cancel": "Cancel",
+      "ok": "Accept",
+      "settings": "Settings"
+    },
+    "camera": {
+      "title": "Camera permission",
+      "message": "This app needs access to your camera.",
+      "cancel": "Cancel",
+      "ok": "Accept"
+    },
+    "storage": {
+      "title": "Storage permission",
+      "message": "This app needs access to your storage.",
+      "cancel": "Cancel",
+      "ok": "Accept"
+    },
+    "location": {
+      "title": "Location permission",
+      "message": "This app needs access to your location.",
+      "cancel": "Cancel",
+      "ok": "Accept"
+    },
+    "unavailable": {
+      "title": "Permission unavailable",
+      "message": "This device does not support the required permissions."
+    },
+    "denied": {
+      "title": "Permission denied",
+      "message": "Permission denied. You can grant permission in the settings."
+    },
+    "limited": {
+      "title": "Permission limited",
+      "message": "Permission limited. You can grant permission in the settings."
+    },
+    "blocked": {
+      "title": "Permission blocked",
+      "message": "Permission blocked. You can grant permission in the settings."
+    }
   }
 }

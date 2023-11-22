@@ -10,7 +10,9 @@ import {
   appSelector,
   authSelector,
   useLazyGetTodoQuery,
-} from "@libs/app-redux";
+} from "@libs/app_redux";
+import usePushNotification from "@libs/local_notification";
+
 import { NavigationServices } from "@libs/navigation";
 import { Button, Text, useThemeMode } from "@rneui/themed";
 import { BaseRootView } from "@wrappers/hoc";
@@ -24,8 +26,9 @@ export default function HomeScreen() {
   const { t } = useTranslation();
 
   const { language } = useAppSelector(appSelector);
-  const { signOut } = useGoogleSignin();
   const { isAuth } = useAppSelector(authSelector);
+  const { signOut } = useGoogleSignin();
+  const { testLocalNotification, getAllNotifications } = usePushNotification();
 
   const [getTodo, { data }] = useLazyGetTodoQuery({});
 
@@ -38,7 +41,7 @@ export default function HomeScreen() {
   }
 
   useEffect(() => {
-    console.log("data", data);
+    getAllNotifications();
   }, [data]);
 
   function _handleAlert() {
@@ -76,6 +79,13 @@ export default function HomeScreen() {
       {isAuth && (
         <Button onPress={_handleLogout} title={t("button.sign_out")} />
       )}
+
+      <Button
+        onPress={() => {
+          testLocalNotification();
+        }}
+        title="Test local notification"
+      />
 
       <Button
         onPress={() =>

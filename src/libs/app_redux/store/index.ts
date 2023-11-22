@@ -33,7 +33,7 @@ const rootReducers = combineReducers({
 type RootState = ReturnType<typeof rootReducers>;
 const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 
-const middlewares: any[] = [createDebugger(), apiService.middleware, logger];
+const middlewares: any[] = [createDebugger(), apiService.middleware];
 
 export const store = configureStore({
   reducer: {

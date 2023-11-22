@@ -1,6 +1,6 @@
 import { ANIMS_MANAGER } from "@assets/anims";
 import { useAppSelector } from "@hooks/useRedux";
-import { loadingSelector } from "@libs/app-redux/selectors/loading.selector";
+import { loadingSelector } from "@libs/app_redux";
 import { Text } from "@rneui/themed";
 import LottieView from "lottie-react-native";
 import React from "react";
@@ -9,7 +9,9 @@ import { StyleSheet, View } from "react-native";
 export default function ControllingAnimationProgress() {
   const loading = useAppSelector(loadingSelector);
 
-  if (!loading.loading) return <View />;
+  if (!loading.loading) {
+    return <View />;
+  }
 
   return (
     <View style={styles.root}>

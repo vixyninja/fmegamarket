@@ -1,6 +1,6 @@
 import { useGoogleSignin } from "@hooks/useGoogleSignIn";
 import { useAppDispatch } from "@hooks/useRedux";
-import { AlertAction, AuthAction, LoadingAction } from "@libs/app-redux";
+import { AlertAction, AuthAction, LoadingAction } from "@libs/app_redux";
 import auth from "@react-native-firebase/auth";
 import {
   GoogleSigninButton,

@@ -23,7 +23,9 @@
     },
     "exit_app": {
       "title": "Thoát ứng dụng",
-      "message": "Bạn có chắc chắn muốn thoát ứng dụng không?"
+      "message": "Bạn có chắc chắn muốn thoát ứng dụng không?",
+      "cancel": "Không",
+      "ok": "Đồng ý"
     }
   },
   "loading": {
@@ -36,5 +38,48 @@
     "sign_out": "Đăng xuất",
     "change_language": "Chuyển đổi ngôn ngữ",
     "change_theme": "Chuyển đổi giao diện"
+  },
+  "permission": {
+    "default": {
+      "title": "Quyền truy cập",
+      "message": "Ứng dụng này cần quyền truy cập.",
+      "cancel": "Không",
+      "ok": "Đồng ý",
+      "settings": "Cài đặt"
+    },
+    "camera": {
+      "title": "Quyền truy cập máy ảnh",
+      "message": "Ứng dụng này cần quyền truy cập máy ảnh.",
+      "cancel": "Không",
+      "ok": "Đồng ý"
+    },
+    "storage": {
+      "title": "Quyền truy cập bộ nhớ",
+      "message": "Ứng dụng này cần quyền truy cập bộ nhớ.",
+      "cancel": "Không",
+      "ok": "Đồng ý"
+    },
+    "location": {
+      "title": "Quyền truy cập vị trí",
+      "message": "Ứng dụng này cần quyền truy cập vị trí.",
+      "cancel": "Không",
+      "ok": "Đồng ý"
+    },
+    "unavailable": {
+      "title": "Quyền truy cập không khả dụng",
+      "message": "Ứng dụng này không có quyền truy cập."
+    },
+    "denied": {
+      "title": "Quyền truy cập bị từ chối",
+      "message": "Ứng dụng này đã bị từ chối quyền truy cập."
+    },
+    "limited": {
+      "title": "Quyền truy cập bị hạn chế",
+      "message": "Ứng dụng này đã bị hạn chế quyền truy cập."
+    },
+    "blocked": {
+      "title": "Quyền truy cập bị chặn",
+      "message": "Ứng dụng này đã bị chặn quyền truy cập."
+    }
   }
 }
