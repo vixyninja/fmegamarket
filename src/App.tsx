@@ -14,8 +14,9 @@ import { Metrics, SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { systemConstant } from "./constants";
-import { RootNavigation, persistor, store } from "./libs";
+import { persistor, store } from "./libs";
 import i18Config from "./libs/intl";
+import RootNavigation from "@navigation/root.navigation";
 
 export default function App() {
   const { requestNotificationPermission, setApplicationIconBadgeNumber } =

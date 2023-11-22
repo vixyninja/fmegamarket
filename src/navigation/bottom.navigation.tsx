@@ -69,7 +69,6 @@ export default function BottomTabNavigation() {
       screenOptions={bottomTabNavigationOptions}
       backBehavior="initialRoute"
       initialRouteName="Home"
-      i18nIsDynamicList
     >
       {bottomTabScreenStack.map((_, index) => (
         <BottomTab.Screen

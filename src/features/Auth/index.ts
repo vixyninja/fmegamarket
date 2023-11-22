@@ -1,4 +1,4 @@
-import { ScreenType } from "@libs/navigation";
+import { ScreenType } from "@navigation/types.navigation";
 import SignInScreen from "./sign-in";
 import SignUpScreen from "./sign-up";
 

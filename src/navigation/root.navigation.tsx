@@ -1,11 +1,11 @@
 import { useAppSelector } from "@hooks/useRedux";
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useEffect } from "react";
-import i18next from "../intl";
+import { appSelector, authSelector } from "../libs/app_redux";
+import i18next from "../libs/intl";
 import AppNavigation from "./app.navigation";
 import AuthNavigation from "./auth.navigation";
-import { navigationRef } from "./services.navigation";
-import { appSelector, authSelector } from "../app_redux";
+import { linking, navigationRef } from "./services.navigation";
 
 export default function RootNavigation() {
   const isSignedIn = useAppSelector(authSelector);
@@ -16,7 +16,7 @@ export default function RootNavigation() {
   }, [language.language]);
 
   return (
-    <NavigationContainer ref={navigationRef}>
+    <NavigationContainer ref={navigationRef} linking={linking}>
       {isSignedIn.isAuth ? <AppNavigation /> : <AuthNavigation />}
     </NavigationContainer>
   );

@@ -13,7 +13,6 @@ import {
 } from "../reducers";
 import { apiService } from "../services";
 const createDebugger = require("redux-flipper").default;
-import logger from "redux-logger";
 
 const persistConfig: PersistConfig<RootState> = {
   key: "root",
@@ -35,7 +34,7 @@ const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 
 const middlewares: any[] = [createDebugger(), apiService.middleware];
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
     [ReduxEnum.persisted]: persistedReducer,
     [apiService.reducerPath]: apiService.reducer,
@@ -46,4 +45,6 @@ export const store = configureStore({
     }).concat(middlewares),
 });
 
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
+
+export { ReduxEnum, RootState, apiService, persistor, store };

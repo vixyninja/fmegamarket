@@ -1,6 +1,8 @@
+import { BottomTabScreenKeys } from "@features/Main";
 import {
   CommonActions,
   DrawerActions,
+  LinkingOptions,
   NavigationContainerRef,
   StackActions,
 } from "@react-navigation/native";
@@ -94,3 +96,24 @@ export class NavigationServices {
       }),
     );
 }
+
+export const linking: LinkingOptions<any> = {
+  prefixes: ["foo://app"],
+  config: {
+    screens: {
+      Home: {
+        path: BottomTabScreenKeys.Home,
+        parse: {
+          id: (id: string) => `${id}`,
+        },
+      },
+      Profile: {
+        path: `${BottomTabScreenKeys.Profile}/:id`,
+        parse: {
+          id: (id: string) => `${id}`,
+        },
+      },
+    },
+  },
+  enabled: true,
+};

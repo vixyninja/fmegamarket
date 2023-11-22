@@ -34,7 +34,8 @@
       "@models/*": ["src/models/*"],
       "@utils/*": ["src/utils/*"],
       "@wrappers/*": ["src/wrappers/*"],
-      "@assets/*": ["src/assets/*"]
+      "@assets/*": ["src/assets/*"],
+      "@navigation/*": ["src/navigation/*"]
     }
   },
   "extends": "@tsconfig/react-native/tsconfig.json",

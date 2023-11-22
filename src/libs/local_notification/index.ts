@@ -1,8 +1,19 @@
 import { usePermission } from "@hooks/usePermission";
+import { Linking } from "react-native";
 import PushNotification, {
-  PushNotificationObject,
   Importance,
+  PushNotificationObject,
 } from "react-native-push-notification";
+
+export const openDeepLinkFCM = (deepLink: string) => {
+  Linking.canOpenURL(deepLink).then((supported) => {
+    if (supported) {
+      Linking.openURL(deepLink);
+    } else {
+      console.log("Don't know how to open URI: " + deepLink);
+    }
+  });
+};
 
 PushNotification.createChannel(
   {
@@ -26,7 +37,9 @@ PushNotification.configure({
     console.log("NOTIFICATION:", notification);
   },
   onNotification: function (notification) {
-    console.log("NOTIFICATION:", notification);
+    if (notification.userInteraction) {
+      // Handle notification click
+    }
   },
   onRegistrationError: function (err) {
     console.error(err.message, err);
@@ -42,6 +55,10 @@ PushNotification.configure({
   },
   popInitialNotification: true,
   requestPermissions: true,
+});
+
+PushNotification.getDeliveredNotifications((notifications) => {
+  console.log(notifications);
 });
 
 export type PushNotificationType = PushNotificationObject;
@@ -72,7 +89,7 @@ const usePushNotification = () => {
       actions: ["Yes", "No"],
       visibility: "public",
       channelId: "push-notification-channel",
-      id: 0,
+      id: Math.floor(Math.random() * 1000000),
       vibrate: true,
       importance: "high",
       priority: "high",
