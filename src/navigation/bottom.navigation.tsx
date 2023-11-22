@@ -70,19 +70,61 @@ export default function BottomTabNavigation() {
       backBehavior="initialRoute"
       initialRouteName="Home"
     >
-      {bottomTabScreenStack.map((_, index) => (
-        <BottomTab.Screen
-          key={index}
-          name={bottomTabScreenStack[index].name}
-          component={bottomTabScreenStack[index].component}
-          options={{
-            tabBarShowLabel: true,
-            tabBarBadge: badge[index],
-            tabBarLabel: (props) => <TextCustom {...props} index={index} />,
-            tabBarIcon: (props) => <IconCustom {...props} index={index} />,
-          }}
-        />
-      ))}
+      <BottomTab.Screen
+        key={bottomTabScreenStack[0].name}
+        name={bottomTabScreenStack[0].name}
+        component={bottomTabScreenStack[0].component}
+        options={{
+          tabBarShowLabel: true,
+          tabBarBadge: badge[0],
+          tabBarLabel: (props) => <TextCustom {...props} index={0} />,
+          tabBarIcon: (props) => <IconCustom {...props} index={0} />,
+        }}
+      />
+      <BottomTab.Screen
+        key={bottomTabScreenStack[1].name}
+        name={bottomTabScreenStack[1].name}
+        component={bottomTabScreenStack[1].component}
+        options={{
+          tabBarShowLabel: true,
+          tabBarBadge: badge[1],
+          tabBarLabel: (props) => <TextCustom {...props} index={1} />,
+          tabBarIcon: (props) => <IconCustom {...props} index={1} />,
+        }}
+      />
+      <BottomTab.Screen
+        key={bottomTabScreenStack[2].name}
+        name={bottomTabScreenStack[2].name}
+        component={bottomTabScreenStack[2].component}
+        options={{
+          tabBarShowLabel: true,
+          tabBarBadge: badge[2],
+          tabBarLabel: (props) => <TextCustom {...props} index={2} />,
+          tabBarIcon: (props) => <IconCustom {...props} index={2} />,
+        }}
+      />
+      <BottomTab.Screen
+        key={bottomTabScreenStack[3].name}
+        name={bottomTabScreenStack[3].name}
+        component={bottomTabScreenStack[3].component}
+        options={{
+          tabBarShowLabel: true,
+          tabBarBadge: badge[3],
+          tabBarLabel: (props) => <TextCustom {...props} index={3} />,
+          tabBarIcon: (props) => <IconCustom {...props} index={3} />,
+        }}
+      />
+      <BottomTab.Screen
+        key={bottomTabScreenStack[4].name}
+        name={bottomTabScreenStack[4].name}
+        component={bottomTabScreenStack[4].component}
+        options={{
+          tabBarShowLabel: true,
+          tabBarBadge: badge[4],
+          tabBarLabel: (props) => <TextCustom {...props} index={4} />,
+          tabBarIcon: (props) => <IconCustom {...props} index={4} />,
+        }}
+      />
     </BottomTab.Navigator>
   );
 }

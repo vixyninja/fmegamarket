@@ -26,13 +26,16 @@ export default function AuthNavigation() {
       id="authNavigation"
       initialRouteName={AuthScreenKeys.SignIn}
     >
-      {authScreenStack.map((_, index) => (
-        <AuthStack.Screen
-          key={index}
-          name={authScreenStack[index].name}
-          component={authScreenStack[index].component}
-        />
-      ))}
+      <AuthStack.Screen
+        key={authScreenStack[0].name}
+        name={authScreenStack[0].name}
+        component={authScreenStack[0].component}
+      />
+      <AuthStack.Screen
+        key={authScreenStack[1].name}
+        name={authScreenStack[1].name}
+        component={authScreenStack[1].component}
+      />
     </AuthStack.Navigator>
   );
 }

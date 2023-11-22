@@ -26,13 +26,16 @@ export default function AppNavigation() {
       id="appNavigation"
       initialRouteName={AppScreenKeys.BottomTab}
     >
-      {appScreenStack.map((_, index) => (
-        <AppStack.Screen
-          key={index}
-          name={appScreenStack[index].name}
-          component={appScreenStack[index].component}
-        />
-      ))}
+      <AppStack.Screen
+        key={appScreenStack[0].name}
+        name={appScreenStack[0].name}
+        component={appScreenStack[0].component}
+      />
+      <AppStack.Screen
+        key={appScreenStack[1].name}
+        name={appScreenStack[1].name}
+        component={appScreenStack[1].component}
+      />
     </AppStack.Navigator>
   );
 }

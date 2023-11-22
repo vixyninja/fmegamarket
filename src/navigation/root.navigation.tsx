@@ -1,4 +1,5 @@
 import { useAppSelector } from "@hooks/useRedux";
+import { useFlipper } from "@react-navigation/devtools";
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import { appSelector, authSelector } from "../libs/app_redux";
@@ -14,6 +15,8 @@ export default function RootNavigation() {
   useEffect(() => {
     i18next.changeLanguage(language.language);
   }, [language.language]);
+
+  useFlipper(navigationRef);
 
   return (
     <NavigationContainer ref={navigationRef} linking={linking}>

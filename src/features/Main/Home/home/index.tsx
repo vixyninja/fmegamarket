@@ -1,6 +1,7 @@
 import { useGoogleSignin } from "@hooks/useGoogleSignIn";
 import { useAppDispatch, useAppSelector } from "@hooks/useRedux";
 import { AuthAction, authSelector } from "@libs/app_redux";
+import { useLinkTo } from "@react-navigation/native";
 
 import { Button } from "@rneui/themed";
 import { BaseRootView } from "@wrappers/hoc";
@@ -19,12 +20,19 @@ export default function HomeScreen() {
     signOut();
     dispatch(AuthAction.clearCredentials());
   }
+  const linkTo = useLinkTo();
 
   return (
     <BaseRootView padding>
       {isAuth && (
         <Button onPress={_handleLogout} title={t("button.sign_out")} />
       )}
+      <Button
+        onPress={() => {
+          linkTo("/BottomTab/Profile");
+        }}
+        title={"TEST"}
+      />
     </BaseRootView>
   );
 }

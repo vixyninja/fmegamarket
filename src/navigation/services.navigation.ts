@@ -1,3 +1,4 @@
+import { AuthScreenKeys } from "@features/Auth";
 import { BottomTabScreenKeys } from "@features/Main";
 import {
   CommonActions,
@@ -98,19 +99,18 @@ export class NavigationServices {
 }
 
 export const linking: LinkingOptions<any> = {
-  prefixes: ["foo://app"],
+  prefixes: ["app://"],
   config: {
     screens: {
-      Home: {
-        path: BottomTabScreenKeys.Home,
-        parse: {
-          id: (id: string) => `${id}`,
-        },
-      },
-      Profile: {
-        path: `${BottomTabScreenKeys.Profile}/:id`,
-        parse: {
-          id: (id: string) => `${id}`,
+      BottomTab: {
+        path: "BottomTab",
+        screens: {
+          Home: {
+            path: BottomTabScreenKeys.Home,
+          },
+          Profile: {
+            path: BottomTabScreenKeys.Profile,
+          },
         },
       },
     },
