@@ -3,7 +3,6 @@ import {
   BaseLoadingLottie,
   BaseStatusBar,
 } from "@components/shared";
-import usePushNotification from "@libs/local_notification";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { ThemeProvider } from "@wrappers/providers";
 import React, { useEffect } from "react";
@@ -19,9 +18,6 @@ import i18Config from "./libs/intl";
 import RootNavigation from "@navigation/root.navigation";
 
 export default function App() {
-  const { requestNotificationPermission, setApplicationIconBadgeNumber } =
-    usePushNotification();
-
   const initialMetrics: Metrics = {
     frame: { x: 0, y: 0, width: 0, height: 0 },
     insets: { top: 0, left: 0, right: 0, bottom: 0 },
@@ -32,9 +28,7 @@ export default function App() {
       webClientId: systemConstant.WEB_CLIENT_ID,
     });
     LottieSplashScreen.hide();
-    requestNotificationPermission();
-    setApplicationIconBadgeNumber(0);
-  }, [requestNotificationPermission]);
+  }, []);
 
   return (
     <Provider store={store}>
