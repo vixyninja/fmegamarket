@@ -3,7 +3,7 @@ import {
   BaseLoadingLottie,
   BaseStatusBar,
 } from "@components/shared";
-import { persistor, store } from "@libs/app-redux";
+import usePushNotification from "@libs/local_notification";
 import { GoogleSignin } from "@react-native-google-signin/google-signin";
 import { ThemeProvider } from "@wrappers/providers";
 import React, { useEffect } from "react";
@@ -13,22 +13,31 @@ import LottieSplashScreen from "react-native-lottie-splash-screen";
 import { Metrics, SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { RootNavigation } from "./libs";
+import { systemConstant } from "./constants";
+import { RootNavigation, persistor, store } from "./libs";
 import i18Config from "./libs/intl";
 
 export default function App() {
+  const {
+    requestPermission,
+    setApplicationIconBadgeNumber,
+    testLocalNotification,
+  } = usePushNotification();
+
   const initialMetrics: Metrics = {
     frame: { x: 0, y: 0, width: 0, height: 0 },
     insets: { top: 0, left: 0, right: 0, bottom: 0 },
   };
 
   useEffect(() => {
-    LottieSplashScreen.hide();
     GoogleSignin.configure({
-      webClientId:
-        "705194195270-8hiek6umkvrvn9d7q2u2uam4b6ag6v31.apps.googleusercontent.com",
+      webClientId: systemConstant.WEB_CLIENT_ID,
     });
-  }, []);
+    LottieSplashScreen.hide();
+    requestPermission();
+    setApplicationIconBadgeNumber(0);
+    testLocalNotification();
+  }, [requestPermission]);
 
   return (
     <Provider store={store}>
