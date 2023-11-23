@@ -4,6 +4,7 @@ import { NavigationServices } from "@navigation/services.navigation";
 import { Image, Text } from "@rneui/themed";
 import { BaseRootView } from "@wrappers/hoc";
 import React, { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { ActivityIndicator, StatusBar } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Animated, {
@@ -20,6 +21,7 @@ export default function WelcomeScreen() {
   const opacity = useSharedValue(0);
   const animatedY = useSharedValue(-200);
   const repeatXY = useSharedValue(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     opacity.value = withTiming(1, { duration: 1000 });
@@ -67,19 +69,16 @@ export default function WelcomeScreen() {
         fadeDuration={500}
         children={
           <Animated.View style={[styles.textContainer, opacityStyle]}>
-            <Text style={styles.text1}>Welcome to 👋</Text>
+            <Text style={styles.text1}>{t("welcome.welcome")}</Text>
             <Text style={styles.text2}>Mega Market</Text>
-            <Text style={styles.text3}>
-              The best furniture e-commerce app of the century for your daily
-              needs 😉
-            </Text>
+            <Text style={styles.text3}>{t("welcome.text")}</Text>
           </Animated.View>
         }
       />
 
       <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
         <Animated.Text style={[styles.nextText, nextButtonStyle]}>
-          Next 👉
+          {t("welcome.next")}
         </Animated.Text>
       </TouchableOpacity>
     </BaseRootView>

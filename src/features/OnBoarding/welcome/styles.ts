@@ -1,36 +1,37 @@
 import { FONT_MANAGER } from "@assets/fonts";
-import { Colors, Theme, makeStyles } from "@rneui/themed";
+import { Colors, Theme, makeStyles, normalize } from "@rneui/themed";
 
 const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({
   image: {
     width: "100%",
     height: "100%",
     resizeMode: "stretch",
+    padding: 6,
   },
   textContainer: {
     position: "absolute",
-    bottom: 40,
+    bottom: normalize(40),
     alignSelf: "center",
   },
   text1: {
     fontFamily: FONT_MANAGER.poppins_semi_bold,
-    fontSize: 36,
+    fontSize: normalize(36),
     color: theme.colors.primary,
   },
   text2: {
     color: theme.colors.primary,
     fontFamily: FONT_MANAGER.poppins_medium,
-    fontSize: 52,
+    fontSize: normalize(52),
   },
   text3: {
     color: theme.colors.primary,
     fontFamily: FONT_MANAGER.poppins_regular,
-    fontSize: 16,
+    fontSize: normalize(16),
   },
   nextButton: {
     position: "absolute",
-    bottom: 20,
-    right: 30,
+    bottom: normalize(20),
+    right: normalize(30),
     zIndex: 999,
     flexDirection: "row",
     justifyContent: "center",
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({
   nextText: {
     color: "#fff",
     fontFamily: FONT_MANAGER.poppins_regular,
-    fontSize: 16,
+    fontSize: normalize(16),
   },
 }));
 

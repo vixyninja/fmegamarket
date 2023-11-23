@@ -81,5 +81,27 @@
       "title": "Permission blocked",
       "message": "Permission blocked. You can grant permission in the settings."
     }
+  },
+  "welcome": {
+    "welcome": "Welcome to 👋",
+    "text": "The best furniture e-commerce app of the century for your daily needs 😉",
+    "next": "Next"
+  },
+  "introduction": {
+    "next": "Next",
+    "back": "Back",
+    "text1": "We provide high quality products just for you",
+    "text2": "Our products are made from natural ingredients",
+    "text3": "We are committed to providing the best service for our customers"
+  },
+  "lobby": {
+    "title": "Let's you in",
+    "fb": "Continue with Facebook",
+    "gg": "Continue with Google",
+    "tw": "Continue with Twitter",
+    "or": "or",
+    "email": "Sign in with Email",
+    "dont": "Don't have an account? ",
+    "signup": "Sign up"
   }
 }

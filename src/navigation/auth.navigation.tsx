@@ -46,6 +46,15 @@ export default function AuthNavigation() {
       />
 
       <AuthStack.Screen
+        key={onBoardingScreenStack[2].name}
+        name={onBoardingScreenStack[2].name}
+        component={onBoardingScreenStack[2].component}
+        options={{
+          animation: "slide_from_right",
+        }}
+      />
+
+      <AuthStack.Screen
         key={authScreenStack[0].name}
         name={authScreenStack[0].name}
         component={authScreenStack[0].component}

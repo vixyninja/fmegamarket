@@ -81,5 +81,27 @@
       "title": "Quyền truy cập bị chặn",
       "message": "Ứng dụng này đã bị chặn quyền truy cập."
     }
+  },
+  "welcome": {
+    "welcome": "Xiin chào 👋",
+    "text": "Ứng dụng thương mại điện tử tốt nhất thế kỷ cho nhu cầu hàng ngày của bạn 😉",
+    "next": "Tiếp theo"
+  },
+  "introduction": {
+    "next": "Tiếp theo",
+    "back": "Quay lại",
+    "text1": "Chúng tôi cung cấp sản phẩm chất lượng cao dành riêng cho bạn",
+    "text2": "Sản phẩm của chúng tôi được làm từ nguyên liệu tự nhiên",
+    "text3": "Chúng tôi cam kết cung cấp dịch vụ tốt nhất cho khách hàng"
+  },
+  "lobby": {
+    "title": "Bắt đầu",
+    "fb": "Tiếp tục với Facebook",
+    "gg": "Tiếp tục với Google",
+    "tw": "Tiếp tục với Twitter",
+    "or": "Hoặc",
+    "email": "Đăng nhập bằng mật khẩu",
+    "dont": "Không có tài khoản? ",
+    "signup": "Đăng ký"
   }
 }
