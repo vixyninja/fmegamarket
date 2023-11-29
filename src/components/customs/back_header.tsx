@@ -1,7 +1,6 @@
+import React from "react";
 import { Colors, Icon, Theme, makeStyles, normalize } from "@rneui/themed";
 import { View, ViewProps } from "react-native";
-
-import React from "react";
 
 export default function BackHeader(props: {
   onPress?: () => void;

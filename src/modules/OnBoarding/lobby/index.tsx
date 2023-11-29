@@ -131,7 +131,7 @@ export default function LobbyScreen() {
       <BaseStatusBar />
 
       <Image
-        source={{ uri: systemConstant.LOBBY_IMAGE[0] }}
+        source={IMAGE_MANAGER.appIcon}
         style={styles.image}
         PlaceholderContent={<ActivityIndicator />}
         defaultSource={IMAGE_MANAGER.placeholder}

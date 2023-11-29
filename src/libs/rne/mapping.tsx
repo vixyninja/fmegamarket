@@ -7,11 +7,13 @@ export const theme = createTheme({
     primary: "#ffffff",
     secondary: "#000000",
     background: "#ffffff",
+    tertiary: "#1DA1F2",
   },
   darkColors: {
     primary: "#000000",
     secondary: "#ffffff",
     background: "#000000",
+    tertiary: "#1DA1F2",
   },
   mode: "light",
   spacing: spacing,

@@ -2,16 +2,23 @@ import { useBackHandler } from "@hooks/useBackHandler";
 import { Colors, Theme, makeStyles, normalize } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, BackHandler, View } from "react-native";
+import {
+  Alert,
+  BackHandler,
+  Keyboard,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 
 export type BaseRootViewProps = {
   children: React.ReactNode;
   enableBackButton?: boolean;
   padding?: number | boolean;
+  touchWithoutFeedback?: boolean;
 };
 
 export default function BaseRootView(props: BaseRootViewProps) {
-  const { children, enableBackButton, padding } = props;
+  const { children, enableBackButton, padding, touchWithoutFeedback } = props;
   const styles = useStyles();
   const { t } = useTranslation();
   const [backButtonEnabled, setBackButtonEnabled] = useState(false);
@@ -48,16 +55,22 @@ export default function BaseRootView(props: BaseRootViewProps) {
   }, [backButtonEnabled]);
 
   return (
-    <View
-      style={[
-        styles.root,
-        {
-          padding: padding ? normalize(16 || padding) : 0,
-        },
-      ]}
+    <TouchableWithoutFeedback
+      onPress={() => {
+        touchWithoutFeedback && Keyboard.dismiss();
+      }}
     >
-      {children}
-    </View>
+      <View
+        style={[
+          styles.root,
+          {
+            padding: padding ? normalize(16 || padding) : 0,
+          },
+        ]}
+      >
+        {children}
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 

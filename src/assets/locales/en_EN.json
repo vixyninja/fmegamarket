@@ -103,5 +103,26 @@
     "email": "Sign in with Email",
     "dont": "Don't have an account? ",
     "signup": "Sign up"
+  },
+  "signIn": {
+    "title": "Login to your account",
+    "button": "Sign in",
+    "email": "Email",
+    "password": "Password",
+    "forgot": "Forgot password?",
+    "dont": "Don't have an account? ",
+    "signup": "Sign up",
+    "or": "or continue with",
+    "remember": "Remember me ?"
+  },
+  "signUp": {
+    "title": "Create your account",
+    "button": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "confirm": "Confirm password",
+    "already": "Already have an account? ",
+    "signin": "Sign in",
+    "or": "or continue with"
   }
 }

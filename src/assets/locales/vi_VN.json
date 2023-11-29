@@ -83,7 +83,7 @@
     }
   },
   "welcome": {
-    "welcome": "Xiin chào 👋",
+    "welcome": "Xin chào 👋",
     "text": "Ứng dụng thương mại điện tử tốt nhất thế kỷ cho nhu cầu hàng ngày của bạn 😉",
     "next": "Tiếp theo"
   },
@@ -103,5 +103,26 @@
     "email": "Đăng nhập bằng mật khẩu",
     "dont": "Không có tài khoản? ",
     "signup": "Đăng ký"
+  },
+  "signIn": {
+    "title": "Đăng nhập tài khoản",
+    "button": "Đăng nhập",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "forgot": "Quên mật khẩu?",
+    "dont": "Không có tài khoản? ",
+    "signup": "Đăng ký",
+    "or": "hoặc tiếp tục với",
+    "remember": "Ghi nhớ đăng nhập ?"
+  },
+  "signUp": {
+    "title": "Đăng ký tài khoản",
+    "button": "Đăng ký",
+    "email": "Email",
+    "password": "Mật khẩu",
+    "confirm": "Xác nhận mật khẩu",
+    "already": "Đã có tài khoản? ",
+    "signin": "Đăng nhập",
+    "or": "hoặc tiếp tục với"
   }
 }
