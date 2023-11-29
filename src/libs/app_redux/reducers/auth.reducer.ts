@@ -7,6 +7,7 @@ type AuthStateType = {
   refreshToken: string | null;
   provider: "google" | "facebook" | "email" | null;
   idToken: string | null;
+  [key: string]: any;
 };
 
 const initialState: AuthStateType = {
@@ -21,12 +22,8 @@ const reducer = createSlice({
   name: ReduxEnum.auth,
   initialState: initialState,
   reducers: {
-    signInGoogle: (state: AuthStateType) => {},
-    signOutGoogle: (state: AuthStateType) => {},
     signInEmail: (state: AuthStateType) => {},
-    signOutEmail: (state: AuthStateType) => {},
-    signInFacebook: (state: AuthStateType) => {},
-    signOutFacebook: (state: AuthStateType) => {},
+    signOut: (state: AuthStateType) => {},
     setCredentials: (
       state: AuthStateType,
       action: PayloadAction<Partial<AuthStateType>>,

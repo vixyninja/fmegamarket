@@ -1,4 +1,4 @@
-import { AppScreenKeys, appScreenStack } from "@features/Main";
+import { AppScreenKeys, appScreenStack } from "@modules/Main";
 import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,

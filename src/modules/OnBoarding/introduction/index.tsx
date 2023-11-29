@@ -1,8 +1,12 @@
+import { IMAGE_MANAGER } from "@assets/images";
 import { systemConstant } from "@constants/system.constant";
+import { useAppDispatch } from "@hooks/useRedux";
+import { AppAction, LoadingAction } from "@libs/app_redux";
 import { NavigationServices } from "@navigation/services.navigation";
 import { Button, Image, Text } from "@rneui/themed";
 import { BaseRootView } from "@wrappers/hoc";
 import React, { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
   FlatList,
@@ -12,21 +16,26 @@ import {
 } from "react-native";
 import { OnBoardingScreenKeys } from "../";
 import useStyles from "./styles";
-import { IMAGE_MANAGER } from "@assets/images";
-import { useTranslation } from "react-i18next";
 
 export default function IntroductionScreen() {
   const styles = useStyles();
   const listRef = useRef<FlatList>(null);
-  const [index, setIndex] = useState(0);
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
+
+  const [index, setIndex] = useState(0);
 
   function onClickNext() {
     if (index < systemConstant.ON_BOARDING_IMAGE.length - 2) {
       listRef.current?.scrollToIndex({ index: index + 1, animated: true });
       setIndex(index + 1);
     } else {
-      NavigationServices.navigate(OnBoardingScreenKeys.Lobby);
+      dispatch(LoadingAction.showLoading());
+      setTimeout(() => {
+        NavigationServices.navigate(OnBoardingScreenKeys.Lobby);
+        dispatch(LoadingAction.hideLoading());
+        dispatch(AppAction.setFirstTime(false));
+      }, 2000);
     }
   }
 

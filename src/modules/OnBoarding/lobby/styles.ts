@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({
   },
   imageContainer: {
     alignSelf: "center",
-    marginTop: normalize(24),
+    marginTop: normalize(64),
   },
   titleStyle: {
     textAlign: "center",

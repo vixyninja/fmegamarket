@@ -1,5 +1,4 @@
-import { AuthScreenKeys } from "@features/Auth";
-import { BottomTabScreenKeys } from "@features/Main";
+import { BottomTabScreenKeys } from "@modules/Main";
 import {
   CommonActions,
   DrawerActions,

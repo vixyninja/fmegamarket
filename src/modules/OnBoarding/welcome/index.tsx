@@ -78,7 +78,7 @@ export default function WelcomeScreen() {
 
       <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
         <Animated.Text style={[styles.nextText, nextButtonStyle]}>
-          {t("welcome.next")}
+          {t("welcome.next")} &gt;
         </Animated.Text>
       </TouchableOpacity>
     </BaseRootView>

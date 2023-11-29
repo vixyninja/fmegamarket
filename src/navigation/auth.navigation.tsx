@@ -1,8 +1,10 @@
-import { authScreenStack } from "@features/Auth";
+import { useAppSelector } from "@hooks/useRedux";
+import { appSelector } from "@libs/app_redux";
+import { authScreenStack } from "@modules/Auth";
 import {
   OnBoardingScreenKeys,
   onBoardingScreenStack,
-} from "@features/OnBoarding";
+} from "@modules/OnBoarding";
 import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,
@@ -11,6 +13,7 @@ import React from "react";
 
 export default function AuthNavigation() {
   const AuthStack = createNativeStackNavigator();
+  const appState = useAppSelector(appSelector);
 
   const authNavigationOptions: NativeStackNavigationOptions = {
     headerShown: false,
@@ -30,20 +33,23 @@ export default function AuthNavigation() {
       id="authNavigation"
       initialRouteName={OnBoardingScreenKeys.Welcome}
     >
-      <AuthStack.Screen
-        key={onBoardingScreenStack[0].name}
-        name={onBoardingScreenStack[0].name}
-        component={onBoardingScreenStack[0].component}
-      />
-
-      <AuthStack.Screen
-        key={onBoardingScreenStack[1].name}
-        name={onBoardingScreenStack[1].name}
-        component={onBoardingScreenStack[1].component}
-        options={{
-          animation: "slide_from_right",
-        }}
-      />
+      {appState.firstTime && (
+        <>
+          <AuthStack.Screen
+            key={onBoardingScreenStack[0].name}
+            name={onBoardingScreenStack[0].name}
+            component={onBoardingScreenStack[0].component}
+          />
+          <AuthStack.Screen
+            key={onBoardingScreenStack[1].name}
+            name={onBoardingScreenStack[1].name}
+            component={onBoardingScreenStack[1].component}
+            options={{
+              animation: "slide_from_right",
+            }}
+          />
+        </>
+      )}
 
       <AuthStack.Screen
         key={onBoardingScreenStack[2].name}
@@ -59,7 +65,6 @@ export default function AuthNavigation() {
         name={authScreenStack[0].name}
         component={authScreenStack[0].component}
       />
-
       <AuthStack.Screen
         key={authScreenStack[1].name}
         name={authScreenStack[1].name}

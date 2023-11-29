@@ -3,11 +3,14 @@
     "ANIMS",
     "dimens",
     "dont",
+    "ENVFILE",
     "fmegamarket",
+    "gradlew",
     "notifee",
     "persistor",
     "reduxjs",
     "rneui",
-    "Signin"
+    "Signin",
+    "signup"
   ]
 }

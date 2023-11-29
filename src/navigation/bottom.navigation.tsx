@@ -1,4 +1,4 @@
-import { bottomTabScreenStack } from "@features/Main";
+import { bottomTabScreenStack } from "@modules/Main";
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,

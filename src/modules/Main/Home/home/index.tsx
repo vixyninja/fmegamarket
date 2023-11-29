@@ -1,4 +1,6 @@
+import { ANIMS_MANAGER } from "@assets/anims";
 import { useGoogleSignin } from "@hooks/useGoogleSignIn";
+import { useLayoutAnimation } from "@hooks/useLayoutAnimation";
 import { useAppDispatch, useAppSelector } from "@hooks/useRedux";
 import { AuthAction, authSelector } from "@libs/app_redux";
 import { useLinkTo } from "@react-navigation/native";
@@ -9,6 +11,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 export default function HomeScreen() {
+  useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEaseOutDelayLong);
+
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
@@ -32,6 +36,12 @@ export default function HomeScreen() {
           linkTo("/BottomTab/Profile");
         }}
         title={"TEST"}
+      />
+      <Button
+        onPress={() => {
+          dispatch(AuthAction.clearCredentials());
+        }}
+        title={"Logout"}
       />
     </BaseRootView>
   );

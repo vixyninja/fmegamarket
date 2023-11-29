@@ -2,6 +2,14 @@ apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
 apply plugin: "com.google.gms.google-services" 
 
+project.ext.envConfigFiles = [
+    debug: "configs/dev/.env.development",
+    release: "configs/prod/.env.production",
+]
+
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
+import com.android.build.OutputFile
 
 react {
 }
@@ -13,18 +21,22 @@ def jscFlavor = 'org.webkit:android-jsc:+'
 
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
 
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
+    println("APP_NAME: " + project.env.get("APP_NAME"))
+
     namespace "com.fmegamarket"
     defaultConfig {
-        applicationId "com.fmegamarket"
+        applicationId project.env.get("APP_ID").toString()
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        resValue "string", "app_name", project.env.get("APP_NAME")
+        versionCode project.env.get("VERSION_CODE").toInteger()
+        versionName project.env.get("VERSION_NAME").toString()
     }
     signingConfigs {
         debug {
@@ -38,6 +50,7 @@ android {
         debug {
             signingConfig signingConfigs.debug
         }
+
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
@@ -52,6 +65,7 @@ dependencies {
     implementation("com.facebook.react:react-android")
     
     implementation project(':react-native-lottie-splash-screen')
+    implementation project(':react-native-config')
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
     implementation("com.google.firebase:firebase-analytics")
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}")
