@@ -20,7 +20,8 @@
     "dev:apk": "yarn dev:setup && cd android && ENVFILE=configs/dev/.env.development ./gradlew clean && ./gradlew assembleRelease && cd ..",
     "prod:apk": "yarn prod:setup && cd android && ENVFILE=configs/prod/.env.development ./gradlew clean && ./gradlew assembleRelease && cd ..",
     "prod:aab": "yarn prod:setup && cd android && ENVFILE=configs/prod/.env.development ./gradlew clean && ./gradlew bundleRelease && cd ..",
-    "signingReport": "cd android && ./gradlew signingReport && cd ..",
+    "sign:dev": "cd android && ENVFILE=configs/dev/.env.development ./gradlew signingReport && cd ..",
+    "sign:prod": "cd android && ENVFILE=configs/prod/.env.production ./gradlew signingReport && cd ..",
     "clean": "cd android && ENVFILE=configs/dev/.env.development ./gradlew clean && cd .."
   },
   "dependencies": {
