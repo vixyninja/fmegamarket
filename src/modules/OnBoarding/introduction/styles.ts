@@ -1,5 +1,5 @@
-import { FONT_MANAGER } from "@assets/fonts";
-import { dimens } from "@libs/rne";
+import { FONT_MANAGER } from "@/assets";
+import { dimens } from "@/configuration/themes";
 import { Colors, Theme, makeStyles, normalize } from "@rneui/themed";
 
 const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({

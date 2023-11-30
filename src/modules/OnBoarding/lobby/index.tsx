@@ -1,19 +1,24 @@
-import { IMAGE_MANAGER } from "@assets/images";
-import { BaseStatusBar } from "@components/shared";
-import { systemConstant } from "@constants/system.constant";
-import { useGoogleSignin } from "@hooks/useGoogleSignIn";
-import { useAppDispatch } from "@hooks/useRedux";
-import { AlertAction, AuthAction, LoadingAction } from "@libs/app_redux";
-import { AuthScreenKeys } from "@modules/Auth";
-import { NavigationServices } from "@navigation/services.navigation";
+import { IMAGE_MANAGER } from "@/assets";
+import {
+  BaseRootView,
+  BaseStatusBar,
+  useAppDispatch,
+  useGoogleSignin,
+} from "@/common";
+import {
+  AlertAction,
+  AuthAction,
+  LoadingAction,
+  NavigationServices,
+} from "@/core";
 import auth from "@react-native-firebase/auth";
 import { statusCodes } from "@react-native-google-signin/google-signin";
-import { Button, Divider, Icon, Image, Text } from "@rneui/themed";
-import { BaseRootView } from "@wrappers/hoc";
+import { Button, Divider, Icon, Image, Text, useTheme } from "@rneui/themed";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, TouchableOpacity, View } from "react-native";
 import useStyles from "./styles";
+import { AuthScreenKeys } from "@/modules/Auth";
 
 export default function LobbyScreen() {
   const styles = useStyles();
@@ -21,6 +26,7 @@ export default function LobbyScreen() {
   const dispatch = useAppDispatch();
   const { signIn, getTokens } = useGoogleSignin();
   const [disabled, setDisabled] = React.useState(false);
+  const { theme } = useTheme();
 
   function navigation(route: AuthScreenKeys) {
     switch (route) {
@@ -151,23 +157,16 @@ export default function LobbyScreen() {
           titleStyle={styles.buttonTitle}
           iconPosition="left"
           icon={
-            <Icon name="facebook" type="feather" size={20} color="#3b5998" />
+            <Icon
+              name="facebook"
+              type="feather"
+              size={20}
+              color={theme.colors.facebook}
+            />
           }
           buttonStyle={styles.buttonContainer}
           disabled={disabled}
-          onPress={() => {
-            dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_in")));
-            dispatch(
-              AuthAction.setCredentials({
-                accessToken: "123",
-                idToken: "123",
-                isAuth: true,
-                provider: "email",
-                refreshToken: "123",
-              }),
-            );
-            dispatch(LoadingAction.hideLoading());
-          }}
+          onPress={() => {}}
         />
 
         <Button
@@ -175,7 +174,12 @@ export default function LobbyScreen() {
           titleStyle={styles.buttonTitle}
           iconPosition="left"
           icon={
-            <Icon name="google" type="font-awesome" size={20} color="#db3236" />
+            <Icon
+              name="google"
+              type="font-awesome"
+              size={20}
+              color={theme.colors.google}
+            />
           }
           buttonStyle={styles.buttonContainer}
           disabled={disabled}
@@ -190,7 +194,12 @@ export default function LobbyScreen() {
           titleStyle={styles.buttonTitle}
           iconPosition="left"
           icon={
-            <Icon name="twitter" type="feather" size={20} color="#00acee" />
+            <Icon
+              name="twitter"
+              type="feather"
+              size={20}
+              color={theme.colors.twitter}
+            />
           }
           buttonStyle={styles.buttonContainer}
           disabled={disabled}

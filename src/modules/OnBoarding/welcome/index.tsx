@@ -1,8 +1,8 @@
-import { IMAGE_MANAGER } from "@assets/images";
-import { systemConstant } from "@constants/system.constant";
-import { NavigationServices } from "@navigation/services.navigation";
+import { IMAGE_MANAGER } from "@/assets";
+import { BaseRootView } from "@/common";
+import { systemConstant } from "@/configuration";
+import { NavigationServices } from "@/core";
 import { Image, Text } from "@rneui/themed";
-import { BaseRootView } from "@wrappers/hoc";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, StatusBar } from "react-native";

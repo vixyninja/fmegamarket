@@ -5,18 +5,9 @@
       "module-resolver",
       {
         "root": ["./src"],
-        "alias": [
-          { "@components": "./src/components" },
-          { "@constants": "./src/constants" },
-          { "@modules": "./src/modules" },
-          { "@hooks": "./src/hooks" },
-          { "@libs": "./src/libs" },
-          { "@models": "./src/models" },
-          { "@utils": "./src/utils" },
-          { "@wrappers": "./src/wrappers" },
-          { "@assets": "./src/assets" },
-          { "@navigation": "./src/navigation" }
-        ],
+        "alias": {
+          "@": "./src"
+        },
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     ],

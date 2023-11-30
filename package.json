@@ -39,6 +39,7 @@
     "@rneui/themed": "^4.0.0-rc.8",
     "async-mutex": "^0.4.0",
     "axios": "^1.6.2",
+    "builder-pattern": "^2.2.0",
     "i18next": "^23.7.6",
     "lottie-react-native": "^6.4.1",
     "react": "18.2.0",

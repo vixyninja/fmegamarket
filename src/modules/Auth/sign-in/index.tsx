@@ -1,39 +1,70 @@
-import { IMAGE_MANAGER } from "@assets/images";
-import { BackHeader, BasePrivateInput } from "@components/customs";
-import BaseInput from "@components/customs/base_input";
-import { useAppDispatch } from "@hooks/useRedux";
-import { NavigationServices } from "@navigation/services.navigation";
-import { Button, CheckBox, Divider, Icon, Image, Text } from "@rneui/themed";
-import { BaseRootView } from "@wrappers/hoc";
+import { ANIMS_MANAGER, IMAGE_MANAGER } from "@/assets";
+import {
+  BackHeader,
+  BaseInput,
+  BasePrivateInput,
+  BaseRootView,
+  useAppDispatch,
+  useLayoutAnimation,
+} from "@/common";
+import {
+  CredentialSignIn,
+  NavigationServices,
+  useSignInNormalMutation,
+} from "@/core";
+import { CheckBox, Divider } from "@rneui/base";
+import { Button, Icon, Image, Text, useTheme } from "@rneui/themed";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { AuthScreenKeys } from "../";
 import useStyles from "./styles";
 
 export default function SignInScreen() {
+  useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const styles = useStyles();
+  const { theme } = useTheme();
 
-  const [text, setText] = useState("");
-  const [text2, setText2] = useState("");
+  const [signInNormal, { data }] = useSignInNormalMutation();
+
+  const [credential, setCredential] = useState<CredentialSignIn>({
+    email: "",
+    password: "",
+  });
   const [isRemember, setIsRemember] = useState(false);
-
-  const onPasswordChange = useCallback(
-    (value: string) => {
-      setText2(value);
-    },
-    [text2],
-  );
 
   const onEmailChange = useCallback(
     (value: string) => {
-      setText(value);
+      setCredential({
+        ...credential,
+        email: value,
+      });
     },
-    [text],
+    [credential.email],
   );
+
+  const onPasswordChange = useCallback(
+    (value: string) => {
+      setCredential({
+        ...credential,
+        password: value,
+      });
+    },
+    [credential.password],
+  );
+
+  const handleSignIn = () => {
+    signInNormal({
+      email: credential.email,
+      password: credential.password,
+      deviceToken: "test",
+      deviceType: "android",
+      rememberMe: isRemember,
+    });
+  };
 
   return (
     <BaseRootView touchWithoutFeedback>
@@ -41,13 +72,8 @@ export default function SignInScreen() {
         <BackHeader onPress={() => NavigationServices.goBack()} />
 
         <Image
-          source={IMAGE_MANAGER.appIcon}
+          source={IMAGE_MANAGER.signIn}
           style={styles.image}
-          PlaceholderContent={<ActivityIndicator />}
-          defaultSource={IMAGE_MANAGER.placeholder}
-          transitionDuration={500}
-          transition={true}
-          fadeDuration={500}
           containerStyle={styles.imageContainer}
         />
 
@@ -80,6 +106,7 @@ export default function SignInScreen() {
                 backgroundColor: "transparent",
               },
             }}
+            keyboardType="email-address"
           />
 
           <BasePrivateInput
@@ -121,7 +148,7 @@ export default function SignInScreen() {
           title={t("signIn.button")}
           containerStyle={styles.signInButtonContainer}
           radius={99}
-          onPress={() => {}}
+          onPress={() => handleSignIn()}
         />
 
         <TouchableOpacity onPress={() => {}} style={styles.forgotContainer}>
@@ -139,7 +166,12 @@ export default function SignInScreen() {
             TouchableComponent={TouchableOpacity}
             buttonStyle={styles.selectionButtonContainer}
             title={
-              <Icon name="facebook" type="feather" size={20} color="#3b5998" />
+              <Icon
+                name="facebook"
+                type="feather"
+                size={20}
+                color={theme.colors.facebook}
+              />
             }
           />
 
@@ -151,7 +183,7 @@ export default function SignInScreen() {
                 name="google"
                 type="font-awesome"
                 size={20}
-                color="#db3236"
+                color={theme.colors.google}
               />
             }
           />
@@ -160,7 +192,12 @@ export default function SignInScreen() {
             TouchableComponent={TouchableOpacity}
             buttonStyle={styles.selectionButtonContainer}
             title={
-              <Icon name="twitter" type="feather" size={20} color="#00acee" />
+              <Icon
+                name="twitter"
+                type="feather"
+                size={20}
+                color={theme.colors.twitter}
+              />
             }
           />
         </View>

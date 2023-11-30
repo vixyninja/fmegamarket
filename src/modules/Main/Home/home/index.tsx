@@ -1,17 +1,20 @@
-import { ANIMS_MANAGER } from "@assets/anims";
-import { useGoogleSignin } from "@hooks/useGoogleSignIn";
-import { useLayoutAnimation } from "@hooks/useLayoutAnimation";
-import { useAppDispatch, useAppSelector } from "@hooks/useRedux";
-import { AuthAction, authSelector } from "@libs/app_redux";
+import { ANIMS_MANAGER } from "@/assets";
+import {
+  BaseRootView,
+  useAppDispatch,
+  useAppSelector,
+  useGoogleSignin,
+  useLayoutAnimation,
+} from "@/common";
+import { AuthAction, authSelector } from "@/core";
 import { useLinkTo } from "@react-navigation/native";
 
 import { Button } from "@rneui/themed";
-import { BaseRootView } from "@wrappers/hoc";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
 export default function HomeScreen() {
-  useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEaseOutDelayLong);
+  useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
 
   const dispatch = useAppDispatch();
 

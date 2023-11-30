@@ -1,10 +1,8 @@
-import { IMAGE_MANAGER } from "@assets/images";
-import { systemConstant } from "@constants/system.constant";
-import { useAppDispatch } from "@hooks/useRedux";
-import { AppAction, LoadingAction } from "@libs/app_redux";
-import { NavigationServices } from "@navigation/services.navigation";
+import { IMAGE_MANAGER } from "@/assets";
+import { BaseRootView, useAppDispatch } from "@/common";
+import { systemConstant } from "@/configuration";
+import { AppAction, LoadingAction, NavigationServices } from "@/core";
 import { Button, Image, Text } from "@rneui/themed";
-import { BaseRootView } from "@wrappers/hoc";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
