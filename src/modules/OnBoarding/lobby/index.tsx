@@ -5,12 +5,9 @@ import {
   useAppDispatch,
   useGoogleSignin,
 } from "@/common";
-import {
-  AlertAction,
-  AuthAction,
-  LoadingAction,
-  NavigationServices,
-} from "@/core";
+import { AlertAction, AuthAction, LoadingAction } from "@/core";
+import { NavigationServices } from "@/core/navigation/services.navigation";
+import { AuthScreenKeys } from "@/modules/Auth";
 import auth from "@react-native-firebase/auth";
 import { statusCodes } from "@react-native-google-signin/google-signin";
 import { Button, Divider, Icon, Image, Text, useTheme } from "@rneui/themed";
@@ -18,7 +15,6 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, TouchableOpacity, View } from "react-native";
 import useStyles from "./styles";
-import { AuthScreenKeys } from "@/modules/Auth";
 
 export default function LobbyScreen() {
   const styles = useStyles();

@@ -74,8 +74,8 @@ const baseApiQueryWithMutex: BaseQueryFn<
               message: "Your session has expired. Please login again.",
               title: "Session Expired",
               isShow: true,
-              callback: () => api.dispatch(AlertAction.disposeAlert()),
-              cancel: () => api.dispatch(AlertAction.disposeAlert()),
+              //   callback: () => api.dispatch(AlertAction.disposeAlert()),
+              //   cancel: () => api.dispatch(AlertAction.disposeAlert()),
             }),
           );
           api.dispatch(AuthAction.clearCredentials());
@@ -87,8 +87,8 @@ const baseApiQueryWithMutex: BaseQueryFn<
             message: "Your session has expired. Please login again.",
             title: "Session Expired",
             isShow: true,
-            callback: () => api.dispatch(AlertAction.disposeAlert()),
-            cancel: () => api.dispatch(AlertAction.disposeAlert()),
+            // callback: () => api.dispatch(AlertAction.disposeAlert()),
+            // cancel: () => api.dispatch(AlertAction.disposeAlert()),
           }),
         );
         api.dispatch(AuthAction.clearCredentials());

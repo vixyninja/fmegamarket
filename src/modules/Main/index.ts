@@ -1,4 +1,5 @@
-import { BottomNavigation, ScreenType } from "@/core";
+import BottomTabNavigation from "@/core/navigation/bottom.navigation";
+import { ScreenType } from "@/core/navigation/types.navigation";
 import { CartScreen } from "./Cart";
 import { ExploreScreen } from "./Explore";
 import { HomeScreen } from "./Home";
@@ -69,7 +70,7 @@ export const bottomTabScreenStack: Array<ScreenType> = [
 export const appScreenStack: Array<ScreenType> = [
   {
     name: AppScreenKeys.BottomTab,
-    component: BottomNavigation,
+    component: BottomTabNavigation,
     option: {
       icon: "home",
       type: "feather",

@@ -1,7 +1,7 @@
 import IntroductionScreen from "./introduction";
 import WelcomeScreen from "./welcome";
 import LobbyScreen from "./lobby";
-import { ScreenType } from "@/core";
+import { ScreenType } from "@/core/navigation/types.navigation";
 
 export { default as IntroductionScreen } from "./introduction";
 export { default as WelcomeScreen } from "./welcome";

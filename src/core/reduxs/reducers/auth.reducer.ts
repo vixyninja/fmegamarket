@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ReduxEnum } from "../store";
+import { ReduxEnum } from "../enum";
 
 type AuthStateType = {
   isAuth: boolean;

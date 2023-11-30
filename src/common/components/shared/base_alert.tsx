@@ -1,5 +1,5 @@
-import { useAppSelector } from "@/common/hooks";
-import { alertSelector } from "@/core";
+import { useAppDispatch, useAppSelector } from "@/common/hooks";
+import { AlertAction, alertSelector } from "@/core";
 import { useThemeMode } from "@rneui/themed";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -11,6 +11,7 @@ export default function BaseAlert() {
 
   const { t } = useTranslation();
   const { mode } = useThemeMode();
+  const dispatch = useAppDispatch();
 
   if (isShow) {
     Alert.alert(
@@ -25,7 +26,10 @@ export default function BaseAlert() {
         },
         {
           text: t("ok"),
-          onPress: callback,
+          onPress: () => {
+            callback();
+            dispatch(AlertAction.disposeAlert());
+          },
           isPreferred: true,
           style: "default",
         },
@@ -33,7 +37,10 @@ export default function BaseAlert() {
       {
         cancelable: false,
         userInterfaceStyle: mode === "dark" ? "dark" : "light",
-        onDismiss: cancel,
+        onDismiss: () => {
+          callback();
+          dispatch(AlertAction.disposeAlert());
+        },
       },
     );
   }

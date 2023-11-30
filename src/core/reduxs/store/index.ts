@@ -1,4 +1,3 @@
-import { ReduxEnum } from "@/configuration";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import EncryptedStorage from "react-native-encrypted-storage";
 import { PersistConfig } from "redux-persist";
@@ -12,6 +11,7 @@ import {
   LoadingReducer,
 } from "../reducers";
 import { apiService } from "../services";
+import { ReduxEnum } from "../enum";
 
 const createDebugger = require("redux-flipper").default;
 
@@ -35,7 +35,7 @@ const persistedReducer = persistReducer<RootState>(persistConfig, rootReducers);
 
 const middlewares: any[] = [createDebugger(), apiService.middleware];
 
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     [ReduxEnum.persisted]: persistedReducer,
     [apiService.reducerPath]: apiService.reducer,
@@ -46,6 +46,4 @@ const store = configureStore({
     }).concat(middlewares),
 });
 
-const persistor = persistStore(store);
-
-export { ReduxEnum, RootState, apiService, persistor, store };
+export const persistor = persistStore(store);

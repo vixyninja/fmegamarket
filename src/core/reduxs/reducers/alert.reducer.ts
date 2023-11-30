@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ReduxEnum } from "../store";
+import { ReduxEnum } from "../enum";
 
 type AlertStateType = {
   type: "success" | "error" | "warning" | "info";
@@ -23,13 +23,15 @@ const reducer = createSlice({
   name: ReduxEnum.alert,
   initialState,
   reducers: {
-    setAlert: (
+    showAlert: (
       state: AlertStateType,
       action: PayloadAction<Partial<AlertStateType>>,
     ) => {
-      Object.assign(state, action.payload);
-    },
-    showAlert: (state: AlertStateType) => {
+      state.type = action.payload.type || "success";
+      state.title = action.payload.title || "Notification";
+      state.message = action.payload.message || "Do you want to continue?";
+      state.callback = action.payload.callback || (() => {});
+      state.cancel = action.payload.cancel || (() => {});
       state.isShow = true;
     },
     hideAlert: (state: AlertStateType) => {

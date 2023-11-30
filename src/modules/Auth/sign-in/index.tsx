@@ -9,17 +9,18 @@ import {
 } from "@/common";
 import {
   CredentialSignIn,
-  NavigationServices,
+  LoadingAction,
   useSignInNormalMutation,
 } from "@/core";
 import { CheckBox, Divider } from "@rneui/base";
 import { Button, Icon, Image, Text, useTheme } from "@rneui/themed";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { AuthScreenKeys } from "../";
 import useStyles from "./styles";
+import { NavigationServices } from "@/core/navigation/services.navigation";
 
 export default function SignInScreen() {
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
@@ -46,6 +47,10 @@ export default function SignInScreen() {
     [credential.email],
   );
 
+  useEffect(() => {
+    console.log("data", data);
+  }, [data]);
+
   const onPasswordChange = useCallback(
     (value: string) => {
       setCredential({
@@ -63,7 +68,7 @@ export default function SignInScreen() {
       deviceToken: "test",
       deviceType: "android",
       rememberMe: isRemember,
-    });
+    }).reset();
   };
 
   return (

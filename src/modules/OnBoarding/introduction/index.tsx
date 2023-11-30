@@ -1,7 +1,8 @@
 import { IMAGE_MANAGER } from "@/assets";
 import { BaseRootView, useAppDispatch } from "@/common";
 import { systemConstant } from "@/configuration";
-import { AppAction, LoadingAction, NavigationServices } from "@/core";
+import { AppAction, LoadingAction } from "@/core";
+import { NavigationServices } from "@/core/navigation/services.navigation";
 import { Button, Image, Text } from "@rneui/themed";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";

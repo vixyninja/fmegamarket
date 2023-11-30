@@ -7,7 +7,6 @@ import {
   useAppDispatch,
   useLayoutAnimation,
 } from "@/common";
-import { NavigationServices } from "@/core";
 import { Button, Divider, Icon, Image, Text, useTheme } from "@rneui/themed";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,6 +14,7 @@ import { TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { AuthScreenKeys } from "../";
 import useStyles from "./styles";
+import { NavigationServices } from "@/core/navigation/services.navigation";
 
 export default function SignUpScreen() {
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
