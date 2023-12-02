@@ -11,7 +11,7 @@ const LOBBY_IMAGE: string[] = [
   "https://i.pinimg.com/564x/d5/57/70/d55770e07874849eec95531fd03095cc.jpg",
 ];
 
-export const systemConstant = {
+export const SYSTEM_CONSTANTS = {
   BASE_IMAGE_URL,
   ON_BOARDING_IMAGE,
   LOBBY_IMAGE,

@@ -69,26 +69,26 @@ const baseApiQueryWithMutex: BaseQueryFn<
           result = await baseApiQuery(args, api, extraOptions);
         } else {
           api.dispatch(
-            AlertAction.setAlert({
+            AlertAction.showAlert({
               type: "error",
               message: "Your session has expired. Please login again.",
               title: "Session Expired",
               isShow: true,
-              //   callback: () => api.dispatch(AlertAction.disposeAlert()),
-              //   cancel: () => api.dispatch(AlertAction.disposeAlert()),
+              callback: () => api.dispatch(AlertAction.disposeAlert()),
+              cancel: () => api.dispatch(AlertAction.disposeAlert()),
             }),
           );
           api.dispatch(AuthAction.clearCredentials());
         }
       } catch (e) {
         api.dispatch(
-          AlertAction.setAlert({
+          AlertAction.showAlert({
             type: "error",
             message: "Your session has expired. Please login again.",
             title: "Session Expired",
             isShow: true,
-            // callback: () => api.dispatch(AlertAction.disposeAlert()),
-            // cancel: () => api.dispatch(AlertAction.disposeAlert()),
+            callback: () => api.dispatch(AlertAction.disposeAlert()),
+            cancel: () => api.dispatch(AlertAction.disposeAlert()),
           }),
         );
         api.dispatch(AuthAction.clearCredentials());
@@ -99,10 +99,6 @@ const baseApiQueryWithMutex: BaseQueryFn<
       await mutex.waitForUnlock();
       result = await baseApiQuery(args, api, extraOptions);
     }
-  } else if (result.error.status === 403) {
-    // handle error
-  } else if (result.error.status === 500) {
-    // handle error
   }
   api.dispatch(LoadingAction.hideLoading());
   return result;
@@ -114,4 +110,11 @@ export const apiService = createApi({
   tagTypes: ["USER"],
   refetchOnReconnect: true,
   reducerPath: "apiService",
+  serializeQueryArgs: (args) => {
+    if (typeof args === "string") {
+      return args;
+    }
+    const { endpointName, ...rest } = args;
+    return JSON.stringify(rest);
+  },
 });

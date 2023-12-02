@@ -1,0 +1,5 @@
+const APT_CONNECT_TIME_OUT = 30000;
+
+export const REQUEST_CONSTANTS = {
+  APT_CONNECT_TIME_OUT,
+};

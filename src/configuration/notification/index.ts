@@ -129,10 +129,10 @@ export const useNotifee = () => {
   };
 
   const pushNotification = async (
-    data?: Partial<Notification>,
     color?: string,
     fontTitle?: string,
     fontBody?: string,
+    data?: Partial<Notification>,
   ) => {
     color = color || "#ffffff";
     fontTitle = fontTitle || "16";

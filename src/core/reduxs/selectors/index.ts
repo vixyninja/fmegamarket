@@ -1,4 +1,7 @@
-export * from "./app.selector";
-export * from "./alert.selector";
-export * from "./loading.selector";
-export * from "./auth.selector";
+export { appSelector } from "./app.selector";
+
+export { alertSelector } from "./alert.selector";
+
+export { loadingSelector } from "./loading.selector";
+
+export { authSelector } from "./auth.selector";

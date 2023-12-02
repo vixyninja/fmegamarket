@@ -1,6 +1,6 @@
 import { IMAGE_MANAGER } from "@/assets";
 import { BaseRootView, useAppDispatch } from "@/common";
-import { systemConstant } from "@/configuration";
+import { SYSTEM_CONSTANTS } from "@/configuration";
 import { AppAction, LoadingAction } from "@/core";
 import { NavigationServices } from "@/core/navigation/services.navigation";
 import { Button, Image, Text } from "@rneui/themed";
@@ -25,7 +25,7 @@ export default function IntroductionScreen() {
   const [index, setIndex] = useState(0);
 
   function onClickNext() {
-    if (index < systemConstant.ON_BOARDING_IMAGE.length - 2) {
+    if (index < SYSTEM_CONSTANTS.ON_BOARDING_IMAGE.length - 2) {
       listRef.current?.scrollToIndex({ index: index + 1, animated: true });
       setIndex(index + 1);
     } else {
@@ -56,7 +56,7 @@ export default function IntroductionScreen() {
       />
       <View style={styles.containerList}>
         <FlatList
-          data={systemConstant.ON_BOARDING_IMAGE.slice(1)}
+          data={SYSTEM_CONSTANTS.ON_BOARDING_IMAGE.slice(1)}
           renderItem={({ item }) => {
             return (
               <Image
@@ -103,7 +103,7 @@ export default function IntroductionScreen() {
       </View>
 
       <View style={styles.containerDot}>
-        {systemConstant.ON_BOARDING_IMAGE.slice(1).map((_, idx) => {
+        {SYSTEM_CONSTANTS.ON_BOARDING_IMAGE.slice(1).map((_, idx) => {
           if (idx === index) {
             return <View key={idx} style={styles.activeDot} />;
           }

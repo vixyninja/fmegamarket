@@ -1,5 +1,5 @@
+import { STORE_ENUM } from "@/common";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ReduxEnum } from "../enum";
 
 type AlertStateType = {
   type: "success" | "error" | "warning" | "info";
@@ -20,7 +20,7 @@ const initialState: AlertStateType = {
 };
 
 const reducer = createSlice({
-  name: ReduxEnum.alert,
+  name: STORE_ENUM.ALERT,
   initialState,
   reducers: {
     showAlert: (

@@ -1,5 +1,5 @@
+import { STORE_ENUM } from "@/common";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ReduxEnum } from "../enum";
 
 type AuthStateType = {
   isAuth: boolean;
@@ -19,7 +19,7 @@ const initialState: AuthStateType = {
 };
 
 const reducer = createSlice({
-  name: ReduxEnum.auth,
+  name: STORE_ENUM.AUTH,
   initialState: initialState,
   reducers: {
     signInEmail: (state: AuthStateType) => {},

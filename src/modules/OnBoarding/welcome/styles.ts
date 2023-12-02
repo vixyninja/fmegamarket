@@ -1,4 +1,4 @@
-import { FONT_MANAGER } from "@assets/fonts";
+import { FONT_MANAGER } from "@/assets";
 import { Colors, Theme, makeStyles, normalize } from "@rneui/themed";
 
 const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({

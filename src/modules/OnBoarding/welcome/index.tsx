@@ -1,6 +1,6 @@
 import { IMAGE_MANAGER } from "@/assets";
 import { BaseRootView } from "@/common";
-import { systemConstant } from "@/configuration";
+import { SYSTEM_CONSTANTS } from "@/configuration";
 import { NavigationServices } from "@/core/navigation/services.navigation";
 import { Image, Text } from "@rneui/themed";
 import React, { useEffect } from "react";
@@ -60,7 +60,7 @@ export default function WelcomeScreen() {
       />
 
       <Image
-        source={{ uri: systemConstant.ON_BOARDING_IMAGE[0] }}
+        source={{ uri: SYSTEM_CONSTANTS.ON_BOARDING_IMAGE[0] }}
         style={styles.image}
         PlaceholderContent={<ActivityIndicator />}
         defaultSource={IMAGE_MANAGER.placeholder}

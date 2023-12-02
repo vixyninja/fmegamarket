@@ -1,4 +1,9 @@
-export * from "./alert.reducer";
-export * from "./app.reducer";
-export * from "./loading.reducer";
-export * from "./auth.reducer";
+export { AlertAction, AlertReducer } from "./alert.reducer";
+
+export { AppAction, AppReducer } from "./app.reducer";
+
+export { AuthAction, AuthReducer } from "./auth.reducer";
+
+export { LoadingAction, LoadingReducer } from "./loading.reducer";
+
+export {} from "./user.reducer";

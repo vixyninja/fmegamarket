@@ -1,9 +1,9 @@
 import { CredentialSignIn, CredentialToken } from "@/core/models";
+import { t } from "i18next";
 import { AlertAction, LoadingAction } from "../reducers";
 import { apiService } from "./api.service";
 import { EndpointEnum } from "./endpoint";
 import { HttpResponse } from "./type.services";
-import { t } from "i18next";
 
 export const authService = apiService.injectEndpoints({
   endpoints: (builder) => ({

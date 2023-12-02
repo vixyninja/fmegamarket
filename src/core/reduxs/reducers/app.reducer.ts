@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { ReduxEnum } from "../enum";
+import { STORE_ENUM } from "@/common";
 
 type AppStateType = {
   language: "vi" | "en";
@@ -12,7 +12,7 @@ const initialState: AppStateType = {
 };
 
 const reducer = createSlice({
-  name: ReduxEnum.app,
+  name: STORE_ENUM.APP,
   initialState: initialState,
   reducers: {
     setLanguage: (state: AppStateType, action: PayloadAction<"vi" | "en">) => {
