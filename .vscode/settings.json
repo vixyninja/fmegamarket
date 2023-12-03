@@ -4,6 +4,7 @@
     "dimens",
     "dont",
     "ENVFILE",
+    "firestore",
     "fmegamarket",
     "gradlew",
     "ionicon",
@@ -14,6 +15,7 @@
     "reduxs",
     "rneui",
     "Signin",
-    "signup"
+    "signup",
+    "uuidv"
   ]
 }

@@ -14,7 +14,7 @@ import {
   ThemeProvider,
   initialLayoutAnimation,
 } from "./common";
-import { ENVIRONMENT_MANAGER, useNotifee } from "./configuration";
+import { ENVIRONMENT_MANAGER, useFCM } from "./configuration";
 import i18Config from "./configuration/intl";
 import { RootNavigation, persistor, store } from "./core";
 
@@ -24,14 +24,17 @@ export default function App() {
     frame: { x: 0, y: 0, width: 0, height: 0 },
     insets: { top: 0, left: 0, right: 0, bottom: 0 },
   };
-  const { checkPermission } = useNotifee();
+
+  const { requestUserPermission, setBadgeCount, pushNotification } = useFCM();
 
   useEffect(() => {
     GoogleSignin.configure({
       webClientId: ENVIRONMENT_MANAGER.WEB_CLIENT_ID,
     });
     LottieSplashScreen.hide();
-    checkPermission();
+    requestUserPermission();
+    setBadgeCount(0);
+    pushNotification({});
   }, []);
 
   return (

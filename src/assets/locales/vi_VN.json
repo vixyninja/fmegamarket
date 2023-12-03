@@ -6,6 +6,16 @@
     "ORDER": "Đơn hàng",
     "PROFILE": "Hồ sơ"
   },
+  "notification": {
+    "title": "Thông báo",
+    "message": "Đây là thông báo mặc định.",
+    "subMessage": "Đây là thông báo mặc định.",
+    "cancel": "Đóng",
+    "ok": "Đồng ý",
+    "ticker": {
+      "default": "Bạn có thông báo mới."
+    }
+  },
   "alert": {
     "default": {
       "title": "Thông báo",

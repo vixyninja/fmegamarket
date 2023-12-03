@@ -37,7 +37,7 @@ export function AuthNavigation() {
       initialRouteName={appState.firstTime ? "WELCOME_SCREEN" : "LOBBY_SCREEN"}
     >
       {appState.firstTime && (
-        <>
+        <AuthStack.Group>
           <AuthStack.Screen
             key={"WELCOME_SCREEN"}
             name={"WELCOME_SCREEN"}
@@ -51,7 +51,7 @@ export function AuthNavigation() {
               animation: "slide_from_right",
             }}
           />
-        </>
+        </AuthStack.Group>
       )}
 
       <AuthStack.Screen

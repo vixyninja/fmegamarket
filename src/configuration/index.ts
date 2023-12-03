@@ -8,4 +8,4 @@ export { b } from "./firebases";
 
 export { resource } from "./intl";
 
-export { useNotifee } from "./notification";
+export { notification, useFCM } from "./notification";

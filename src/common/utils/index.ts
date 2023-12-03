@@ -1,5 +1,3 @@
-export { LoggerUtil } from "./logger.util";
-
 export { ToastUtil } from "./toast.util";
 
 export {
@@ -14,3 +12,5 @@ export {
   getDeviceInfo,
   getDeviceSystemVersion,
 } from "./device.util";
+
+// export { default as loggerUtil } from "./logger.util";

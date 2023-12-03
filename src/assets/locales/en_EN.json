@@ -6,6 +6,16 @@
     "ORDER": "Order",
     "PROFILE": "Profile"
   },
+  "notification": {
+    "title": "Notification",
+    "message": "This is a notification",
+    "subMessage": "This is a sub message",
+    "cancel": "Cancel",
+    "ok": "Accept",
+    "ticker": {
+      "default": "You have a new notification"
+    }
+  },
   "alert": {
     "default": {
       "title": "Notification",
