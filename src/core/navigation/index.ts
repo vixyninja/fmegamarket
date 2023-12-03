@@ -1,10 +1,5 @@
 export {
   ScreenOption,
-  CartGroupParamList,
-  ExploreGroupParamList,
-  HomeGroupParamList,
-  OrderGroupParamList,
-  ProfileGroupParamList,
   AuthParamList,
   BottomParamList,
   AppParamList,
@@ -23,7 +18,5 @@ export {
   linking,
   navigationRef,
 } from "./services.navigation";
-
-export * from "./stack";
 
 export { AppRoutes } from "./routes";

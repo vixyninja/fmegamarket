@@ -1,4 +1,4 @@
-import { BottomParamList, CartGroupParamList } from "@/core";
+import { AppParamList, BottomParamList } from "@/core";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -8,7 +8,7 @@ import { Text, View } from "react-native";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<BottomParamList, "CART">,
-  StackScreenProps<CartGroupParamList, "CART_SCREEN">
+  StackScreenProps<AppParamList, "BOTTOM_TAB">
 >;
 
 export default function CartScreen({ navigation, route }: Props) {
@@ -17,7 +17,7 @@ export default function CartScreen({ navigation, route }: Props) {
     <View>
       <Text>CartScreen</Text>
       <Button
-        onPress={() => navigation.navigate("PROFILE")}
+        onPress={() => navigation.navigate("WISHLIST_SCREEN")}
         title={"Navigation to profile"}
       />
     </View>

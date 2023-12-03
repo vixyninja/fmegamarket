@@ -1,4 +1,4 @@
-import { ErrorBoundary, NotFound } from "@/modules";
+import { ErrorBoundary, NotFound, NotificationScreen } from "@/modules";
 import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,
@@ -42,6 +42,12 @@ export function AppNavigation() {
         key={"ERROR_BOUNDARY"}
         name={"ERROR_BOUNDARY"}
         component={ErrorBoundary}
+      />
+
+      <AppStack.Screen
+        key={"NOTIFICATION_SCREEN"}
+        name={"NOTIFICATION_SCREEN"}
+        component={NotificationScreen}
       />
     </AppStack.Navigator>
   );

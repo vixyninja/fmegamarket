@@ -1,31 +1,32 @@
-import { BottomParamList, ProfileGroupParamList } from "@/core";
-import type { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import type { CompositeScreenProps } from "@react-navigation/native";
-import type { StackScreenProps } from "@react-navigation/stack";
+import { AppParamList, BottomParamList } from "@/core";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { CompositeScreenProps } from "@react-navigation/native";
+import { StackScreenProps } from "@react-navigation/stack";
 import { Button, Text } from "@rneui/themed";
 import React from "react";
 import { View } from "react-native";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<BottomParamList, "PROFILE">,
-  StackScreenProps<ProfileGroupParamList, "PROFILE_SCREEN">
+  StackScreenProps<AppParamList, "BOTTOM_TAB">
 >;
 
 export default function ProfileScreen({ navigation, route }: Props) {
   console.log(route.name);
+  console.log(route.params);
   return (
     <View>
       <Text>ProfileScreen</Text>
       <Button
-        title={"Notification"}
+        title={"Home screen"}
         onPress={() => {
-          navigation.navigate("HOME", { screen: "NOTIFICATION_SCREEN" });
+          navigation.navigate("BOTTOM_TAB", { screen: "HOME" });
         }}
       />
       <Button
-        title={"Setting"}
+        title={"Notification"}
         onPress={() => {
-          navigation.navigate("SETTING_SCREEN");
+          navigation.navigate("NOTIFICATION_SCREEN");
         }}
       />
     </View>

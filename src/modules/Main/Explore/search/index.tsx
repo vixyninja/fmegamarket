@@ -1,14 +1,9 @@
-import { BottomParamList, ExploreGroupParamList } from "@/core";
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { CompositeScreenProps } from "@react-navigation/native";
-import { StackScreenProps } from "@react-navigation/stack";
+import { AppParamList } from "@/core";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React from "react";
 import { Text, View } from "react-native";
 
-type Props = CompositeScreenProps<
-  BottomTabScreenProps<BottomParamList, "EXPLORE">,
-  StackScreenProps<ExploreGroupParamList, "SEARCH_SCREEN">
->;
+type Props = NativeStackScreenProps<AppParamList, "SEARCH_SCREEN">;
 export default function SearchScreen({ navigation, route }: Props) {
   console.log(route.name);
 

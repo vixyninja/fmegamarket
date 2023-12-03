@@ -7,10 +7,9 @@ import {
   useLayoutAnimation,
 } from "@/common";
 import {
-  AppRoutes,
+  AppParamList,
   AuthAction,
   BottomParamList,
-  HomeGroupParamList,
   authSelector,
 } from "@/core";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
@@ -23,7 +22,7 @@ import { useTranslation } from "react-i18next";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<BottomParamList, "HOME">,
-  StackScreenProps<HomeGroupParamList, "HOME_SCREEN">
+  StackScreenProps<AppParamList, "BOTTOM_TAB">
 >;
 
 export default function HomeScreen({ navigation, route }: Props) {
@@ -63,8 +62,11 @@ export default function HomeScreen({ navigation, route }: Props) {
       />
       <Button
         onPress={() => {
-          navigation.navigate(AppRoutes.NOTIFICATION_SCREEN, {
-            test: "Notification",
+          navigation.navigate("BOTTOM_TAB", {
+            screen: "PROFILE",
+            params: {
+              test: "test",
+            },
           });
         }}
         title={"Notification"}

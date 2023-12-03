@@ -1,4 +1,11 @@
-import { bottomTabScreenStack } from "@/modules";
+import {
+  CartScreen,
+  ExploreScreen,
+  HomeScreen,
+  OrderScreen,
+  ProfileScreen,
+  bottomTabScreenStack,
+} from "@/modules";
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
@@ -7,13 +14,7 @@ import { LabelPosition } from "@react-navigation/bottom-tabs/lib/typescript/src/
 import { Icon, Text, normalize, useTheme } from "@rneui/themed";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-  CartStack,
-  ExploreStack,
-  HomeStack,
-  OrderStack,
-  ProfileStack,
-} from "./stack";
+
 import { BottomParamList } from "./types.navigation";
 
 export function BottomTabNavigation() {
@@ -79,7 +80,7 @@ export function BottomTabNavigation() {
       <BottomTab.Screen
         key={"HOME"}
         name={"HOME"}
-        component={HomeStack}
+        component={HomeScreen}
         options={{
           tabBarShowLabel: true,
           tabBarBadge: badge[0],
@@ -90,7 +91,7 @@ export function BottomTabNavigation() {
       <BottomTab.Screen
         key={"EXPLORE"}
         name={"EXPLORE"}
-        component={ExploreStack}
+        component={ExploreScreen}
         options={{
           tabBarShowLabel: true,
           tabBarBadge: badge[1],
@@ -101,7 +102,7 @@ export function BottomTabNavigation() {
       <BottomTab.Screen
         key={"CART"}
         name={"CART"}
-        component={CartStack}
+        component={CartScreen}
         options={{
           tabBarShowLabel: true,
           tabBarBadge: badge[2],
@@ -112,7 +113,7 @@ export function BottomTabNavigation() {
       <BottomTab.Screen
         key={"ORDER"}
         name={"ORDER"}
-        component={OrderStack}
+        component={OrderScreen}
         options={{
           tabBarShowLabel: true,
           tabBarBadge: badge[3],
@@ -123,7 +124,7 @@ export function BottomTabNavigation() {
       <BottomTab.Screen
         key={"PROFILE"}
         name={"PROFILE"}
-        component={ProfileStack}
+        component={ProfileScreen}
         options={{
           tabBarShowLabel: true,
           tabBarBadge: badge[4],

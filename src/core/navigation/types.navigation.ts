@@ -26,53 +26,12 @@ type AuthParamList = {
   [AuthScreenKeys.SIGN_UP_SCREEN]: { test: string } | undefined;
 };
 
-// HOME GROUP MODULE
-type HomeGroupParamList = {
-  [HomeScreenKeys.HOME_SCREEN]: { test: string } | undefined;
-  [HomeScreenKeys.NOTIFICATION_SCREEN]: { test: string } | undefined;
-};
-
-// EXPLORE GROUP MODULE
-type ExploreGroupParamList = {
-  [ExploreScreenKeys.EXPLORE_SCREEN]: { test: string } | undefined;
-  [ExploreScreenKeys.SEARCH_SCREEN]: { test: string } | undefined;
-};
-
-// ORDERS GROUP MODULE
-type OrderGroupParamList = {
-  [OrderScreenKey.ORDER_SCREEN]: { test: string } | undefined;
-  [OrderScreenKey.HISTORY_SCREEN]: { test: string } | undefined;
-};
-
-// CART GROUP MODULE
-type CartGroupParamList = {
-  [CartScreenKeys.CART_SCREEN]: { test: string } | undefined;
-  [CartScreenKeys.WISHLIST_SCREEN]: { test: string } | undefined;
-};
-
-// PROFILE GROUP MODULE
-type ProfileGroupParamList = {
-  [ProfileScreenKeys.PROFILE_SCREEN]: { userId: string } | undefined;
-  [ProfileScreenKeys.SETTING_SCREEN]: { test: string } | undefined;
-};
-
-// BOTTOM TAB MODULE
 type BottomParamList = {
-  [BottomTabScreenKeys.HOME]:
-    | NavigatorScreenParams<HomeGroupParamList>
-    | undefined;
-  [BottomTabScreenKeys.EXPLORE]:
-    | NavigatorScreenParams<ExploreGroupParamList>
-    | undefined;
-  [BottomTabScreenKeys.ORDER]:
-    | NavigatorScreenParams<OrderGroupParamList>
-    | undefined;
-  [BottomTabScreenKeys.CART]:
-    | NavigatorScreenParams<CartGroupParamList>
-    | undefined;
-  [BottomTabScreenKeys.PROFILE]:
-    | NavigatorScreenParams<ProfileGroupParamList>
-    | undefined;
+  [BottomTabScreenKeys.HOME]: undefined;
+  [BottomTabScreenKeys.EXPLORE]: undefined;
+  [BottomTabScreenKeys.ORDER]: undefined;
+  [BottomTabScreenKeys.CART]: undefined;
+  [BottomTabScreenKeys.PROFILE]: undefined | { test: string };
 };
 
 // ROOT MODULE
@@ -82,16 +41,21 @@ type AppParamList = {
     | undefined;
   [AppScreenKeys.NOT_FOUND]: undefined;
   [AppScreenKeys.ERROR_BOUNDARY]: undefined;
+
+  //   HOME MODULE
+  [HomeScreenKeys.NOTIFICATION_SCREEN]: undefined;
+
+  //   EXPLORE MODULE
+  [ExploreScreenKeys.SEARCH_SCREEN]: undefined;
+
+  //   CART MODULE
+  [CartScreenKeys.WISHLIST_SCREEN]: undefined;
+
+  //   ORDER MODULE
+  [OrderScreenKey.HISTORY_SCREEN]: undefined;
+
+  //   PROFILE MODULE
+  [ProfileScreenKeys.SETTING_SCREEN]: undefined;
 };
 
-export {
-  AppParamList,
-  AuthParamList,
-  BottomParamList,
-  CartGroupParamList,
-  ExploreGroupParamList,
-  HomeGroupParamList,
-  OrderGroupParamList,
-  ProfileGroupParamList,
-  ScreenOption,
-};
+export { AppParamList, AuthParamList, BottomParamList, ScreenOption };
