@@ -1,7 +1,6 @@
 import { IMAGE_MANAGER } from "@/assets";
 import { BaseRootView } from "@/common";
 import { SYSTEM_CONSTANTS } from "@/configuration";
-import { NavigationServices } from "@/core/navigation/services.navigation";
 import { Image, Text } from "@rneui/themed";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +12,6 @@ import Animated, {
   withRepeat,
   withTiming,
 } from "react-native-reanimated";
-import { OnBoardingScreenKeys } from "../";
 import useStyles from "./styles";
 
 export default function WelcomeScreen() {
@@ -47,9 +45,7 @@ export default function WelcomeScreen() {
     };
   });
 
-  function handleNext() {
-    NavigationServices.navigate(OnBoardingScreenKeys.Introduction);
-  }
+  function handleNext() {}
 
   return (
     <BaseRootView>

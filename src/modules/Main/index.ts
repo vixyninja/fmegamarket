@@ -1,89 +1,19 @@
-import BottomTabNavigation from "@/core/navigation/bottom.navigation";
-import { ScreenType } from "@/core/navigation/types.navigation";
-import { CartScreen } from "./Cart";
-import { ExploreScreen } from "./Explore";
-import { HomeScreen } from "./Home";
-import { OrderScreen } from "./Order";
-import { ProfileScreen, SettingScreen } from "./Profile";
+const AppScreenKeys = {
+  BOTTOM_TAB: "BOTTOM_TAB",
+  NOT_FOUND: "NOT_FOUND",
+  ERROR_BOUNDARY: "ERROR_BOUNDARY",
+} as const;
 
-export enum AppScreenKeys {
-  BottomTab = "BottomTab",
-  SettingScreen = "SettingScreen",
-}
+export { AppScreenKeys };
 
-export enum BottomTabScreenKeys {
-  Home = "Home",
-  Explore = "Explore",
-  Orders = "Orders",
-  Cart = "Cart",
-  Profile = "Profile",
-}
+export { BottomTabScreenKeys, bottomTabScreenStack } from "./bottom";
 
-export const bottomTabScreenStack: Array<ScreenType> = [
-  {
-    name: BottomTabScreenKeys.Home,
-    component: HomeScreen,
-    option: {
-      icon: "home",
-      type: "feather",
-      label: "HOME",
-    },
-  },
-  {
-    name: BottomTabScreenKeys.Explore,
-    component: ExploreScreen,
-    option: {
-      icon: "search",
-      type: "feather",
-      label: "EXPLORE",
-    },
-  },
-  {
-    name: BottomTabScreenKeys.Orders,
-    component: OrderScreen,
-    option: {
-      icon: "shopping-bag",
-      type: "feather",
-      label: "ORDERS",
-    },
-  },
-  {
-    name: BottomTabScreenKeys.Cart,
-    component: CartScreen,
-    option: {
-      icon: "shopping-cart",
-      type: "feather",
-      label: "CART",
-    },
-  },
-  {
-    name: BottomTabScreenKeys.Profile,
-    component: ProfileScreen,
-    option: {
-      icon: "person",
-      type: "feather",
-      label: "PROFILE",
-    },
-  },
-];
+export { ProfileScreenKeys, ProfileScreen, SettingScreen } from "./Profile";
 
-export const appScreenStack: Array<ScreenType> = [
-  {
-    name: AppScreenKeys.BottomTab,
-    component: BottomTabNavigation,
-    option: {
-      icon: "home",
-      type: "feather",
-      label: "Home",
-    },
-  },
-  {
-    name: AppScreenKeys.SettingScreen,
-    component: SettingScreen,
-    option: {
-      icon: "settings",
-      type: "feather",
-      label: "Setting",
-    },
-  },
-];
+export { OrderScreenKey, HistoryScreen, OrderScreen } from "./Order";
+
+export { HomeScreenKeys, HomeScreen, NotificationScreen } from "./Home";
+
+export { ExploreScreenKeys, ExploreScreen, SearchScreen } from "./Explore";
+
+export { CartScreenKeys, CartScreen, WishListScreen } from "./Cart";

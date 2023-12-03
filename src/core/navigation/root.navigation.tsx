@@ -4,11 +4,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import React, { useEffect } from "react";
 import i18next from "../../configuration/intl";
 import { appSelector, authSelector } from "../reduxs";
-import AppNavigation from "./app.navigation";
-import AuthNavigation from "./auth.navigation";
+import { AppNavigation } from "./app.navigation";
+import { AuthNavigation } from "./auth.navigation";
 import { linking, navigationRef } from "./services.navigation";
 
-export default function RootNavigation() {
+export function RootNavigation() {
   const isSignedIn = useAppSelector(authSelector);
   const language = useAppSelector(appSelector);
 

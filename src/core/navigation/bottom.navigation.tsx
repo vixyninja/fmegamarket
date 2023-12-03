@@ -7,9 +7,17 @@ import { LabelPosition } from "@react-navigation/bottom-tabs/lib/typescript/src/
 import { Icon, Text, normalize, useTheme } from "@rneui/themed";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import {
+  CartStack,
+  ExploreStack,
+  HomeStack,
+  OrderStack,
+  ProfileStack,
+} from "./stack";
+import { BottomParamList } from "./types.navigation";
 
-export default function BottomTabNavigation() {
-  const BottomTab = createBottomTabNavigator();
+export function BottomTabNavigation() {
+  const BottomTab = createBottomTabNavigator<BottomParamList>();
 
   const { theme } = useTheme();
   const { t } = useTranslation();
@@ -41,9 +49,7 @@ export default function BottomTabNavigation() {
           fontSize: normalize(11),
         }}
       >
-        {t(
-          `bottom_navigation.${bottomTabScreenStack[props.index].option.label}`,
-        )}
+        {t(`bottom_navigation.${bottomTabScreenStack[props.index].label}`)}
       </Text>
     );
   };
@@ -56,8 +62,8 @@ export default function BottomTabNavigation() {
   }) => {
     return (
       <Icon
-        name={bottomTabScreenStack[props.index].option.icon}
-        type={bottomTabScreenStack[props.index].option.iconType}
+        name={bottomTabScreenStack[props.index].label}
+        type={bottomTabScreenStack[props.index].type ?? "material-community"}
         size={props.size}
         color={props.color}
       />
@@ -68,12 +74,12 @@ export default function BottomTabNavigation() {
     <BottomTab.Navigator
       screenOptions={bottomTabNavigationOptions}
       backBehavior="initialRoute"
-      initialRouteName="Home"
+      initialRouteName="HOME"
     >
       <BottomTab.Screen
-        key={bottomTabScreenStack[0].name}
-        name={bottomTabScreenStack[0].name}
-        component={bottomTabScreenStack[0].component}
+        key={"HOME"}
+        name={"HOME"}
+        component={HomeStack}
         options={{
           tabBarShowLabel: true,
           tabBarBadge: badge[0],
@@ -82,9 +88,9 @@ export default function BottomTabNavigation() {
         }}
       />
       <BottomTab.Screen
-        key={bottomTabScreenStack[1].name}
-        name={bottomTabScreenStack[1].name}
-        component={bottomTabScreenStack[1].component}
+        key={"EXPLORE"}
+        name={"EXPLORE"}
+        component={ExploreStack}
         options={{
           tabBarShowLabel: true,
           tabBarBadge: badge[1],
@@ -93,9 +99,9 @@ export default function BottomTabNavigation() {
         }}
       />
       <BottomTab.Screen
-        key={bottomTabScreenStack[2].name}
-        name={bottomTabScreenStack[2].name}
-        component={bottomTabScreenStack[2].component}
+        key={"CART"}
+        name={"CART"}
+        component={CartStack}
         options={{
           tabBarShowLabel: true,
           tabBarBadge: badge[2],
@@ -104,9 +110,9 @@ export default function BottomTabNavigation() {
         }}
       />
       <BottomTab.Screen
-        key={bottomTabScreenStack[3].name}
-        name={bottomTabScreenStack[3].name}
-        component={bottomTabScreenStack[3].component}
+        key={"ORDERS"}
+        name={"ORDERS"}
+        component={OrderStack}
         options={{
           tabBarShowLabel: true,
           tabBarBadge: badge[3],
@@ -115,9 +121,9 @@ export default function BottomTabNavigation() {
         }}
       />
       <BottomTab.Screen
-        key={bottomTabScreenStack[4].name}
-        name={bottomTabScreenStack[4].name}
-        component={bottomTabScreenStack[4].component}
+        key={"PROFILE"}
+        name={"PROFILE"}
+        component={ProfileStack}
         options={{
           tabBarShowLabel: true,
           tabBarBadge: badge[4],

@@ -1,8 +1,7 @@
 import { IMAGE_MANAGER } from "@/assets";
 import { BaseRootView, useAppDispatch } from "@/common";
 import { SYSTEM_CONSTANTS } from "@/configuration";
-import { AppAction, LoadingAction } from "@/core";
-import { NavigationServices } from "@/core/navigation/services.navigation";
+import { AppAction, LoadingAction, NavigationServices } from "@/core";
 import { Button, Image, Text } from "@rneui/themed";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +12,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { OnBoardingScreenKeys } from "../";
 import useStyles from "./styles";
 
 export default function IntroductionScreen() {
@@ -31,7 +29,6 @@ export default function IntroductionScreen() {
     } else {
       dispatch(LoadingAction.showLoading());
       setTimeout(() => {
-        NavigationServices.navigate(OnBoardingScreenKeys.Lobby);
         dispatch(LoadingAction.hideLoading());
         dispatch(AppAction.setFirstTime(false));
       }, 2000);

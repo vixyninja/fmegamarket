@@ -16,11 +16,8 @@ export {
   loadingSelector,
 } from "./selectors";
 
-export {
-  EndpointEnum,
-  apiService,
-  authService,
-  useSignInNormalMutation,
-} from "./services";
+export { EndpointEnum, authService } from "./services";
+
+export { useSignInNormalMutation } from "./services/auth.service";
 
 export { store, persistor } from "./store";

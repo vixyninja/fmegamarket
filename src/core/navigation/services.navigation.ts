@@ -105,10 +105,10 @@ export const linking: LinkingOptions<any> = {
         path: "BottomTab",
         screens: {
           Home: {
-            path: BottomTabScreenKeys.Home,
+            path: BottomTabScreenKeys.HOME,
           },
           Profile: {
-            path: BottomTabScreenKeys.Profile,
+            path: BottomTabScreenKeys.PROFILE,
           },
         },
       },

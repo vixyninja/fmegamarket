@@ -28,6 +28,53 @@
       "ok": "Đồng ý"
     }
   },
+  "validation": {
+    "default": {
+      "email": "Email không hợp lệ.",
+      "password": "Mật khẩu không hợp lệ.",
+      "confirm_password": "Xác nhận mật khẩu không hợp lệ.",
+      "first_name": "Tên không hợp lệ.",
+      "last_name": "Họ không hợp lệ.",
+      "phone": "Số điện thoại không hợp lệ.",
+      "address": "Địa chỉ không hợp lệ.",
+      "city": "Thành phố không hợp lệ.",
+      "country": "Quốc gia không hợp lệ.",
+      "postal_code": "Mã bưu điện không hợp lệ.",
+      "card_number": "Số thẻ không hợp lệ.",
+      "card_holder": "Chủ thẻ không hợp lệ.",
+      "card_expired": "Thẻ đã hết hạn.",
+      "card_cvv": "CVV không hợp lệ."
+    },
+    "email": {
+      "required": "Email là bắt buộc.",
+      "invalid": "Email không hợp lệ."
+    },
+    "password": {
+      "required": "Mật khẩu là bắt buộc.",
+      "invalid": "Mật khẩu không hợp lệ."
+    },
+    "confirm_password": {
+      "required": "Xác nhận mật khẩu là bắt buộc.",
+      "invalid": "Xác nhận mật khẩu không hợp lệ.",
+      "not_match": "Xác nhận mật khẩu không khớp."
+    },
+    "first_name": {
+      "required": "Tên là bắt buộc.",
+      "invalid": "Tên không hợp lệ."
+    },
+    "last_name": {
+      "required": "Họ là bắt buộc.",
+      "invalid": "Họ không hợp lệ."
+    },
+    "phone": {
+      "required": "Số điện thoại là bắt buộc.",
+      "invalid": "Số điện thoại không hợp lệ."
+    },
+    "address": {
+      "required": "Địa chỉ là bắt buộc.",
+      "invalid": "Địa chỉ không hợp lệ."
+    }
+  },
   "loading": {
     "sign_in": "Đang đăng nhập...",
     "sign_out": "Đang đăng xuất..."

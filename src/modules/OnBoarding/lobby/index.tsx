@@ -24,18 +24,7 @@ export default function LobbyScreen() {
   const [disabled, setDisabled] = React.useState(false);
   const { theme } = useTheme();
 
-  function navigation(route: AuthScreenKeys) {
-    switch (route) {
-      case AuthScreenKeys.SignIn:
-        NavigationServices.navigate(AuthScreenKeys.SignIn);
-        break;
-      case AuthScreenKeys.SignUp:
-        NavigationServices.navigate(AuthScreenKeys.SignUp);
-        break;
-      default:
-        break;
-    }
-  }
+
 
   async function onGoogleButtonPress() {
     dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_in")));
@@ -57,7 +46,7 @@ export default function LobbyScreen() {
         );
       } else {
         dispatch(
-          AlertAction.setAlert({
+          AlertAction.showAlert({
             title: t("alert.sign_in_failed.title"),
             message: t("alert.sign_in_failed.message"),
             callback: () => {
@@ -75,7 +64,7 @@ export default function LobbyScreen() {
     } catch (error: any) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         dispatch(
-          AlertAction.setAlert({
+          AlertAction.showAlert({
             title: t("alert.sign_in_cancelled.title"),
             message: t("alert.sign_in_cancelled.message"),
             callback: () => {
@@ -91,7 +80,7 @@ export default function LobbyScreen() {
         );
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         dispatch(
-          AlertAction.setAlert({
+          AlertAction.showAlert({
             title: t("alert.play_services_not_available.title"),
             message: t("alert.play_services_not_available.message"),
             callback: () => {
@@ -107,7 +96,7 @@ export default function LobbyScreen() {
         );
       } else {
         dispatch(
-          AlertAction.setAlert({
+          AlertAction.showAlert({
             title: t("alert.sign_in_failed.title"),
             message: t("alert.sign_in_failed.message"),
             callback: () => {
@@ -213,13 +202,12 @@ export default function LobbyScreen() {
         title={t("lobby.email")}
         containerStyle={styles.signInButtonContainer}
         radius={99}
-        onPress={() => navigation(AuthScreenKeys.SignIn)}
         disabled={disabled}
       />
 
       <View style={styles.footer}>
         <Text style={styles.footerText}>{t("lobby.dont")}</Text>
-        <TouchableOpacity onPress={() => navigation(AuthScreenKeys.SignUp)}>
+        <TouchableOpacity>
           <Text h4Style={styles.footerTextClick} h4>
             {" "}
             {t("lobby.signup")}

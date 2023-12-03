@@ -1,18 +1,21 @@
+import { useAppSelector } from "@/common";
 import {
-  OnBoardingScreenKeys,
-  authScreenStack,
-  onBoardingScreenStack,
+    IntroductionScreen,
+    LobbyScreen,
+    SignInScreen,
+    SignUpScreen,
+    WelcomeScreen,
 } from "@/modules";
 import {
-  NativeStackNavigationOptions,
-  createNativeStackNavigator,
+    NativeStackNavigationOptions,
+    createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import React from "react";
 import { appSelector } from "../reduxs";
-import { useAppSelector } from "@/common";
+import { AuthParamList } from "./types.navigation";
 
-export default function AuthNavigation() {
-  const AuthStack = createNativeStackNavigator();
+export function AuthNavigation() {
+  const AuthStack = createNativeStackNavigator<AuthParamList>();
   const appState = useAppSelector(appSelector);
 
   const authNavigationOptions: NativeStackNavigationOptions = {
@@ -31,19 +34,21 @@ export default function AuthNavigation() {
     <AuthStack.Navigator
       screenOptions={authNavigationOptions}
       id="authNavigation"
-      initialRouteName={OnBoardingScreenKeys.Welcome}
+      initialRouteName={
+        appState.firstTime ? "WELCOME_SCREEN" : "SIGN_IN_SCREEN"
+      }
     >
       {appState.firstTime && (
         <>
           <AuthStack.Screen
-            key={onBoardingScreenStack[0].name}
-            name={onBoardingScreenStack[0].name}
-            component={onBoardingScreenStack[0].component}
+            key={"WELCOME_SCREEN"}
+            name={"WELCOME_SCREEN"}
+            component={WelcomeScreen}
           />
           <AuthStack.Screen
-            key={onBoardingScreenStack[1].name}
-            name={onBoardingScreenStack[1].name}
-            component={onBoardingScreenStack[1].component}
+            key={"INTRODUCTION_SCREEN"}
+            name={"INTRODUCTION_SCREEN"}
+            component={IntroductionScreen}
             options={{
               animation: "slide_from_right",
             }}
@@ -52,23 +57,23 @@ export default function AuthNavigation() {
       )}
 
       <AuthStack.Screen
-        key={onBoardingScreenStack[2].name}
-        name={onBoardingScreenStack[2].name}
-        component={onBoardingScreenStack[2].component}
+        key={"LOBBY_SCREEN"}
+        name={"LOBBY_SCREEN"}
+        component={LobbyScreen}
         options={{
           animation: "slide_from_right",
         }}
       />
 
       <AuthStack.Screen
-        key={authScreenStack[0].name}
-        name={authScreenStack[0].name}
-        component={authScreenStack[0].component}
+        key={"SIGN_IN_SCREEN"}
+        name={"SIGN_IN_SCREEN"}
+        component={SignInScreen}
       />
       <AuthStack.Screen
-        key={authScreenStack[1].name}
-        name={authScreenStack[1].name}
-        component={authScreenStack[1].component}
+        key={"SIGN_UP_SCREEN"}
+        name={"SIGN_UP_SCREEN"}
+        component={SignUpScreen}
       />
     </AuthStack.Navigator>
   );

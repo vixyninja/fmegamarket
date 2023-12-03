@@ -15,8 +15,7 @@ import {
 } from "./common";
 import { ENVIRONMENT_MANAGER, useNotifee } from "./configuration";
 import i18Config from "./configuration/intl";
-import { persistor, store } from "./core";
-import RootNavigation from "./core/navigation/root.navigation";
+import { RootNavigation, persistor, store } from "./core";
 
 export default function App() {
   const initialMetrics: Metrics = {
