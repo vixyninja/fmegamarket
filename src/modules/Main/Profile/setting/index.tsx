@@ -7,7 +7,7 @@ import { Text, View } from "react-native";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<BottomParamList, "PROFILE">,
-  StackScreenProps<ProfileGroupParamList>
+  StackScreenProps<ProfileGroupParamList, "SETTING_SCREEN">
 >;
 
 export default function SettingScreen({ navigation, route }: Props) {

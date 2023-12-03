@@ -3,8 +3,8 @@ import { ScreenOption } from "@/core";
 const BottomTabScreenKeys = {
   HOME: "HOME",
   EXPLORE: "EXPLORE",
-  ORDER: "ORDER",
   CART: "CART",
+  ORDER: "ORDER",
   PROFILE: "PROFILE",
 } as const;
 
@@ -20,14 +20,14 @@ const bottomTabScreenStack: Array<ScreenOption> = [
     label: "EXPLORE",
   },
   {
-    icon: "shopping-bag",
-    type: "feather",
-    label: "ORDER",
-  },
-  {
     icon: "shopping-cart",
     type: "feather",
     label: "CART",
+  },
+  {
+    icon: "shopping-bag",
+    type: "feather",
+    label: "ORDER",
   },
   {
     icon: "user",

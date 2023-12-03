@@ -19,13 +19,13 @@ export default function ProfileScreen({ navigation, route }: Props) {
       <Button
         title={"Notification"}
         onPress={() => {
-          navigation.jumpTo;
+          navigation.navigate("HOME", { screen: "NOTIFICATION_SCREEN" });
         }}
       />
       <Button
         title={"Setting"}
         onPress={() => {
-          navigation.navigate("HOME", { screen: "NOTIFICATION_SCREEN" });
+          navigation.navigate("SETTING_SCREEN");
         }}
       />
     </View>

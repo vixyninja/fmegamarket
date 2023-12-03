@@ -19,10 +19,10 @@ export function HomeStack() {
 
   return (
     <Stack.Navigator screenOptions={screenOptions} id="HOME_STACK">
-      <Stack.Screen name="HOME_SCREEN" component={HomeScreen} />
+      <Stack.Screen name="HOME_SCREEN" component={HomeScreen as any} />
       <Stack.Screen
         name="NOTIFICATION_SCREEN"
-        component={NotificationScreen}
+        component={NotificationScreen as any}
         options={{
           headerShown: true,
         }}

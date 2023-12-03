@@ -18,8 +18,8 @@ export function ExploreStack() {
 
   return (
     <Stack.Navigator screenOptions={screenOptions} id="EXPLORE_STACK">
-      <Stack.Screen name="EXPLORE_SCREEN" component={ExploreScreen} />
-      <Stack.Screen name="SEARCH_SCREEN" component={SearchScreen} />
+      <Stack.Screen name="EXPLORE_SCREEN" component={ExploreScreen as any} />
+      <Stack.Screen name="SEARCH_SCREEN" component={SearchScreen as any} />
     </Stack.Navigator>
   );
 }

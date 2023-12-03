@@ -18,8 +18,8 @@ export function CartStack() {
 
   return (
     <Stack.Navigator screenOptions={screenOptions} id="CART_STACK">
-      <Stack.Screen name="CART_SCREEN" component={CartScreen} />
-      <Stack.Screen name="WISHLIST_SCREEN" component={WishListScreen} />
+      <Stack.Screen name="CART_SCREEN" component={CartScreen as any} />
+      <Stack.Screen name="WISHLIST_SCREEN" component={WishListScreen as any} />
     </Stack.Navigator>
   );
 }

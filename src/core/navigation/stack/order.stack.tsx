@@ -18,8 +18,8 @@ export function OrderStack() {
 
   return (
     <Stack.Navigator screenOptions={screenOptions} id="PROFILE_STACK">
-      <Stack.Screen name="ORDER_SCREEN" component={OrderScreen} />
-      <Stack.Screen name="HISTORY_SCREEN" component={HistoryScreen} />
+      <Stack.Screen name="ORDER_SCREEN" component={OrderScreen as any} />
+      <Stack.Screen name="HISTORY_SCREEN" component={HistoryScreen as any} />
     </Stack.Navigator>
   );
 }

@@ -16,7 +16,10 @@ export default function CartScreen({ navigation, route }: Props) {
   return (
     <View>
       <Text>CartScreen</Text>
-      <Button onPress={() => navigation.navigate("PROFILE")} />
+      <Button
+        onPress={() => navigation.navigate("PROFILE")}
+        title={"Navigation to profile"}
+      />
     </View>
   );
 }

@@ -9,12 +9,12 @@ import {
 import {
   AppRoutes,
   AuthAction,
+  BottomParamList,
   HomeGroupParamList,
   authSelector,
 } from "@/core";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { CompositeScreenProps, useLinkTo } from "@react-navigation/native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { StackScreenProps } from "@react-navigation/stack";
 
 import { Button } from "@rneui/themed";
@@ -22,8 +22,8 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 
 type Props = CompositeScreenProps<
-  BottomTabScreenProps<HomeGroupParamList, "HOME_SCREEN">,
-  StackScreenProps<HomeGroupParamList>
+  BottomTabScreenProps<BottomParamList, "HOME">,
+  StackScreenProps<HomeGroupParamList, "HOME_SCREEN">
 >;
 
 export default function HomeScreen({ navigation, route }: Props) {

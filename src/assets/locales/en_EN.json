@@ -2,8 +2,8 @@
   "bottom_navigation": {
     "HOME": "Home",
     "EXPLORE": "Explore",
-    "ORDER": "Order",
     "CART": "Cart",
+    "ORDER": "Order",
     "PROFILE": "Profile"
   },
   "alert": {
