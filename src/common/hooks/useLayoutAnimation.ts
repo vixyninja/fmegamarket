@@ -5,7 +5,10 @@ import {
   UIManager,
 } from "react-native";
 
-export const useLayoutAnimation = (animation: LayoutAnimationConfig) => {
+export const useLayoutAnimation = (animation: LayoutAnimationConfig) =>
+  LayoutAnimation.configureNext(animation);
+
+export const initialLayoutAnimation = () => {
   if (
     Platform.OS === "android" &&
     UIManager.setLayoutAnimationEnabledExperimental
@@ -13,5 +16,14 @@ export const useLayoutAnimation = (animation: LayoutAnimationConfig) => {
     UIManager.setLayoutAnimationEnabledExperimental(true);
   }
 
-  return LayoutAnimation.configureNext(animation);
+  return LayoutAnimation.configureNext({
+    duration: 300,
+    create: {
+      type: LayoutAnimation.Types.easeInEaseOut,
+      property: LayoutAnimation.Properties.opacity,
+    },
+    update: {
+      type: LayoutAnimation.Types.easeInEaseOut,
+    },
+  });
 };

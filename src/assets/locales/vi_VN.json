@@ -2,7 +2,7 @@
   "bottom_navigation": {
     "HOME": "Trang chủ",
     "EXPLORE": "Khám phá",
-    "ORDERS": "Đơn hàng",
+    "ORDER": "Đơn hàng",
     "CART": "Giỏ hàng",
     "PROFILE": "Hồ sơ"
   },

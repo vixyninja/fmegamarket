@@ -13,7 +13,7 @@ export const resource = {
 
 i18next.use(initReactI18next).init(
   {
-    compatibilityJSON: "v4",
+    compatibilityJSON: "v3",
     lng: "en",
     fallbackLng: "en",
     resources: resource,

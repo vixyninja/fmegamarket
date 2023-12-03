@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-export function BackButton() {
+export default function NotFound() {
   return (
     <View>
-      <Text>BackB</Text>
+      <Text>NotFound</Text>
     </View>
   );
 }

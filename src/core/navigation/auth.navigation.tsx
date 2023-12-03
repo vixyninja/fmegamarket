@@ -1,14 +1,14 @@
 import { useAppSelector } from "@/common";
 import {
-    IntroductionScreen,
-    LobbyScreen,
-    SignInScreen,
-    SignUpScreen,
-    WelcomeScreen,
+  IntroductionScreen,
+  LobbyScreen,
+  SignInScreen,
+  SignUpScreen,
+  WelcomeScreen,
 } from "@/modules";
 import {
-    NativeStackNavigationOptions,
-    createNativeStackNavigator,
+  NativeStackNavigationOptions,
+  createNativeStackNavigator,
 } from "@react-navigation/native-stack";
 import React from "react";
 import { appSelector } from "../reduxs";
@@ -21,7 +21,7 @@ export function AuthNavigation() {
   const authNavigationOptions: NativeStackNavigationOptions = {
     headerShown: false,
     animation: "default",
-    animationDuration: 300,
+    animationDuration: 500,
     animationTypeForReplace: "pop",
     autoHideHomeIndicator: true,
     customAnimationOnGesture: true,
@@ -34,9 +34,7 @@ export function AuthNavigation() {
     <AuthStack.Navigator
       screenOptions={authNavigationOptions}
       id="authNavigation"
-      initialRouteName={
-        appState.firstTime ? "WELCOME_SCREEN" : "SIGN_IN_SCREEN"
-      }
+      initialRouteName={appState.firstTime ? "WELCOME_SCREEN" : "LOBBY_SCREEN"}
     >
       {appState.firstTime && (
         <>

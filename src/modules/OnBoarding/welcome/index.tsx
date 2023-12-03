@@ -1,6 +1,8 @@
 import { IMAGE_MANAGER } from "@/assets";
 import { BaseRootView } from "@/common";
 import { SYSTEM_CONSTANTS } from "@/configuration";
+import { AppRoutes, AuthParamList } from "@/core";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Image, Text } from "@rneui/themed";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,7 +16,11 @@ import Animated, {
 } from "react-native-reanimated";
 import useStyles from "./styles";
 
-export default function WelcomeScreen() {
+type Props = NativeStackScreenProps<AuthParamList, "WELCOME_SCREEN">;
+
+export default function WelcomeScreen({ navigation, route }: Props) {
+  console.log(route.name);
+
   const styles = useStyles();
   const opacity = useSharedValue(0);
   const animatedY = useSharedValue(-200);
@@ -45,7 +51,10 @@ export default function WelcomeScreen() {
     };
   });
 
-  function handleNext() {}
+  const handleNext = () =>
+    navigation.navigate(AppRoutes.INTRODUCTION_SCREEN, {
+      test: "Introduction Screen",
+    });
 
   return (
     <BaseRootView>

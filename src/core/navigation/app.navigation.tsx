@@ -1,3 +1,4 @@
+import { ErrorBoundary, NotFound } from "@/modules";
 import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,
@@ -5,7 +6,6 @@ import {
 import React from "react";
 import { BottomTabNavigation } from "./bottom.navigation";
 import { AppParamList } from "./types.navigation";
-import { Text } from "@rneui/themed";
 
 export function AppNavigation() {
   const AppStack = createNativeStackNavigator<AppParamList>();
@@ -13,12 +13,10 @@ export function AppNavigation() {
   const authNavigationOptions: NativeStackNavigationOptions = {
     headerShown: false,
     animation: "simple_push",
-    animationDuration: 300,
-    animationTypeForReplace: "push",
+    animationDuration: 500,
     autoHideHomeIndicator: true,
     customAnimationOnGesture: true,
     fullScreenGestureEnabled: true,
-    orientation: "default",
     statusBarAnimation: "slide",
   };
 
@@ -37,13 +35,13 @@ export function AppNavigation() {
       <AppStack.Screen
         key={"NOT_FOUND"}
         name={"NOT_FOUND"}
-        component={() => <Text>Not Found</Text>}
+        component={NotFound}
       />
 
       <AppStack.Screen
         key={"ERROR_BOUNDARY"}
         name={"ERROR_BOUNDARY"}
-        component={() => <Text>Error Boundary</Text>}
+        component={ErrorBoundary}
       />
     </AppStack.Navigator>
   );

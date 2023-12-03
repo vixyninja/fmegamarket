@@ -10,14 +10,16 @@ export function ProfileStack() {
 
   const screenOptions: NativeStackNavigationOptions = {
     headerShown: false,
-    animation: "slide_from_right",
-    animationDuration: 300,
+    animation: "slide_from_bottom",
+    animationDuration: 600,
+    navigationBarHidden: true,
+    animationTypeForReplace: "pop",
   };
 
   return (
-    <Stack.Group screenOptions={screenOptions} navigationKey="PROFILE_STACK">
-      <Stack.Screen name="PROFILE_SCREEN" component={ProfileScreen} />
-      <Stack.Screen name="SETTING_SCREEN" component={SettingScreen} />
-    </Stack.Group>
+    <Stack.Navigator screenOptions={screenOptions} id="PROFILE_STACK">
+      <Stack.Screen name="PROFILE_SCREEN" component={ProfileScreen as any} />
+      <Stack.Screen name="SETTING_SCREEN" component={SettingScreen as any} />
+    </Stack.Navigator>
   );
 }

@@ -1,10 +1,10 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-export function TabButton() {
+export default function ErrorBoundary() {
   return (
     <View>
-      <Text>BackB</Text>
+      <Text>ErrorBoundary</Text>
     </View>
   );
 }

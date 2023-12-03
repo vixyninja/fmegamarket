@@ -5,26 +5,27 @@ import {
   useAppDispatch,
   useGoogleSignin,
 } from "@/common";
-import { AlertAction, AuthAction, LoadingAction } from "@/core";
-import { NavigationServices } from "@/core/navigation/services.navigation";
-import { AuthScreenKeys } from "@/modules/Auth";
+import { AlertAction, AuthAction, AuthParamList, LoadingAction } from "@/core";
 import auth from "@react-native-firebase/auth";
 import { statusCodes } from "@react-native-google-signin/google-signin";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Divider, Icon, Image, Text, useTheme } from "@rneui/themed";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, TouchableOpacity, View } from "react-native";
 import useStyles from "./styles";
 
-export default function LobbyScreen() {
+type Props = NativeStackScreenProps<AuthParamList, "LOBBY_SCREEN">;
+
+export default function LobbyScreen({ navigation, route }: Props) {
+  console.log(route.name);
+
   const styles = useStyles();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { signIn, getTokens } = useGoogleSignin();
   const [disabled, setDisabled] = React.useState(false);
   const { theme } = useTheme();
-
-
 
   async function onGoogleButtonPress() {
     dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_in")));

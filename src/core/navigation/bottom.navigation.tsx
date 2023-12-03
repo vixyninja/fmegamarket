@@ -62,7 +62,7 @@ export function BottomTabNavigation() {
   }) => {
     return (
       <Icon
-        name={bottomTabScreenStack[props.index].label}
+        name={bottomTabScreenStack[props.index].icon}
         type={bottomTabScreenStack[props.index].type ?? "material-community"}
         size={props.size}
         color={props.color}
@@ -110,8 +110,8 @@ export function BottomTabNavigation() {
         }}
       />
       <BottomTab.Screen
-        key={"ORDERS"}
-        name={"ORDERS"}
+        key={"ORDER"}
+        name={"ORDER"}
         component={OrderStack}
         options={{
           tabBarShowLabel: true,

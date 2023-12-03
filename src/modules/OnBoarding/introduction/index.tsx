@@ -1,7 +1,8 @@
 import { IMAGE_MANAGER } from "@/assets";
 import { BaseRootView, useAppDispatch } from "@/common";
 import { SYSTEM_CONSTANTS } from "@/configuration";
-import { AppAction, LoadingAction, NavigationServices } from "@/core";
+import { AppAction, AppRoutes, AuthParamList, LoadingAction } from "@/core";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Image, Text } from "@rneui/themed";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,7 +15,12 @@ import {
 } from "react-native";
 import useStyles from "./styles";
 
-export default function IntroductionScreen() {
+type Props = NativeStackScreenProps<AuthParamList, "INTRODUCTION_SCREEN">;
+
+export default function IntroductionScreen({ navigation, route }: Props) {
+  console.log(route.name);
+  console.log(route.params);
+
   const styles = useStyles();
   const listRef = useRef<FlatList>(null);
   const dispatch = useAppDispatch();
@@ -27,6 +33,7 @@ export default function IntroductionScreen() {
       listRef.current?.scrollToIndex({ index: index + 1, animated: true });
       setIndex(index + 1);
     } else {
+      navigation.navigate(AppRoutes.LOBBY_SCREEN, { test: "Lobby Screen" });
       dispatch(LoadingAction.showLoading());
       setTimeout(() => {
         dispatch(LoadingAction.hideLoading());
@@ -40,7 +47,7 @@ export default function IntroductionScreen() {
       listRef.current?.scrollToIndex({ index: index - 1, animated: true });
       setIndex(index - 1);
     } else {
-      NavigationServices.goBack();
+      navigation.canGoBack() && navigation.goBack();
     }
   }
 

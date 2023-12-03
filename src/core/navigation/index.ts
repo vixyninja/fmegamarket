@@ -3,7 +3,7 @@ export {
   CartGroupParamList,
   ExploreGroupParamList,
   HomeGroupParamList,
-  OrdersGroupParamList,
+  OrderGroupParamList,
   ProfileGroupParamList,
   AuthParamList,
   BottomParamList,
@@ -24,6 +24,6 @@ export {
   navigationRef,
 } from "./services.navigation";
 
-export { BackButton, TabButton } from "./components";
-
 export * from "./stack";
+
+export { AppRoutes } from "./routes";

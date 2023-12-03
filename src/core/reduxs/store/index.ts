@@ -11,7 +11,7 @@ import {
   AuthReducer,
   LoadingReducer,
 } from "../reducers";
-import { apiService } from "../services";
+import { apiService } from "../services/api.service";
 
 const createDebugger = require("redux-flipper").default;
 

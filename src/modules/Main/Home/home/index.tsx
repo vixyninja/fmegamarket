@@ -6,14 +6,29 @@ import {
   useGoogleSignin,
   useLayoutAnimation,
 } from "@/common";
-import { AuthAction, authSelector } from "@/core";
-import { useLinkTo } from "@react-navigation/native";
+import {
+  AppRoutes,
+  AuthAction,
+  HomeGroupParamList,
+  authSelector,
+} from "@/core";
+import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
+import { CompositeScreenProps, useLinkTo } from "@react-navigation/native";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StackScreenProps } from "@react-navigation/stack";
 
 import { Button } from "@rneui/themed";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-export default function HomeScreen() {
+type Props = CompositeScreenProps<
+  BottomTabScreenProps<HomeGroupParamList, "HOME_SCREEN">,
+  StackScreenProps<HomeGroupParamList>
+>;
+
+export default function HomeScreen({ navigation, route }: Props) {
+  console.log(route.name);
+
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
 
   const dispatch = useAppDispatch();
@@ -45,6 +60,14 @@ export default function HomeScreen() {
           dispatch(AuthAction.clearCredentials());
         }}
         title={"Logout"}
+      />
+      <Button
+        onPress={() => {
+          navigation.navigate(AppRoutes.NOTIFICATION_SCREEN, {
+            test: "Notification",
+          });
+        }}
+        title={"Notification"}
       />
     </BaseRootView>
   );

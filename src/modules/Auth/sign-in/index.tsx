@@ -8,21 +8,24 @@ import {
   useLayoutAnimation,
 } from "@/common";
 import {
+  AuthParamList,
   CredentialSignIn,
-  LoadingAction,
   useSignInNormalMutation,
 } from "@/core";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { CheckBox, Divider } from "@rneui/base";
 import { Button, Icon, Image, Text, useTheme } from "@rneui/themed";
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { AuthScreenKeys } from "../";
 import useStyles from "./styles";
-import { NavigationServices } from "@/core/navigation/services.navigation";
 
-export default function SignInScreen() {
+type Props = NativeStackScreenProps<AuthParamList, "SIGN_IN_SCREEN">;
+
+export default function SignInScreen({ navigation, route }: Props) {
+  console.log(route.name);
+
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
@@ -74,7 +77,7 @@ export default function SignInScreen() {
   return (
     <BaseRootView touchWithoutFeedback>
       <ScrollView scrollEnabled={false}>
-        <BackHeader onPress={() => NavigationServices.goBack()} />
+        <BackHeader />
 
         <Image
           source={IMAGE_MANAGER.signIn}
@@ -209,9 +212,7 @@ export default function SignInScreen() {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>{t("signIn.dont")}</Text>
-          <TouchableOpacity
-            onPress={() => NavigationServices.navigate(AuthScreenKeys.SignUp)}
-          >
+          <TouchableOpacity>
             <Text h4Style={styles.footerTextClick} h4>
               {" "}
               {t("signIn.signup")}

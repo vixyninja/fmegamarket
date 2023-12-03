@@ -7,16 +7,20 @@ import {
   useAppDispatch,
   useLayoutAnimation,
 } from "@/common";
+import { AuthParamList } from "@/core";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Divider, Icon, Image, Text, useTheme } from "@rneui/themed";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { AuthScreenKeys } from "../";
 import useStyles from "./styles";
-import { NavigationServices } from "@/core/navigation/services.navigation";
 
-export default function SignUpScreen() {
+type Props = NativeStackScreenProps<AuthParamList, "SIGN_UP_SCREEN">;
+
+export default function SignUpScreen({ navigation, route }: Props) {
+  console.log(route.name);
+
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
 
   const dispatch = useAppDispatch();
@@ -45,7 +49,7 @@ export default function SignUpScreen() {
   return (
     <BaseRootView touchWithoutFeedback>
       <ScrollView scrollEnabled contentContainerStyle={styles.root}>
-        <BackHeader onPress={() => NavigationServices.goBack()} />
+        <BackHeader />
 
         <Image
           source={IMAGE_MANAGER.signUp}
@@ -152,9 +156,7 @@ export default function SignUpScreen() {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>{t("signUp.already")}</Text>
-          <TouchableOpacity
-            onPress={() => NavigationServices.navigate(AuthScreenKeys.SignIn)}
-          >
+          <TouchableOpacity>
             <Text h4Style={styles.footerTextClick} h4>
               {" "}
               {t("signUp.signin")}

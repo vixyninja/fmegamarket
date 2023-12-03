@@ -10,14 +10,16 @@ export function ExploreStack() {
 
   const screenOptions: NativeStackNavigationOptions = {
     headerShown: false,
-    animation: "slide_from_right",
-    animationDuration: 300,
+    animation: "slide_from_bottom",
+    animationDuration: 600,
+    navigationBarHidden: true,
+    animationTypeForReplace: "pop",
   };
 
   return (
-    <Stack.Group screenOptions={screenOptions} navigationKey="EXPLORE_STACK">
+    <Stack.Navigator screenOptions={screenOptions} id="EXPLORE_STACK">
       <Stack.Screen name="EXPLORE_SCREEN" component={ExploreScreen} />
       <Stack.Screen name="SEARCH_SCREEN" component={SearchScreen} />
-    </Stack.Group>
+    </Stack.Navigator>
   );
 }

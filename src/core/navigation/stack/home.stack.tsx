@@ -10,14 +10,23 @@ export function HomeStack() {
 
   const screenOptions: NativeStackNavigationOptions = {
     headerShown: false,
-    animation: "slide_from_right",
-    animationDuration: 300,
+    animation: "slide_from_bottom",
+    animationDuration: 600,
+    navigationBarHidden: true,
+    animationTypeForReplace: "pop",
+    headerTitleAlign: "center",
   };
 
   return (
-    <Stack.Group screenOptions={screenOptions} navigationKey="HOME_STACK">
+    <Stack.Navigator screenOptions={screenOptions} id="HOME_STACK">
       <Stack.Screen name="HOME_SCREEN" component={HomeScreen} />
-      <Stack.Screen name="NOTIFICATION_SCREEN" component={NotificationScreen} />
-    </Stack.Group>
+      <Stack.Screen
+        name="NOTIFICATION_SCREEN"
+        component={NotificationScreen}
+        options={{
+          headerShown: true,
+        }}
+      />
+    </Stack.Navigator>
   );
 }
