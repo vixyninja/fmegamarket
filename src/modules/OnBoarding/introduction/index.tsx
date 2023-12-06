@@ -1,18 +1,21 @@
-import { IMAGE_MANAGER } from "@/assets";
 import { BaseRootView, useAppDispatch } from "@/common";
 import { SYSTEM_CONSTANTS } from "@/configuration";
-import { AppAction, AppRoutes, AuthParamList, LoadingAction } from "@/core";
+import { AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Image, Text } from "@rneui/themed";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  ActivityIndicator,
   FlatList,
+  NativeScrollEvent,
   StatusBar,
   TouchableOpacity,
   View,
 } from "react-native";
+import {
+  useAnimatedScrollHandler,
+  useSharedValue,
+} from "react-native-reanimated";
 import useStyles from "./styles";
 
 type Props = NativeStackScreenProps<AuthParamList, "INTRODUCTION_SCREEN">;
@@ -28,28 +31,23 @@ export default function IntroductionScreen({ navigation, route }: Props) {
 
   const [index, setIndex] = useState(0);
 
-  function onClickNext() {
-    if (index < SYSTEM_CONSTANTS.ON_BOARDING_IMAGE.length - 2) {
-      listRef.current?.scrollToIndex({ index: index + 1, animated: true });
-      setIndex(index + 1);
-    } else {
-      navigation.navigate(AppRoutes.LOBBY_SCREEN, { test: "Lobby Screen" });
-      dispatch(LoadingAction.showLoading());
-      setTimeout(() => {
-        dispatch(LoadingAction.hideLoading());
-        dispatch(AppAction.setFirstTime(false));
-      }, 2000);
-    }
-  }
+  const scrollX = useSharedValue(0);
 
-  function onClickBack() {
-    if (index > 0) {
-      listRef.current?.scrollToIndex({ index: index - 1, animated: true });
-      setIndex(index - 1);
-    } else {
-      navigation.canGoBack() && navigation.goBack();
-    }
-  }
+  const handler = useAnimatedScrollHandler({
+    onBeginDrag: (event: NativeScrollEvent) => {
+      console.log("On Begin Drag", event.contentOffset.x);
+    },
+    onEndDrag: (event: NativeScrollEvent) => {
+      console.log("On End Drag", event.contentOffset.x);
+    },
+    onScroll: (event: NativeScrollEvent) => {
+      scrollX.value = event.contentOffset.x;
+    },
+  });
+
+  function onClickNext() {}
+
+  function onClickBack() {}
 
   return (
     <BaseRootView>
@@ -62,17 +60,7 @@ export default function IntroductionScreen({ navigation, route }: Props) {
         <FlatList
           data={SYSTEM_CONSTANTS.ON_BOARDING_IMAGE.slice(1)}
           renderItem={({ item }) => {
-            return (
-              <Image
-                source={{ uri: item }}
-                style={styles.image}
-                PlaceholderContent={<ActivityIndicator />}
-                defaultSource={IMAGE_MANAGER.placeholder}
-                transitionDuration={500}
-                transition={true}
-                fadeDuration={500}
-              />
-            );
+            return <Image source={{ uri: item }} style={styles.image} />;
           }}
           ref={listRef}
           bounces={false}
@@ -80,6 +68,7 @@ export default function IntroductionScreen({ navigation, route }: Props) {
           alwaysBounceHorizontal={false}
           alwaysBounceVertical={false}
           pagingEnabled
+          onScroll={handler}
           showsHorizontalScrollIndicator={false}
           keyExtractor={(item) => item.toString()}
           horizontal

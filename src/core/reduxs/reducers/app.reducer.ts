@@ -4,11 +4,13 @@ import { STORE_ENUM } from "@/common";
 type AppStateType = {
   language: "vi" | "en";
   firstTime: boolean;
+  fontFamily: "roboto" | "poppins";
 };
 
 const initialState: AppStateType = {
   language: "en",
   firstTime: true,
+  fontFamily: "roboto",
 };
 
 const reducer = createSlice({
@@ -20,6 +22,12 @@ const reducer = createSlice({
     },
     setFirstTime: (state: AppStateType, action: PayloadAction<boolean>) => {
       state.firstTime = action.payload;
+    },
+    setFontFamily: (
+      state: AppStateType,
+      action: PayloadAction<"roboto" | "poppins">,
+    ) => {
+      state.fontFamily = action.payload;
     },
   },
 });

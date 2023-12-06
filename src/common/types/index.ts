@@ -1,4 +1,9 @@
-export { API_ERROR_ENUM, STORAGE_ENUM, STORE_ENUM } from "./enums";
+export {
+  API_ERROR_ENUM,
+  STORAGE_ENUM,
+  STORE_ENUM,
+  LanguagesEnum,
+} from "./enums";
 
 export type { StorageType } from "./types/";
 

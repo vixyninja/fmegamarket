@@ -2,7 +2,7 @@ import { STORE_ENUM } from "@/common";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 type AlertStateType = {
-  type: "success" | "error" | "warning" | "info";
+  type: "success" | "error" | "warning" | "info" | "core";
   title: string;
   message: string;
   callback: () => void;
@@ -13,7 +13,7 @@ type AlertStateType = {
 const initialState: AlertStateType = {
   type: "success",
   title: "Notification",
-  message: "Do you want to continue?",
+  message: "Notification message",
   callback: () => {},
   cancel: () => {},
   isShow: false,
@@ -27,9 +27,9 @@ const reducer = createSlice({
       state: AlertStateType,
       action: PayloadAction<Partial<AlertStateType>>,
     ) => {
-      state.type = action.payload.type || "success";
+      state.type = action.payload.type || "core";
       state.title = action.payload.title || "Notification";
-      state.message = action.payload.message || "Do you want to continue?";
+      state.message = action.payload.message || "Notification message";
       state.callback = action.payload.callback || (() => {});
       state.cancel = action.payload.cancel || (() => {});
       state.isShow = true;

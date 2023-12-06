@@ -1,91 +1,59 @@
-import { IMAGE_MANAGER } from "@/assets";
-import { BaseRootView } from "@/common";
-import { SYSTEM_CONSTANTS } from "@/configuration";
-import { AppRoutes, AuthParamList } from "@/core";
+import { ANIMS_MANAGER } from "@/assets";
+import { BaseRootView, useAppDispatch, useLayoutAnimation } from "@/common";
+import { AppAction, AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { Image, Text } from "@rneui/themed";
-import React, { useEffect } from "react";
+import { BottomSheet, Button, Text } from "@rneui/themed";
+import LottieView from "lottie-react-native";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, StatusBar } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Animated, {
-  useAnimatedStyle,
-  useSharedValue,
-  withRepeat,
-  withTiming,
-} from "react-native-reanimated";
+import { View } from "react-native";
 import useStyles from "./styles";
 
 type Props = NativeStackScreenProps<AuthParamList, "WELCOME_SCREEN">;
 
-export default function WelcomeScreen({ navigation, route }: Props) {
-  console.log(route.name);
-
+export default function WelcomeScreen({ navigation }: Props) {
+  useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
+  const dispatch = useAppDispatch();
   const styles = useStyles();
-  const opacity = useSharedValue(0);
-  const animatedY = useSharedValue(-200);
-  const repeatXY = useSharedValue(0);
   const { t } = useTranslation();
 
-  useEffect(() => {
-    opacity.value = withTiming(1, { duration: 1000 });
-    animatedY.value = withTiming(0, { duration: 2000 });
-    repeatXY.value = withRepeat(withTiming(20, { duration: 1000 }), -1, true);
-    return () => {
-      opacity.value = withTiming(0, { duration: 1000 });
-      animatedY.value = withTiming(-200, { duration: 2000 });
-      repeatXY.value = withRepeat(withTiming(0, { duration: 1000 }), -1, true);
-    };
-  }, []);
-
-  const opacityStyle = useAnimatedStyle(() => {
-    return {
-      opacity: opacity.value,
-      transform: [{ translateY: animatedY.value }],
-    };
-  });
-
-  const nextButtonStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateX: repeatXY.value }],
-    };
-  });
-
-  const handleNext = () =>
-    navigation.navigate(AppRoutes.INTRODUCTION_SCREEN, {
-      test: "Introduction Screen",
-    });
+  function onPressNext() {
+    dispatch(AppAction.setFirstTime(false));
+    navigation.navigate("LOBBY_SCREEN");
+  }
 
   return (
     <BaseRootView>
-      <StatusBar
-        translucent
-        backgroundColor={"transparent"}
-        barStyle={"light-content"}
+      <LottieView
+        source={ANIMS_MANAGER.welcome}
+        style={styles.image}
+        autoPlay
+        cacheComposition
+        loop
+        useNativeLooping
+        resizeMode="cover"
+        renderMode="AUTOMATIC"
+        speed={0.5}
       />
 
-      <Image
-        source={{ uri: SYSTEM_CONSTANTS.ON_BOARDING_IMAGE[0] }}
-        style={styles.image}
-        PlaceholderContent={<ActivityIndicator />}
-        defaultSource={IMAGE_MANAGER.placeholder}
-        transitionDuration={500}
-        transition={true}
-        fadeDuration={500}
+      <BottomSheet
+        isVisible
+        containerStyle={styles.bottomSheetContainer}
+        backdropStyle={styles.bottomSheetBackdrop}
         children={
-          <Animated.View style={[styles.textContainer, opacityStyle]}>
-            <Text style={styles.text1}>{t("welcome.welcome")}</Text>
-            <Text style={styles.text2}>Mega Market</Text>
-            <Text style={styles.text3}>{t("welcome.text")}</Text>
-          </Animated.View>
+          <View style={styles.containerChildren}>
+            <Text h2>{t("welcome.welcome")}</Text>
+            <Text h1>Mega Market</Text>
+            <Text h4>{t("welcome.text")}</Text>
+            <Button
+              title={t("welcome.next")}
+              raised
+              containerStyle={styles.nextButtonContainer}
+              onPress={onPressNext}
+            />
+          </View>
         }
       />
-
-      <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-        <Animated.Text style={[styles.nextText, nextButtonStyle]}>
-          {t("welcome.next")} &gt;
-        </Animated.Text>
-      </TouchableOpacity>
     </BaseRootView>
   );
 }

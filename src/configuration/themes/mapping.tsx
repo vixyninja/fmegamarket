@@ -1,7 +1,7 @@
-import { Colors, TextProps, Theme, createTheme } from "@rneui/themed";
-import { spacing } from "./dimens";
-import { ActivityIndicator } from "react-native";
 import { FONT_MANAGER, IMAGE_MANAGER } from "@/assets";
+import { Colors, TextProps, Theme, createTheme } from "@rneui/themed";
+import { ActivityIndicator } from "react-native";
+import { spacing } from "./dimens";
 
 export const theme = createTheme({
   lightColors: {
@@ -34,32 +34,37 @@ export const theme = createTheme({
       return {
         style: {
           color: theme.colors.secondary,
-          fontFamily: FONT_MANAGER.poppins_regular,
+          fontFamily: FONT_MANAGER.roboto_regular,
+          elevation: 1,
+          overflow: "scroll",
         },
         h1Style: {
-          fontFamily: FONT_MANAGER.poppins_semi_bold,
-          fontSize: 52,
+          fontFamily: FONT_MANAGER.roboto_regular,
+          fontSize: 32,
           color: theme.colors.secondary,
+          elevation: 1,
+          overflow: "scroll",
         },
         h2Style: {
-          fontFamily: FONT_MANAGER.poppins_semi_bold,
-          fontSize: 36,
+          fontFamily: FONT_MANAGER.roboto_regular,
+          fontSize: 28,
           color: theme.colors.secondary,
+          elevation: 1,
+          overflow: "scroll",
         },
         h3Style: {
-          fontFamily: FONT_MANAGER.poppins_semi_bold,
+          fontFamily: FONT_MANAGER.roboto_regular,
           fontSize: 24,
           color: theme.colors.secondary,
+          elevation: 1,
+          overflow: "scroll",
         },
         h4Style: {
-          fontFamily: FONT_MANAGER.poppins_medium,
-          fontSize: 18,
+          fontFamily: FONT_MANAGER.roboto_regular,
+          fontSize: 20,
           color: theme.colors.secondary,
-        },
-        h5Style: {
-          fontFamily: FONT_MANAGER.poppins_medium,
-          fontSize: 16,
-          color: theme.colors.secondary,
+          overflow: "scroll",
+          elevation: 1,
         },
         ...props,
       };
@@ -75,7 +80,7 @@ export const theme = createTheme({
         ...props,
       };
     },
-    Image(props, theme) {
+    Image(props, _) {
       return {
         defaultSource: IMAGE_MANAGER.placeholder,
         transitionDuration: 500,

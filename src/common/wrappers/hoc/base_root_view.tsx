@@ -8,14 +8,15 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
   View,
+  ViewProps,
 } from "react-native";
 
-export type BaseRootViewProps = {
+interface BaseRootViewProps extends ViewProps {
   children: React.ReactNode;
   enableBackButton?: boolean;
   padding?: number | boolean;
   touchWithoutFeedback?: boolean;
-};
+}
 
 export default function BaseRootView(props: BaseRootViewProps) {
   const { children, enableBackButton, padding, touchWithoutFeedback } = props;
@@ -69,6 +70,7 @@ export default function BaseRootView(props: BaseRootViewProps) {
             padding: padding ? normalize(16 || padding) : 0,
           },
         ]}
+        {...props}
       >
         {children}
       </View>
