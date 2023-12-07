@@ -7,6 +7,7 @@ type AuthStateType = {
   refreshToken: string | null;
   provider: "google" | "facebook" | "email" | null;
   idToken: string | null;
+  isRememberMe: boolean;
   [key: string]: any;
 };
 
@@ -16,6 +17,7 @@ const initialState: AuthStateType = {
   accessToken: null,
   provider: null,
   idToken: null,
+  isRememberMe: false,
 };
 
 const reducer = createSlice({
@@ -24,10 +26,7 @@ const reducer = createSlice({
   reducers: {
     signInEmail: (state: AuthStateType) => {},
     signOut: (state: AuthStateType) => {},
-    setCredentials: (
-      state: AuthStateType,
-      action: PayloadAction<Partial<AuthStateType>>,
-    ) => {
+    setCredentials: (state: AuthStateType, action: PayloadAction<Partial<AuthStateType>>) => {
       return {
         ...state,
         ...action.payload,

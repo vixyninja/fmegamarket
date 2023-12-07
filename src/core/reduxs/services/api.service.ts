@@ -35,11 +35,11 @@ const baseApiQuery = retry(
   },
 );
 
-const baseApiQueryWithMutex: BaseQueryFn<
-  string | FetchArgs,
-  unknown,
-  FetchBaseQueryError
-> = async (args, api, extraOptions) => {
+const baseApiQueryWithMutex: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> = async (
+  args,
+  api,
+  extraOptions,
+) => {
   await mutex.waitForUnlock();
 
   let result = await baseApiQuery(args, api, extraOptions);
@@ -54,11 +54,7 @@ const baseApiQueryWithMutex: BaseQueryFn<
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
       try {
-        const refreshResult = await baseApiQuery(
-          EndpointEnum.REFRESH_TOKEN,
-          api,
-          extraOptions,
-        );
+        const refreshResult = await baseApiQuery(EndpointEnum.REFRESH_TOKEN, api, extraOptions);
         if (refreshResult.data) {
           //   api.dispatch(
           //     AuthAction.setCredentials({

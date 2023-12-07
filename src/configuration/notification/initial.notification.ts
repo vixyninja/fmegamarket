@@ -1,9 +1,4 @@
-import notifee, {
-  AndroidImportance,
-  AndroidVisibility,
-  Event,
-  EventType,
-} from "@notifee/react-native";
+import notifee, { AndroidImportance, AndroidVisibility, Event, EventType } from "@notifee/react-native";
 import { Linking } from "react-native";
 import { ENVIRONMENT_MANAGER } from "../environments";
 import { COLORS } from "../themes";

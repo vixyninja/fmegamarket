@@ -1,122 +1,34 @@
-import { IMAGE_MANAGER } from "@/assets";
-import {
-  BaseRootView,
-  BaseStatusBar,
-  useAppDispatch,
-  useGoogleSignin,
-} from "@/common";
-import { AlertAction, AuthAction, AuthParamList, LoadingAction } from "@/core";
-import auth from "@react-native-firebase/auth";
-import { statusCodes } from "@react-native-google-signin/google-signin";
+import { ANIMS_MANAGER, IMAGE_MANAGER } from "@/assets";
+import { BaseRootView, BaseStatusBar, useLayoutAnimation } from "@/common";
+import { AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Divider, Icon, Image, Text, useTheme } from "@rneui/themed";
-import React from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, TouchableOpacity, View } from "react-native";
+import { useSignIn } from "./hook";
 import useStyles from "./styles";
 
 type Props = NativeStackScreenProps<AuthParamList, "LOBBY_SCREEN">;
 
-export default function LobbyScreen({ navigation, route }: Props) {
-  console.log(route.name);
+export default function LobbyScreen({ navigation }: Props) {
+  useLayoutAnimation(ANIMS_MANAGER.layout.LayoutVerticalEaseInEase);
 
   const styles = useStyles();
-  const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const { signIn, getTokens } = useGoogleSignin();
-  const [disabled, setDisabled] = React.useState(false);
+
   const { theme } = useTheme();
 
-  async function onGoogleButtonPress() {
-    dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_in")));
-    try {
-      setDisabled(true);
-      await signIn();
-      const { idToken, accessToken } = await getTokens();
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-      const credential = await auth().signInWithCredential(googleCredential);
+  const { t } = useTranslation();
 
-      if (credential) {
-        dispatch(
-          AuthAction.setCredentials({
-            provider: "google",
-            idToken: idToken,
-            isAuth: true,
-            googleAccessToken: accessToken,
-          }),
-        );
-      } else {
-        dispatch(
-          AlertAction.showAlert({
-            title: t("alert.sign_in_failed.title"),
-            message: t("alert.sign_in_failed.message"),
-            callback: () => {
-              dispatch(AlertAction.disposeAlert());
-              dispatch(AlertAction.hideAlert());
-            },
-            cancel: () => {
-              dispatch(AlertAction.disposeAlert());
-              dispatch(AlertAction.hideAlert());
-            },
-            type: "warning",
-          }),
-        );
-      }
-    } catch (error: any) {
-      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        dispatch(
-          AlertAction.showAlert({
-            title: t("alert.sign_in_cancelled.title"),
-            message: t("alert.sign_in_cancelled.message"),
-            callback: () => {
-              dispatch(AlertAction.disposeAlert());
-              dispatch(AlertAction.hideAlert());
-            },
-            cancel: () => {
-              dispatch(AlertAction.disposeAlert());
-              dispatch(AlertAction.hideAlert());
-            },
-            type: "warning",
-          }),
-        );
-      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        dispatch(
-          AlertAction.showAlert({
-            title: t("alert.play_services_not_available.title"),
-            message: t("alert.play_services_not_available.message"),
-            callback: () => {
-              dispatch(AlertAction.disposeAlert());
-              dispatch(AlertAction.hideAlert());
-            },
-            cancel: () => {
-              dispatch(AlertAction.disposeAlert());
-              dispatch(AlertAction.hideAlert());
-            },
-            type: "warning",
-          }),
-        );
-      } else {
-        dispatch(
-          AlertAction.showAlert({
-            title: t("alert.sign_in_failed.title"),
-            message: t("alert.sign_in_failed.message"),
-            callback: () => {
-              dispatch(AlertAction.disposeAlert());
-              dispatch(AlertAction.hideAlert());
-            },
-            cancel: () => {
-              dispatch(AlertAction.disposeAlert());
-              dispatch(AlertAction.hideAlert());
-            },
-            type: "warning",
-          }),
-        );
-      }
-    } finally {
-      setDisabled(false);
-      dispatch(LoadingAction.hideLoading());
-    }
-  }
+  const { disabled, onGoogleButtonPress } = useSignIn();
+
+  const onClickSignInEmail = useCallback(() => {
+    navigation.navigate("SIGN_IN_SCREEN");
+  }, []);
+
+  const onClickSignUpEmail = useCallback(() => {
+    navigation.navigate("SIGN_UP_SCREEN");
+  }, []);
 
   return (
     <BaseRootView>
@@ -142,14 +54,7 @@ export default function LobbyScreen({ navigation, route }: Props) {
           title={t("lobby.fb")}
           titleStyle={styles.buttonTitle}
           iconPosition="left"
-          icon={
-            <Icon
-              name="facebook"
-              type="feather"
-              size={20}
-              color={theme.colors.facebook}
-            />
-          }
+          icon={<Icon name="facebook" type="feather" size={20} color={theme.colors.facebook} />}
           buttonStyle={styles.buttonContainer}
           disabled={disabled}
           onPress={() => {}}
@@ -159,34 +64,17 @@ export default function LobbyScreen({ navigation, route }: Props) {
           title={t("lobby.gg")}
           titleStyle={styles.buttonTitle}
           iconPosition="left"
-          icon={
-            <Icon
-              name="google"
-              type="font-awesome"
-              size={20}
-              color={theme.colors.google}
-            />
-          }
+          icon={<Icon name="google" type="font-awesome" size={20} color={theme.colors.google} />}
           buttonStyle={styles.buttonContainer}
           disabled={disabled}
-          onPress={() => onGoogleButtonPress()}
+          onPress={onGoogleButtonPress}
         />
 
         <Button
-          style={{
-            borderWidth: 0,
-          }}
           title={t("lobby.tw")}
           titleStyle={styles.buttonTitle}
           iconPosition="left"
-          icon={
-            <Icon
-              name="twitter"
-              type="feather"
-              size={20}
-              color={theme.colors.twitter}
-            />
-          }
+          icon={<Icon name="twitter" type="feather" size={20} color={theme.colors.twitter} />}
           buttonStyle={styles.buttonContainer}
           disabled={disabled}
         />
@@ -204,11 +92,12 @@ export default function LobbyScreen({ navigation, route }: Props) {
         containerStyle={styles.signInButtonContainer}
         radius={99}
         disabled={disabled}
+        onPress={onClickSignInEmail}
       />
 
       <View style={styles.footer}>
         <Text style={styles.footerText}>{t("lobby.dont")}</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onClickSignUpEmail}>
           <Text h4Style={styles.footerTextClick} h4>
             {" "}
             {t("lobby.signup")}

@@ -1,89 +1,43 @@
 import { ANIMS_MANAGER, IMAGE_MANAGER } from "@/assets";
-import {
-  BackHeader,
-  BaseInput,
-  BasePrivateInput,
-  BaseRootView,
-  useAppDispatch,
-  useLayoutAnimation,
-} from "@/common";
-import {
-  AuthParamList,
-  CredentialSignIn,
-  useSignInNormalMutation,
-} from "@/core";
+import { BackHeader, BaseInput, BasePrivateInput, BaseRootView, useLayoutAnimation } from "@/common";
+import { AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { CheckBox, Divider } from "@rneui/base";
 import { Button, Icon, Image, Text, useTheme } from "@rneui/themed";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { useSignIn } from "./hook";
 import useStyles from "./styles";
 
 type Props = NativeStackScreenProps<AuthParamList, "SIGN_IN_SCREEN">;
 
-export default function SignInScreen({ navigation, route }: Props) {
-  console.log(route.name);
-
+export default function SignInScreen({ navigation }: Props) {
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
-  const dispatch = useAppDispatch();
+
   const { t } = useTranslation();
+
   const styles = useStyles();
+
   const { theme } = useTheme();
 
-  const [signInNormal, { data }] = useSignInNormalMutation();
+  const { credential, onChangeEmail, onChangePassword, signIn, onChangeRemember, isLoading } = useSignIn();
 
-  const [credential, setCredential] = useState<CredentialSignIn>({
-    email: "",
-    password: "",
-  });
-  const [isRemember, setIsRemember] = useState(false);
+  const onClickBack = useCallback(() => {
+    navigation.canGoBack() && navigation.goBack();
+  }, []);
 
-  const onEmailChange = useCallback(
-    (value: string) => {
-      setCredential({
-        ...credential,
-        email: value,
-      });
-    },
-    [credential.email],
-  );
-
-  useEffect(() => {
-    console.log("data", data);
-  }, [data]);
-
-  const onPasswordChange = useCallback(
-    (value: string) => {
-      setCredential({
-        ...credential,
-        password: value,
-      });
-    },
-    [credential.password],
-  );
-
-  const handleSignIn = () => {
-    signInNormal({
-      email: credential.email,
-      password: credential.password,
-      deviceToken: "test",
-      deviceType: "android",
-      rememberMe: isRemember,
-    }).reset();
-  };
+  const onClickSignUp = useCallback(() => {
+    navigation.navigate("SIGN_UP_SCREEN");
+  }, []);
 
   return (
     <BaseRootView touchWithoutFeedback>
       <ScrollView scrollEnabled={false}>
-        <BackHeader />
+        <BackHeader onPress={onClickBack} />
 
-        <Image
-          source={IMAGE_MANAGER.signIn}
-          style={styles.image}
-          containerStyle={styles.imageContainer}
-        />
+        <Image source={IMAGE_MANAGER.signIn} style={styles.image} containerStyle={styles.imageContainer} />
 
         <Text h3 h3Style={styles.titleStyle}>
           {t("signIn.title")}
@@ -91,7 +45,8 @@ export default function SignInScreen({ navigation, route }: Props) {
 
         <View style={styles.buttonForm}>
           <BaseInput
-            callBack={onEmailChange}
+            value={credential.email}
+            callBack={onChangeEmail}
             placeholder={t("signIn.email")}
             leftIcon={{
               name: "email",
@@ -114,13 +69,17 @@ export default function SignInScreen({ navigation, route }: Props) {
                 backgroundColor: "transparent",
               },
             }}
+            disabled={isLoading}
+            autoFocus={false}
             keyboardType="email-address"
           />
 
           <BasePrivateInput
-            callBack={onPasswordChange}
+            value={credential.password}
+            callBack={onChangePassword}
             autoFocus={false}
             placeholder={t("signIn.password")}
+            disabled={isLoading}
           />
         </View>
 
@@ -136,6 +95,7 @@ export default function SignInScreen({ navigation, route }: Props) {
               color={styles.checkedCheckBox.color}
               size={25}
               iconStyle={{ marginRight: 5 }}
+              disabled={isLoading}
             />
           }
           uncheckedIcon={
@@ -147,8 +107,9 @@ export default function SignInScreen({ navigation, route }: Props) {
               iconStyle={{ marginRight: 5 }}
             />
           }
-          checked={isRemember}
-          onPress={() => setIsRemember(!isRemember)}
+          checked={credential.rememberMe ? true : false}
+          onPress={onChangeRemember}
+          disabled={isLoading}
         />
 
         <Button
@@ -156,10 +117,11 @@ export default function SignInScreen({ navigation, route }: Props) {
           title={t("signIn.button")}
           containerStyle={styles.signInButtonContainer}
           radius={99}
-          onPress={() => handleSignIn()}
+          onPress={signIn}
+          disabled={isLoading}
         />
 
-        <TouchableOpacity onPress={() => {}} style={styles.forgotContainer}>
+        <TouchableOpacity onPress={() => {}} style={styles.forgotContainer} disabled={isLoading}>
           <Text>{t("signIn.forgot")}</Text>
         </TouchableOpacity>
 
@@ -171,48 +133,30 @@ export default function SignInScreen({ navigation, route }: Props) {
 
         <View style={styles.selectionGroup}>
           <Button
-            TouchableComponent={TouchableOpacity}
+            onPress={onClickBack}
+            disabled={isLoading}
             buttonStyle={styles.selectionButtonContainer}
-            title={
-              <Icon
-                name="facebook"
-                type="feather"
-                size={20}
-                color={theme.colors.facebook}
-              />
-            }
+            title={<Icon name="facebook" type="feather" size={20} color={theme.colors.facebook} />}
           />
 
           <Button
-            TouchableComponent={TouchableOpacity}
+            onPress={onClickBack}
+            disabled={isLoading}
             buttonStyle={styles.selectionButtonContainer}
-            title={
-              <Icon
-                name="google"
-                type="font-awesome"
-                size={20}
-                color={theme.colors.google}
-              />
-            }
+            title={<Icon name="google" type="font-awesome" size={20} color={theme.colors.google} />}
           />
 
           <Button
-            TouchableComponent={TouchableOpacity}
+            onPress={onClickBack}
+            disabled={isLoading}
             buttonStyle={styles.selectionButtonContainer}
-            title={
-              <Icon
-                name="twitter"
-                type="feather"
-                size={20}
-                color={theme.colors.twitter}
-              />
-            }
+            title={<Icon name="twitter" type="feather" size={20} color={theme.colors.twitter} />}
           />
         </View>
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>{t("signIn.dont")}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onClickSignUp}>
             <Text h4Style={styles.footerTextClick} h4>
               {" "}
               {t("signIn.signup")}

@@ -1,17 +1,6 @@
 import { ANIMS_MANAGER } from "@/assets";
-import {
-  BaseRootView,
-  useAppDispatch,
-  useAppSelector,
-  useGoogleSignin,
-  useLayoutAnimation,
-} from "@/common";
-import {
-  AppParamList,
-  AuthAction,
-  BottomParamList,
-  authSelector,
-} from "@/core";
+import { BaseRootView, useAppDispatch, useAppSelector, useGoogleSignin, useLayoutAnimation } from "@/common";
+import { AppParamList, AuthAction, BottomParamList, authSelector } from "@/core";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { CompositeScreenProps, useLinkTo } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -27,6 +16,8 @@ type Props = CompositeScreenProps<
 
 export default function HomeScreen({ navigation, route }: Props) {
   console.log(route.name);
+
+  console.log(route.params?.userId);
 
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
 
@@ -45,9 +36,7 @@ export default function HomeScreen({ navigation, route }: Props) {
 
   return (
     <BaseRootView padding>
-      {isAuth && (
-        <Button onPress={_handleLogout} title={t("button.sign_out")} />
-      )}
+      {isAuth && <Button onPress={_handleLogout} title={t("button.sign_out")} />}
       <Button
         onPress={() => {
           linkTo("/BottomTab/Profile");
@@ -63,9 +52,9 @@ export default function HomeScreen({ navigation, route }: Props) {
       <Button
         onPress={() => {
           navigation.navigate("BOTTOM_TAB", {
-            screen: "PROFILE",
+            screen: "ORDER",
             params: {
-              test: "test",
+              userId: "123123",
             },
           });
         }}

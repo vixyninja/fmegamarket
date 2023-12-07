@@ -2,11 +2,7 @@ import { Colors, Icon, Theme, makeStyles, normalize } from "@rneui/themed";
 import React from "react";
 import { View, ViewProps } from "react-native";
 
-export default function BackHeader(props: {
-  onPress?: () => void;
-  color?: string;
-  style?: ViewProps["style"];
-}) {
+export default function BackHeader(props: { onPress?: () => void; color?: string; style?: ViewProps["style"] }) {
   const styles = useStyles();
   const { onPress, color, style } = props;
   return (
@@ -26,12 +22,12 @@ export default function BackHeader(props: {
 }
 const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({
   container: {
-    width: normalize(40),
-    height: normalize(40),
+    width: normalize(50),
+    height: normalize(50),
   },
   iconContainer: {
-    width: normalize(40),
-    height: normalize(40),
+    width: normalize(50),
+    height: normalize(50),
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "center",

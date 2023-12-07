@@ -9,15 +9,10 @@ export {
   LoadingReducer,
 } from "./reducers";
 
-export {
-  alertSelector,
-  appSelector,
-  authSelector,
-  loadingSelector,
-} from "./selectors";
+export { alertSelector, appSelector, authSelector, loadingSelector } from "./selectors";
 
 export { EndpointEnum, authService } from "./services";
 
-export { useSignInNormalMutation } from "./services/auth.service";
+export { useSignInNormalMutation, useSignInGoogleMutation } from "./services/auth.service";
 
 export { store, persistor } from "./store";

@@ -14,6 +14,10 @@
     "ok": "Accept",
     "ticker": {
       "default": "You have a new notification"
+    },
+    "sign_in_success": {
+      "title": "Sign in success",
+      "message": "Sign in success, hello."
     }
   },
   "alert": {
@@ -40,56 +44,20 @@
   },
   "validation": {
     "default": {
-      "required": "This field is required.",
-      "email": "Please enter a valid email address.",
-      "min": "Please enter a value greater than or equal to {0}.",
-      "max": "Please enter a value less than or equal to {0}.",
-      "min_length": "Please enter at least {0} characters.",
-      "max_length": "Please enter no more than {0} characters.",
-      "pattern": "Please enter a valid value.",
-      "number": "Please enter a valid number.",
-      "url": "Please enter a valid URL.",
-      "date": "Please enter a valid date.",
-      "date_iso": "Please enter a valid date (ISO).",
-      "credit_card": "Please enter a valid credit card number.",
-      "json": "Please enter a valid JSON.",
-      "phone": "Please enter a valid phone number.",
-      "color": "Please enter a valid color.",
-      "ip": "Please enter a valid IP address.",
-      "ipv4": "Please enter a valid IPv4 address.",
-      "ipv6": "Please enter a valid IPv6 address.",
-      "hex": "Please enter a valid hexadecimal.",
-      "equal": "Please enter the same value again.",
-      "not_equal": "Please enter a different value.",
-      "unique": "Please enter a unique value."
+      "sign_in_failed": "Sign in failed, please try again."
     },
     "email": {
       "required": "Email is required.",
-      "email": "Please enter a valid email address."
+      "invalid": "Please enter a valid email address."
     },
     "password": {
       "required": "Password is required.",
-      "min_length": "Please enter at least {0} characters."
+      "invalid": "Please enter at least 6 characters."
     },
     "confirm_password": {
       "required": "Confirm password is required.",
-      "equal": "Please enter the same value again."
-    },
-    "first_name": {
-      "required": "First name is required.",
-      "min_length": "Please enter at least {0} characters."
-    },
-    "last_name": {
-      "required": "Last name is required.",
-      "min_length": "Please enter at least {0} characters."
-    },
-    "phone": {
-      "required": "Phone is required.",
-      "phone": "Please enter a valid phone number."
-    },
-    "address": {
-      "required": "Address is required.",
-      "min_length": "Please enter at least {0} characters."
+      "invalid": "Confirm password is invalid.",
+      "not_match": "Confirm password does not match. Confirm password must be the same as password."
     }
   },
   "loading": {

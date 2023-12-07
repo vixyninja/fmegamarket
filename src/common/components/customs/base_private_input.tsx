@@ -1,13 +1,5 @@
 import { FONT_MANAGER } from "@/assets";
-import {
-  Colors,
-  Input,
-  InputProps,
-  Theme,
-  makeStyles,
-  normalize,
-  useThemeMode,
-} from "@rneui/themed";
+import { Colors, Input, InputProps, Theme, makeStyles, normalize, useThemeMode } from "@rneui/themed";
 import React, { useCallback, useState } from "react";
 
 interface BasePrivateInputProps extends InputProps {
@@ -20,19 +12,16 @@ export default function BasePrivateInput(props: BasePrivateInputProps) {
   const { callBack, autoFocus, placeholder } = props;
 
   const styles = useStyles();
-  const ref = React.useRef<any>(null);
   const { mode } = useThemeMode();
 
   const [text, setText] = useState("");
-  const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
   const [isFocus, setIsFocus] = useState(false);
-
-  const focus = () => ref.current?.focus();
-  const blur = () => ref.current?.blur();
+  const [isSecureTextEntry, setIsSecureTextEntry] = useState(true);
 
   const onTextChange = useCallback(
     (value: string) => {
       setText(value);
+      callBack(value);
     },
     [text],
   );
@@ -43,11 +32,11 @@ export default function BasePrivateInput(props: BasePrivateInputProps) {
 
   const onFocusBorderTrue = useCallback(() => {
     setIsFocus(true);
-  }, [isFocus]);
+  }, []);
 
   const onFocusBorderFalse = useCallback(() => {
     setIsFocus(false);
-  }, [isFocus]);
+  }, []);
 
   const onRightIconPress = useCallback(() => {
     setIsSecureTextEntry(!isSecureTextEntry);
@@ -55,13 +44,11 @@ export default function BasePrivateInput(props: BasePrivateInputProps) {
 
   return (
     <Input
-      ref={ref}
       value={text}
-      onChangeText={(value) => onTextChange(value)}
+      onChangeText={onTextChange}
       keyboardType="default"
       keyboardAppearance={mode}
       enterKeyHint="enter"
-      verticalAlign="auto"
       autoComplete="password"
       autoCorrect={false}
       autoFocus={autoFocus && autoFocus}
@@ -71,20 +58,18 @@ export default function BasePrivateInput(props: BasePrivateInputProps) {
       inputMode="text"
       maxLength={50}
       multiline={false}
-      onSubmitEditing={() => onTextSubmit()}
+      onSubmitEditing={onTextSubmit}
       inputStyle={styles.inputContainer}
       containerStyle={[styles.container, isFocus && styles.focusedContainer]}
       underlineColorAndroid={"transparent"}
       inputContainerStyle={styles.inputContainerStyle}
-      placeholder={placeholder && placeholder}
-      onFocus={() => onFocusBorderTrue()}
-      onBlur={() => onFocusBorderFalse()}
+      placeholder={placeholder}
+      onFocus={onFocusBorderTrue}
+      onBlur={onFocusBorderFalse}
       leftIcon={{
         name: "lock",
         type: "material-community",
         size: 20,
-        onPress: () => focus(),
-        onBlur: () => blur(),
         activeOpacity: 0.5,
         underlayColor: "transparent",
         pressRetentionOffset: {

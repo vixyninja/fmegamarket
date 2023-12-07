@@ -16,6 +16,24 @@ const LayoutEaseInEase: LayoutAnimationConfig = {
   },
 };
 
+const LayoutVerticalEaseInEase: LayoutAnimationConfig = {
+  duration: 600,
+  create: {
+    type: LayoutAnimation.Types.spring,
+    property: LayoutAnimation.Properties.scaleXY,
+    delay: 600,
+    springDamping: 1,
+  },
+  update: {
+    type: LayoutAnimation.Types.easeIn,
+  },
+  delete: {
+    type: LayoutAnimation.Types.easeInEaseOut,
+    property: LayoutAnimation.Properties.opacity,
+  },
+};
+
 export const LayoutAnims = {
   LayoutEaseInEase,
+  LayoutVerticalEaseInEase,
 };

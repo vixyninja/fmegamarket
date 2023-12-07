@@ -6,8 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Alert } from "react-native";
 
 export default function BaseAlert() {
-  const { callback, cancel, isShow, message, title, type } =
-    useAppSelector(alertSelector);
+  const { callback, cancel, isShow, message, title, type } = useAppSelector(alertSelector);
 
   const { t } = useTranslation();
   const { mode } = useThemeMode();
@@ -20,12 +19,12 @@ export default function BaseAlert() {
       [
         {
           onPress: cancel,
-          text: t("default.cancel"),
+          text: t("alert.default.cancel"),
           isPreferred: true,
           style: "cancel",
         },
         {
-          text: t("default.ok"),
+          text: t("alert.default.ok"),
           onPress: () => {
             callback();
             dispatch(AlertAction.disposeAlert());

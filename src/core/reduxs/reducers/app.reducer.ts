@@ -23,10 +23,7 @@ const reducer = createSlice({
     setFirstTime: (state: AppStateType, action: PayloadAction<boolean>) => {
       state.firstTime = action.payload;
     },
-    setFontFamily: (
-      state: AppStateType,
-      action: PayloadAction<"roboto" | "poppins">,
-    ) => {
+    setFontFamily: (state: AppStateType, action: PayloadAction<"roboto" | "poppins">) => {
       state.fontFamily = action.payload;
     },
   },

@@ -5,17 +5,8 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Image, Text } from "@rneui/themed";
 import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  FlatList,
-  NativeScrollEvent,
-  StatusBar,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import {
-  useAnimatedScrollHandler,
-  useSharedValue,
-} from "react-native-reanimated";
+import { FlatList, NativeScrollEvent, StatusBar, TouchableOpacity, View } from "react-native";
+import { useAnimatedScrollHandler, useSharedValue } from "react-native-reanimated";
 import useStyles from "./styles";
 
 type Props = NativeStackScreenProps<AuthParamList, "INTRODUCTION_SCREEN">;
@@ -104,11 +95,7 @@ export default function IntroductionScreen({ navigation, route }: Props) {
         })}
       </View>
 
-      <Button
-        title={t("introduction.next")}
-        onPress={onClickNext}
-        containerStyle={styles.button}
-      />
+      <Button title={t("introduction.next")} onPress={onClickNext} containerStyle={styles.button} />
 
       <TouchableOpacity style={styles.backButton} onPress={onClickBack}>
         <Text

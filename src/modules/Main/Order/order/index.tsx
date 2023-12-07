@@ -11,7 +11,7 @@ type Props = CompositeScreenProps<
 >;
 
 export default function OrderScreen({ navigation, route }: Props) {
-  console.log(route.name);
+  console.log(" LOG O DAY ", route.params?.userId);
   return (
     <View>
       <Text>OrderScreen</Text>

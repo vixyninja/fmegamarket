@@ -27,18 +27,16 @@ type AuthParamList = {
 };
 
 type BottomParamList = {
-  [BottomTabScreenKeys.HOME]: undefined;
+  [BottomTabScreenKeys.HOME]: { userId: string } | undefined;
   [BottomTabScreenKeys.EXPLORE]: undefined;
-  [BottomTabScreenKeys.ORDER]: undefined;
+  [BottomTabScreenKeys.ORDER]: { userId: string } | undefined;
   [BottomTabScreenKeys.CART]: undefined;
   [BottomTabScreenKeys.PROFILE]: undefined | { test: string };
 };
 
 // ROOT MODULE
 type AppParamList = {
-  [AppScreenKeys.BOTTOM_TAB]:
-    | NavigatorScreenParams<BottomParamList>
-    | undefined;
+  [AppScreenKeys.BOTTOM_TAB]: NavigatorScreenParams<BottomParamList> | undefined;
   [AppScreenKeys.NOT_FOUND]: undefined;
   [AppScreenKeys.ERROR_BOUNDARY]: undefined;
 

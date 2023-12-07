@@ -1,12 +1,5 @@
 import { ANIMS_MANAGER, IMAGE_MANAGER } from "@/assets";
-import {
-  BackHeader,
-  BaseInput,
-  BasePrivateInput,
-  BaseRootView,
-  useAppDispatch,
-  useLayoutAnimation,
-} from "@/common";
+import { BackHeader, BaseInput, BasePrivateInput, BaseRootView, useAppDispatch, useLayoutAnimation } from "@/common";
 import { AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Divider, Icon, Image, Text, useTheme } from "@rneui/themed";
@@ -51,11 +44,7 @@ export default function SignUpScreen({ navigation, route }: Props) {
       <ScrollView scrollEnabled contentContainerStyle={styles.root}>
         <BackHeader />
 
-        <Image
-          source={IMAGE_MANAGER.signUp}
-          style={styles.image}
-          containerStyle={styles.imageContainer}
-        />
+        <Image source={IMAGE_MANAGER.signUp} style={styles.image} containerStyle={styles.imageContainer} />
 
         <Text h3 h3Style={styles.titleStyle}>
           {t("signUp.title")}
@@ -88,16 +77,8 @@ export default function SignUpScreen({ navigation, route }: Props) {
             }}
           />
 
-          <BasePrivateInput
-            callBack={onPasswordChange}
-            autoFocus={false}
-            placeholder={t("signUp.password")}
-          />
-          <BasePrivateInput
-            callBack={onPasswordChange}
-            autoFocus={false}
-            placeholder={t("signUp.confirm")}
-          />
+          <BasePrivateInput callBack={onPasswordChange} autoFocus={false} placeholder={t("signUp.password")} />
+          <BasePrivateInput callBack={onPasswordChange} autoFocus={false} placeholder={t("signUp.confirm")} />
         </View>
 
         <Button
@@ -117,40 +98,19 @@ export default function SignUpScreen({ navigation, route }: Props) {
           <Button
             TouchableComponent={TouchableOpacity}
             buttonStyle={styles.selectionButtonContainer}
-            title={
-              <Icon
-                name="facebook"
-                type="feather"
-                size={20}
-                color={theme.colors.facebook}
-              />
-            }
+            title={<Icon name="facebook" type="feather" size={20} color={theme.colors.facebook} />}
           />
 
           <Button
             TouchableComponent={TouchableOpacity}
             buttonStyle={styles.selectionButtonContainer}
-            title={
-              <Icon
-                name="google"
-                type="font-awesome"
-                size={20}
-                color={theme.colors.google}
-              />
-            }
+            title={<Icon name="google" type="font-awesome" size={20} color={theme.colors.google} />}
           />
 
           <Button
             TouchableComponent={TouchableOpacity}
             buttonStyle={styles.selectionButtonContainer}
-            title={
-              <Icon
-                name="twitter"
-                type="feather"
-                size={20}
-                color={theme.colors.twitter}
-              />
-            }
+            title={<Icon name="twitter" type="feather" size={20} color={theme.colors.twitter} />}
           />
         </View>
 

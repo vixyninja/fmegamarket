@@ -1,22 +1,15 @@
 import { FONT_MANAGER } from "@/assets";
-import {
-  Colors,
-  Input,
-  InputProps,
-  Theme,
-  makeStyles,
-  normalize,
-  useThemeMode,
-} from "@rneui/themed";
+import { Colors, Input, InputProps, Theme, makeStyles, normalize, useThemeMode } from "@rneui/themed";
 import React, { useCallback, useState } from "react";
 
 interface BaseInputProps extends InputProps {
   callBack(value: string): void;
   autoFocus?: boolean;
+  placeholder?: string;
 }
 
 export default function BaseInput(props: BaseInputProps) {
-  const { callBack, autoFocus } = props;
+  const { callBack, autoFocus, placeholder } = props;
 
   const styles = useStyles();
   const { mode } = useThemeMode();
@@ -27,6 +20,7 @@ export default function BaseInput(props: BaseInputProps) {
   const onTextChange = useCallback(
     (value: string) => {
       setText(value);
+      callBack(value);
     },
     [text],
   );
@@ -37,34 +31,34 @@ export default function BaseInput(props: BaseInputProps) {
 
   const onFocusBorderTrue = useCallback(() => {
     setIsFocus(true);
-  }, [isFocus]);
+  }, []);
 
   const onFocusBorderFalse = useCallback(() => {
     setIsFocus(false);
-  }, [isFocus]);
+  }, []);
 
   return (
     <Input
+      {...props}
       value={text}
-      onChangeText={(value) => onTextChange(value)}
+      onChangeText={onTextChange}
       keyboardType="default"
       keyboardAppearance={mode}
       enterKeyHint="done"
-      verticalAlign="auto"
       autoCorrect={false}
       autoFocus={autoFocus && autoFocus}
       autoCapitalize="none"
       showSoftInputOnFocus={true}
       secureTextEntry={false}
       inputMode="text"
-      onSubmitEditing={() => onTextSubmit()}
+      onSubmitEditing={onTextSubmit}
       inputStyle={styles.inputContainer}
       containerStyle={[styles.container, isFocus && styles.focusedContainer]}
       underlineColorAndroid={"transparent"}
       inputContainerStyle={styles.inputContainerStyle}
-      onFocus={() => onFocusBorderTrue()}
-      onBlur={() => onFocusBorderFalse()}
-      {...props}
+      placeholder={placeholder}
+      onFocus={onFocusBorderTrue}
+      onBlur={onFocusBorderFalse}
     />
   );
 }

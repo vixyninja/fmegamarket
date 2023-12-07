@@ -1,5 +1,5 @@
 import { IMAGE_MANAGER } from "@/assets";
-import { usePermission } from "@/common";
+import { isPlatForm, usePermission } from "@/common";
 import {
   AndroidBadgeIconType,
   AndroidColor,
@@ -8,7 +8,6 @@ import {
   Notification,
   NotificationAndroid,
 } from "@notifee/react-native";
-import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 import messaging from "@react-native-firebase/messaging";
 import { useEffect } from "react";
@@ -21,89 +20,69 @@ const useFCM = () => {
   const { requestPermission } = usePermission();
   const { t } = useTranslation();
 
-  const requestUserPermission = async () => {
+  async function requestUserPermission(): Promise<void> {
     const authStatus = await messaging().requestPermission();
     const enabled =
       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
 
-    if (enabled) {
-      console.log("Authorization status:", authStatus);
-    } else {
+    if (!enabled) {
       await requestPermission("android.permission.POST_NOTIFICATIONS");
     }
 
     const permission = await notification.requestPermission();
     if (permission.authorizationStatus === AuthorizationStatus.DENIED) {
       await requestPermission("android.permission.POST_NOTIFICATIONS");
-    } else if (
-      permission.authorizationStatus === AuthorizationStatus.NOT_DETERMINED
-    ) {
+    } else if (permission.authorizationStatus === AuthorizationStatus.NOT_DETERMINED) {
       await requestPermission("android.permission.POST_NOTIFICATIONS");
-    } else if (
-      permission.authorizationStatus === AuthorizationStatus.PROVISIONAL
-    ) {
+    } else if (permission.authorizationStatus === AuthorizationStatus.PROVISIONAL) {
       await requestPermission("android.permission.POST_NOTIFICATIONS");
-    } else if (
-      permission.authorizationStatus === AuthorizationStatus.AUTHORIZED
-    ) {
-      console.log("Authorization status:", authStatus);
+    } else if (permission.authorizationStatus === AuthorizationStatus.AUTHORIZED) {
       return;
     }
-  };
+  }
 
-  const checkPermission = async () => {
-    const authStatus = await messaging().hasPermission();
-    if (
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL
-    ) {
-      console.log("Authorization status:", authStatus);
-      return;
-    } else {
-      requestUserPermission();
-    }
-  };
-
-  const getToken = async () => {
+  async function getToken(): Promise<string> {
     let fcmToken = await messaging().getToken();
     if (fcmToken) {
-      console.log("Your Firebase Token is:", fcmToken);
-    } else {
-      console.log("Failed", "No token received");
+      console.log("FCM TOKEN: ", fcmToken);
     }
     return fcmToken;
-  };
+  }
 
-  const saveTokenToFirestore = async (fcmToken: string) => {
-    const userId = auth().currentUser?.uid;
-
+  async function saveTokenToFirestore(userId: string): Promise<void> {
     if (!userId) return;
 
-    await firestore()
-      .collection("users")
-      .doc(userId)
-      .update({
-        fcmToken: firestore.FieldValue.arrayUnion(fcmToken),
-        credential: auth().currentUser?.providerData,
-        email: auth().currentUser?.email,
-        phoneNumber: auth().currentUser?.phoneNumber,
-      })
-      .then(() => {
-        console.log("Token saved to firestore");
-      })
-      .catch((err) => {
-        console.error(err);
+    const fcmToken = await getToken();
+
+    const existUser = await firestore().collection("users").where("id", "==", userId).get();
+
+    if (existUser.empty) {
+      await firestore().collection("users").doc(userId).set({
+        id: userId,
+        fcmToken: fcmToken,
+        deviceType: isPlatForm(),
+        createAt: Date.now(),
+        updateAt: Date.now(),
       });
-  };
+    } else {
+      await firestore().collection("users").doc(userId).update({
+        fcmToken: fcmToken,
+        updateAt: Date.now(),
+        deviceType: isPlatForm(),
+      });
+    }
+  }
 
-  const clearNotification = async () =>
-    await notification.cancelAllNotifications();
+  async function clearNotification(): Promise<void> {
+    return await notification.cancelAllNotifications();
+  }
 
-  const getListNotification = async () =>
-    await notification.getDisplayedNotifications();
+  async function getListNotification() {
+    return await notification.getDisplayedNotifications();
+  }
 
-  const pushNotification = async (data: Partial<Notification>) => {
+  async function pushNotification(data: Partial<Notification>) {
     const configAndroid: NotificationAndroid = {
       asForegroundService: true,
       actions: [
@@ -146,9 +125,9 @@ const useFCM = () => {
       },
       ...data,
     });
-  };
+  }
 
-  const registerAppBackground = async () => {
+  async function registerAppBackground() {
     await messaging().registerDeviceForRemoteMessages();
     messaging().setBackgroundMessageHandler(async (remoteMessage) => {
       console.log("Message handled in the background!", remoteMessage);
@@ -178,9 +157,9 @@ const useFCM = () => {
         id: uuid.v4().toString(),
       });
     });
-  };
+  }
 
-  const registerAppForeground = async () => {
+  async function registerAppForeground() {
     await messaging().registerDeviceForRemoteMessages();
     messaging().onMessage(async (remoteMessage) => {
       console.log("FCM Message Data:", remoteMessage.data);
@@ -189,8 +168,9 @@ const useFCM = () => {
         android: {
           channelId: ENVIRONMENT_MANAGER.NOTIFICATION_CHANNEL_ID,
           autoCancel: true,
-          badgeIconType: AndroidBadgeIconType.SMALL,
+          badgeIconType: AndroidBadgeIconType.LARGE,
           circularLargeIcon: true,
+          smallIcon: IMAGE_MANAGER.appIcon,
           color: AndroidColor.TEAL,
           colorized: true,
           importance: AndroidImportance.HIGH,
@@ -210,26 +190,28 @@ const useFCM = () => {
         id: uuid.v4().toString(),
       });
     });
-  };
+  }
 
-  const setBadgeCount = async (count: number) => {
+  async function setBadgeCount(count: number) {
     await notification.setBadgeCount(count);
-  };
+  }
 
   useEffect(() => {
-    checkPermission();
-    registerAppBackground();
-    // registerAppForeground();
-
-    getToken().then((fcmToken) => {
-      if (fcmToken) {
-        saveTokenToFirestore(fcmToken);
+    (async () => {
+      const authStatus = await messaging().hasPermission();
+      if (
+        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+        authStatus === messaging.AuthorizationStatus.PROVISIONAL
+      ) {
+        return;
       } else {
-        console.log("Failed", "No token received");
+        requestUserPermission();
       }
-    });
+    })();
+    registerAppBackground();
+    registerAppForeground();
 
-    const unsubscribe = messaging().onMessage(async (remoteMessage) => {
+    return messaging().onMessage(async (remoteMessage) => {
       console.log("FCM Message Data:", remoteMessage.data);
       // NOTIFEE DISPLAY SHOW HERE
       await pushNotification({
@@ -257,12 +239,6 @@ const useFCM = () => {
         id: uuid.v4().toString(),
       });
     });
-
-    messaging().onTokenRefresh((fcmToken) => {
-      saveTokenToFirestore(fcmToken);
-    });
-
-    return unsubscribe;
   }, []);
 
   return {
