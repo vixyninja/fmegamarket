@@ -8,7 +8,6 @@ type AuthStateType = {
   provider: "google" | "facebook" | "email" | null;
   idToken: string | null;
   isRememberMe: boolean;
-  [key: string]: any;
 };
 
 const initialState: AuthStateType = {
@@ -33,7 +32,14 @@ const reducer = createSlice({
       };
     },
     clearCredentials: (state: AuthStateType) => {
-      Object.assign(state, initialState);
+      Object.assign(state, {
+        isAuth: false,
+        refreshToken: null,
+        accessToken: null,
+        provider: null,
+        idToken: null,
+        isRememberMe: false,
+      });
     },
   },
 });

@@ -38,19 +38,14 @@ notifee.registerForegroundService((notification) => {
   });
 });
 
-notifee.isBatteryOptimizationEnabled().then((enabled) => {
-  console.log("isBatteryOptimizationEnabled", enabled);
-});
-
 // THIS CONFIG FOR BACKGROUND NOTIFICATION, BACKGROUND IS SERVICE WORKER WHEN APP IS KILLED
 notifee.onBackgroundEvent(async ({ type, detail }: Event) => {
-  console.log("onBackgroundEvent", type);
   switch (type) {
     case EventType.DISMISSED:
-      console.log("User dismissed notification", detail);
+      console.log("User dismissed notification onBackgroundEvent", detail);
       break;
     case EventType.PRESS:
-      console.log("User pressed notification", detail);
+      console.log("User pressed notification onBackgroundEvent", detail);
       //   event.detail.notification?.data.link &&
       //     openDeepLink(event.detail.notification?.data.link);
 
@@ -60,13 +55,12 @@ notifee.onBackgroundEvent(async ({ type, detail }: Event) => {
 
 // THIS CONFIG FOR FOREGROUND NOTIFICATION, FOREGROUND IS SERVICE WORKER WHEN APP IS OPEN
 notifee.onForegroundEvent(async ({ type, detail }: Event) => {
-  console.log("onForegroundEvent", type);
   switch (type) {
     case EventType.DISMISSED:
-      console.log("User dismissed notification", detail);
+      console.log("User dismissed notification onBackgroundEvent", detail);
       break;
     case EventType.PRESS:
-      console.log("User pressed notification", detail);
+      console.log("User pressed notification onBackgroundEvent", detail);
       //   event.detail.notification?.data.link &&
       //     openDeepLink(event.detail.notification?.data.link);
       break;

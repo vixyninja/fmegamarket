@@ -1,4 +1,3 @@
-import { IMAGE_MANAGER } from "@/assets";
 import { isPlatForm, usePermission } from "@/common";
 import {
   AndroidBadgeIconType,
@@ -10,7 +9,6 @@ import {
 } from "@notifee/react-native";
 import firestore from "@react-native-firebase/firestore";
 import messaging from "@react-native-firebase/messaging";
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import uuid from "react-native-uuid";
 import { ENVIRONMENT_MANAGER } from "../environments";
@@ -18,18 +16,17 @@ import { notification } from "./initial.notification";
 
 const useFCM = () => {
   const { requestPermission } = usePermission();
+
   const { t } = useTranslation();
 
-  async function requestUserPermission(): Promise<void> {
+  async function requestUserPermission(): Promise<any> {
     const authStatus = await messaging().requestPermission();
     const enabled =
       authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
       authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
     if (!enabled) {
       await requestPermission("android.permission.POST_NOTIFICATIONS");
     }
-
     const permission = await notification.requestPermission();
     if (permission.authorizationStatus === AuthorizationStatus.DENIED) {
       await requestPermission("android.permission.POST_NOTIFICATIONS");
@@ -84,27 +81,21 @@ const useFCM = () => {
 
   async function pushNotification(data: Partial<Notification>) {
     const configAndroid: NotificationAndroid = {
-      asForegroundService: true,
       actions: [
         {
           pressAction: {
             id: "cancel_press_action",
           },
           title: t("notification.cancel"),
-          icon: "ic_launcher",
         },
       ],
-      autoCancel: true,
-      badgeIconType: AndroidBadgeIconType.SMALL,
       channelId: ENVIRONMENT_MANAGER.NOTIFICATION_CHANNEL_ID,
-      circularLargeIcon: true,
-      color: AndroidColor.TEAL,
+      color: AndroidColor.CYAN,
       colorized: true,
       importance: AndroidImportance.HIGH,
-      largeIcon: IMAGE_MANAGER.appIcon,
-      lightUpScreen: true,
+      autoCancel: true,
+      badgeIconType: AndroidBadgeIconType.LARGE,
       showTimestamp: true,
-      sound: "default",
       ticker: data.title || t("notification.ticker.default"),
       pressAction: {
         id: "default_press_action",
@@ -123,72 +114,31 @@ const useFCM = () => {
       data: {
         id: uuid.v4().toString(),
       },
-      ...data,
     });
   }
 
-  async function registerAppBackground() {
-    await messaging().registerDeviceForRemoteMessages();
-    messaging().setBackgroundMessageHandler(async (remoteMessage) => {
-      console.log("Message handled in the background!", remoteMessage);
-      // NOTIFEE DISPLAY SHOW HERE
-      await pushNotification({
-        android: {
-          channelId: ENVIRONMENT_MANAGER.NOTIFICATION_CHANNEL_ID,
-          autoCancel: true,
-          badgeIconType: AndroidBadgeIconType.SMALL,
-          circularLargeIcon: true,
-          color: AndroidColor.TEAL,
-          colorized: true,
-          importance: AndroidImportance.HIGH,
-          largeIcon: IMAGE_MANAGER.appIcon,
-          lightUpScreen: true,
-          showTimestamp: true,
-          sound: "default",
-          ticker: t("notification.ticker.default"),
-          pressAction: {
-            id: "default_press_action",
-          },
-          timestamp: Date.now(),
+  async function onMessageReceived(message: any) {
+    console.log("onMessageReceived", message);
+    await pushNotification({
+      android: {
+        channelId: ENVIRONMENT_MANAGER.NOTIFICATION_CHANNEL_ID,
+        color: AndroidColor.CYAN,
+        colorized: true,
+        importance: AndroidImportance.HIGH,
+        showTimestamp: true,
+        autoCancel: true,
+        badgeIconType: AndroidBadgeIconType.LARGE,
+        ticker: t("notification.ticker.default"),
+        largeIcon: message.notification?.android?.imageUrl || undefined,
+        pressAction: {
+          id: "default_press_action",
         },
-        data: remoteMessage.data,
-        title: remoteMessage.notification?.title,
-        body: remoteMessage.notification?.body,
-        id: uuid.v4().toString(),
-      });
-    });
-  }
-
-  async function registerAppForeground() {
-    await messaging().registerDeviceForRemoteMessages();
-    messaging().onMessage(async (remoteMessage) => {
-      console.log("FCM Message Data:", remoteMessage.data);
-      // NOTIFEE DISPLAY SHOW HERE
-      await pushNotification({
-        android: {
-          channelId: ENVIRONMENT_MANAGER.NOTIFICATION_CHANNEL_ID,
-          autoCancel: true,
-          badgeIconType: AndroidBadgeIconType.LARGE,
-          circularLargeIcon: true,
-          smallIcon: IMAGE_MANAGER.appIcon,
-          color: AndroidColor.TEAL,
-          colorized: true,
-          importance: AndroidImportance.HIGH,
-          largeIcon: IMAGE_MANAGER.appIcon,
-          lightUpScreen: true,
-          showTimestamp: true,
-          sound: "default",
-          ticker: t("notification.ticker.default"),
-          pressAction: {
-            id: "default_press_action",
-          },
-          timestamp: Date.now(),
-        },
-        data: remoteMessage.data,
-        title: remoteMessage.notification?.title,
-        body: remoteMessage.notification?.body,
-        id: uuid.v4().toString(),
-      });
+        timestamp: Date.now(),
+      },
+      data: message.data,
+      title: message.notification?.title,
+      body: message.notification?.body,
+      id: uuid.v4().toString(),
     });
   }
 
@@ -196,61 +146,15 @@ const useFCM = () => {
     await notification.setBadgeCount(count);
   }
 
-  useEffect(() => {
-    (async () => {
-      const authStatus = await messaging().hasPermission();
-      if (
-        authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-        authStatus === messaging.AuthorizationStatus.PROVISIONAL
-      ) {
-        return;
-      } else {
-        requestUserPermission();
-      }
-    })();
-    registerAppBackground();
-    registerAppForeground();
-
-    return messaging().onMessage(async (remoteMessage) => {
-      console.log("FCM Message Data:", remoteMessage.data);
-      // NOTIFEE DISPLAY SHOW HERE
-      await pushNotification({
-        android: {
-          channelId: ENVIRONMENT_MANAGER.NOTIFICATION_CHANNEL_ID,
-          autoCancel: true,
-          badgeIconType: AndroidBadgeIconType.SMALL,
-          circularLargeIcon: true,
-          color: AndroidColor.TEAL,
-          colorized: true,
-          importance: AndroidImportance.HIGH,
-          largeIcon: IMAGE_MANAGER.appIcon,
-          lightUpScreen: true,
-          showTimestamp: true,
-          sound: "default",
-          ticker: t("notification.ticker.default"),
-          pressAction: {
-            id: "default_press_action",
-          },
-          timestamp: Date.now(),
-        },
-        data: remoteMessage.data,
-        title: remoteMessage.notification?.title,
-        body: remoteMessage.notification?.body,
-        id: uuid.v4().toString(),
-      });
-    });
-  }, []);
-
   return {
     requestUserPermission,
-    getToken,
     saveTokenToFirestore,
     clearNotification,
     getListNotification,
-    registerAppBackground,
-    registerAppForeground,
     pushNotification,
     setBadgeCount,
+    getToken,
+    onMessageReceived,
   };
 };
 

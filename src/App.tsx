@@ -11,6 +11,7 @@ import { BaseAlert, BaseLoadingLottie, BaseStatusBar, ThemeProvider, initialLayo
 import { ENVIRONMENT_MANAGER, useFCM } from "./configuration";
 import i18Config from "./configuration/intl";
 import { RootNavigation, persistor, store } from "./core";
+import messaging from "@react-native-firebase/messaging";
 
 export default function App() {
   initialLayoutAnimation();
@@ -20,17 +21,27 @@ export default function App() {
     insets: { top: 0, left: 0, right: 0, bottom: 0 },
   };
 
-  const { requestUserPermission, setBadgeCount, pushNotification } = useFCM();
+  const { requestUserPermission, setBadgeCount, onMessageReceived } = useFCM();
 
   useEffect(() => {
     GoogleSignin.configure({
       webClientId: ENVIRONMENT_MANAGER.WEB_CLIENT_ID,
     });
     LottieSplashScreen.hide();
-    requestUserPermission();
-    setBadgeCount(0);
-    pushNotification({});
+    bootstrap();
   }, []);
+
+  async function bootstrap() {
+    requestUserPermission();
+
+    setBadgeCount(0);
+
+    await messaging().registerDeviceForRemoteMessages();
+
+    messaging().onMessage(onMessageReceived);
+
+    messaging().setBackgroundMessageHandler(onMessageReceived);
+  }
 
   return (
     <Provider store={store}>

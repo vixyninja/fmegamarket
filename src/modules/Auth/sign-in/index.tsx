@@ -22,7 +22,8 @@ export default function SignInScreen({ navigation }: Props) {
 
   const { theme } = useTheme();
 
-  const { credential, onChangeEmail, onChangePassword, signIn, onChangeRemember, isLoading } = useSignIn();
+  const { credential, onChangeEmail, onChangePassword, signInNormal, onChangeRemember, isRemember, disable } =
+    useSignIn();
 
   const onClickBack = useCallback(() => {
     navigation.canGoBack() && navigation.goBack();
@@ -69,7 +70,7 @@ export default function SignInScreen({ navigation }: Props) {
                 backgroundColor: "transparent",
               },
             }}
-            disabled={isLoading}
+            disabled={disable}
             autoFocus={false}
             keyboardType="email-address"
           />
@@ -79,7 +80,7 @@ export default function SignInScreen({ navigation }: Props) {
             callBack={onChangePassword}
             autoFocus={false}
             placeholder={t("signIn.password")}
-            disabled={isLoading}
+            disabled={disable}
           />
         </View>
 
@@ -95,7 +96,7 @@ export default function SignInScreen({ navigation }: Props) {
               color={styles.checkedCheckBox.color}
               size={25}
               iconStyle={{ marginRight: 5 }}
-              disabled={isLoading}
+              disabled={disable}
             />
           }
           uncheckedIcon={
@@ -107,9 +108,9 @@ export default function SignInScreen({ navigation }: Props) {
               iconStyle={{ marginRight: 5 }}
             />
           }
-          checked={credential.rememberMe ? true : false}
+          checked={isRemember}
           onPress={onChangeRemember}
-          disabled={isLoading}
+          disabled={disable}
         />
 
         <Button
@@ -117,11 +118,11 @@ export default function SignInScreen({ navigation }: Props) {
           title={t("signIn.button")}
           containerStyle={styles.signInButtonContainer}
           radius={99}
-          onPress={signIn}
-          disabled={isLoading}
+          onPress={signInNormal}
+          disabled={disable}
         />
 
-        <TouchableOpacity onPress={() => {}} style={styles.forgotContainer} disabled={isLoading}>
+        <TouchableOpacity onPress={() => {}} style={styles.forgotContainer} disabled={disable}>
           <Text>{t("signIn.forgot")}</Text>
         </TouchableOpacity>
 
@@ -134,21 +135,21 @@ export default function SignInScreen({ navigation }: Props) {
         <View style={styles.selectionGroup}>
           <Button
             onPress={onClickBack}
-            disabled={isLoading}
+            disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
             title={<Icon name="facebook" type="feather" size={20} color={theme.colors.facebook} />}
           />
 
           <Button
             onPress={onClickBack}
-            disabled={isLoading}
+            disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
             title={<Icon name="google" type="font-awesome" size={20} color={theme.colors.google} />}
           />
 
           <Button
             onPress={onClickBack}
-            disabled={isLoading}
+            disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
             title={<Icon name="twitter" type="feather" size={20} color={theme.colors.twitter} />}
           />

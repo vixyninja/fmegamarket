@@ -6,4 +6,4 @@ export { AuthAction, AuthReducer } from "./auth.reducer";
 
 export { LoadingAction, LoadingReducer } from "./loading.reducer";
 
-export {} from "./user.reducer";
+export { UserAction, UserReducer } from "./user.reducer";

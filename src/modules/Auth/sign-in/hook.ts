@@ -1,27 +1,36 @@
 import { isEmail, isPassword, isPlatForm, useAppDispatch } from "@/common";
 import { useFCM } from "@/configuration";
-import { AlertAction, AuthAction, CredentialSignIn, LoadingAction, useSignInNormalMutation } from "@/core";
+import {
+  AlertAction,
+  AuthAction,
+  ISignInNormalCredential,
+  LoadingAction,
+  UserAction,
+  useSignInNormalMutation,
+} from "@/core";
 import lodash from "lodash";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Platform } from "react-native";
 
 export const useSignIn = () => {
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
 
-  const [credential, setCredential] = useState<CredentialSignIn>({
+  const [disable, setDisable] = useState<boolean>(false);
+
+  const [isRemember, setIsRemember] = useState<boolean>(false);
+
+  const [credential, setCredential] = useState<ISignInNormalCredential>({
     email: "nevergiveup2k3@gmail.com",
     password: "nevergiveup2k3",
-    rememberMe: true,
     deviceToken: "",
     deviceType: isPlatForm(),
   });
 
   const { getToken, pushNotification, saveTokenToFirestore } = useFCM();
 
-  const [signInNormal, { isLoading }] = useSignInNormalMutation();
+  const [signInNormalMutation] = useSignInNormalMutation();
 
   const validatorForm = useCallback(() => {
     if (lodash.isEmpty(credential.email)) {
@@ -71,38 +80,39 @@ export const useSignIn = () => {
     return true;
   }, [credential]);
 
-  const signIn = useCallback(async () => {
+  const signInNormal = useCallback(async () => {
+    setDisable(true);
     if (!validatorForm()) {
       return;
     }
 
     dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_in") + "..."));
-    await signInNormal({
+    await signInNormalMutation({
       email: credential.email,
       password: credential.password,
       deviceToken: await getToken(),
       deviceType: isPlatForm(),
-      rememberMe: credential.rememberMe,
     })
       .unwrap()
-      .then((res) => {
+      .then(async (res) => {
         if (res.statusCode === 200) {
-          pushNotification({
+          await pushNotification({
             title: t("notification.sign_in_success.title"),
             body: t("notification.sign_in_success.message"),
           });
-          saveTokenToFirestore("a2b3c4d5e6f7g8h9i10j11k12l13m14n15");
-          dispatch(LoadingAction.hideLoading());
+          await saveTokenToFirestore(res.data.user?.uuid!);
           dispatch(
             AuthAction.setCredentials({
               accessToken: res.data.accessToken,
               refreshToken: res.data.refreshToken,
               provider: "email",
               isAuth: true,
+              isRememberMe: isRemember,
             }),
           );
-        } else {
+          dispatch(UserAction.setUser({ ...res.data.user }));
           dispatch(LoadingAction.hideLoading());
+        } else {
           dispatch(
             AlertAction.showAlert({
               title: t("alert.sign_in_failed.title"),
@@ -110,10 +120,10 @@ export const useSignIn = () => {
               type: "error",
             }),
           );
+          dispatch(LoadingAction.hideLoading());
         }
       })
       .catch((_) => {
-        dispatch(LoadingAction.hideLoading());
         dispatch(
           AlertAction.showAlert({
             title: t("alert.sign_in_failed.title"),
@@ -121,7 +131,9 @@ export const useSignIn = () => {
             type: "error",
           }),
         );
+        dispatch(LoadingAction.hideLoading());
       });
+    setDisable(false);
   }, [credential]);
 
   const onChangeEmail = (email: string) => {
@@ -133,16 +145,17 @@ export const useSignIn = () => {
   };
 
   const onChangeRemember = () => {
-    setCredential((prev) => ({ ...prev, rememberMe: !prev.rememberMe }));
+    setIsRemember((prev) => !prev);
   };
 
   return {
     credential,
-    isLoading,
     onChangeEmail,
     onChangePassword,
     onChangeRemember,
-    signIn,
+    signInNormal,
     setCredential,
+    isRemember,
+    disable,
   };
 };

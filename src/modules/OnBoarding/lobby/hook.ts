@@ -1,6 +1,6 @@
 import { isPlatForm, useAppDispatch, useAppSelector, useGoogleSignin } from "@/common";
 import { useFCM } from "@/configuration";
-import { AlertAction, AuthAction, LoadingAction, authSelector, useSignInGoogleMutation } from "@/core";
+import { AlertAction, AuthAction, LoadingAction, UserAction, authSelector, useSignInGoogleMutation } from "@/core";
 import auth from "@react-native-firebase/auth";
 import { statusCodes } from "@react-native-google-signin/google-signin";
 import { useCallback, useEffect, useState } from "react";
@@ -15,7 +15,7 @@ export const useSignIn = () => {
 
   const authState = useAppSelector(authSelector);
 
-  const { getToken } = useFCM();
+  const { getToken, saveTokenToFirestore, pushNotification } = useFCM();
 
   const { signIn, getTokens, signOut } = useGoogleSignin();
 
@@ -73,16 +73,19 @@ export const useSignIn = () => {
         .unwrap()
         .then(async (res) => {
           if (res.statusCode === 200) {
+            await pushNotification({});
+            await saveTokenToFirestore(res.data.user?.uuid!);
             dispatch(
               AuthAction.setCredentials({
                 provider: "google",
                 idToken: idToken,
                 isAuth: true,
-                googleAccessToken: accessToken,
                 accessToken: res.data.accessToken,
                 refreshToken: res.data.refreshToken,
               }),
             );
+            dispatch(UserAction.setUser({ ...res.data.user }));
+            dispatch(LoadingAction.hideLoading());
           } else {
             dispatch(
               AlertAction.showAlert({
@@ -105,13 +108,7 @@ export const useSignIn = () => {
       dispatch(LoadingAction.hideLoading());
     } catch (error: any) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        dispatch(
-          AlertAction.showAlert({
-            title: t("alert.sign_in_cancelled.title"),
-            message: t("alert.sign_in_cancelled.message"),
-            type: "warning",
-          }),
-        );
+        console.log("user cancelled the login flow");
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         dispatch(
           AlertAction.showAlert({
@@ -129,11 +126,11 @@ export const useSignIn = () => {
           }),
         );
       }
-      dispatch(LoadingAction.hideLoading());
       setDisabled(false);
+      dispatch(LoadingAction.hideLoading());
     } finally {
-      dispatch(LoadingAction.hideLoading());
       setDisabled(false);
+      dispatch(LoadingAction.hideLoading());
     }
   }, []);
 

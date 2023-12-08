@@ -1,5 +1,5 @@
 export interface BaseModel {
-  id?: string;
+  uuid?: string;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
