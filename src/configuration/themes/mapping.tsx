@@ -80,7 +80,7 @@ export const theme = createTheme({
         ...props,
       };
     },
-    Image(props, _) {
+    Image(props, themes) {
       return {
         defaultSource: IMAGE_MANAGER.placeholder,
         transitionDuration: 500,
@@ -88,7 +88,7 @@ export const theme = createTheme({
         fadeDuration: 500,
         resizeMode: "center",
         alt: "image",
-        PlaceholderContent: <ActivityIndicator />,
+        PlaceholderContent: <ActivityIndicator size={"large"} color={themes.colors.secondary} />,
         ...props,
       };
     },

@@ -1,67 +1,66 @@
-import { FONT_MANAGER } from "@/assets";
-import { dimens } from "@/configuration/themes";
+import { dimens } from "@/configuration";
 import { Colors, Theme, makeStyles, normalize } from "@rneui/themed";
 
 const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({
+  imageCard: {
+    width: dimens.width,
+    height: dimens.height,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   image: {
-    width: normalize(dimens.width),
-    height: normalize(dimens.height / 1.6),
-    resizeMode: "stretch",
+    width: normalize(300),
+    height: normalize(300),
+    borderRadius: normalize(20),
   },
-  containerList: {
-    width: normalize(dimens.width),
-    height: normalize(dimens.height / 1.6),
+  fallBackContainer: {
+    flex: 1,
+    position: "absolute",
+    width: dimens.width,
+    height: dimens.height,
+    borderRadius: normalize(20),
+    justifyContent: "center",
+    alignItems: "center",
   },
-  containerDot: {
+  fallBack: {
+    width: normalize(300),
+    height: normalize(300),
+  },
+  backDropContainer: {
+    width: dimens.width,
+    height: dimens.height,
+    flex: 1,
+  },
+  backDropImage: {
+    width: dimens.width,
+    height: dimens.height,
+  },
+  indicatorContainer: {
+    position: "absolute",
+    bottom: normalize(20),
+    left: 0,
+    right: 0,
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: normalize(20),
+    zIndex: 100,
   },
-  containerText: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: normalize(20),
-    height: normalize(dimens.height * 0.17),
-  },
-  text: {
-    fontFamily: FONT_MANAGER.poppins_extra_bold,
-    marginVertical: normalize(20),
-    marginHorizontal: normalize(20),
-    textAlign: "center",
-    textAlignVertical: "center",
-  },
-  dot: {
-    backgroundColor: theme.colors.grey3,
-    width: normalize(10),
-    height: normalize(10),
+  indicator: {
+    width: normalize(12),
+    height: normalize(12),
     borderRadius: normalize(99),
-    marginHorizontal: normalize(4),
-    marginVertical: normalize(4),
+    marginHorizontal: normalize(12),
+    backgroundColor: theme.colors.primary,
   },
-  activeDot: {
-    backgroundColor: theme.colors.secondary,
-    width: normalize(30),
-    height: normalize(10),
-    borderRadius: normalize(20),
-    marginHorizontal: normalize(4),
-    marginVertical: normalize(4),
-  },
-  button: {
-    marginHorizontal: normalize(20),
-    borderRadius: normalize(99),
-  },
-  backButton: {
+  buttonNextContainer: {
     position: "absolute",
-    top: 30,
-    left: 30,
-    zIndex: 999,
+    top: normalize(40),
+    right: normalize(20),
   },
-  backText: {
-    color: "#000",
-    fontFamily: FONT_MANAGER.poppins_regular,
-    fontSize: 16,
+  buttonNext: {
+    width: normalize(80),
+    borderRadius: normalize(12),
+    backgroundColor: "transparent",
   },
 }));
 

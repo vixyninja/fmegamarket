@@ -1,4 +1,4 @@
-import { useAppSelector } from "@/common";
+import { BaseLoadingLottie, useAppSelector } from "@/common";
 import { useFlipper } from "@react-navigation/devtools";
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useEffect } from "react";
@@ -9,18 +9,18 @@ import { AuthNavigation } from "./auth.navigation";
 import { linking, navigationRef } from "./services.navigation";
 
 export function RootNavigation() {
-  const isSignedIn = useAppSelector(authSelector);
-  const language = useAppSelector(appSelector);
+  const { isAuth } = useAppSelector(authSelector);
+  const { language } = useAppSelector(appSelector);
 
   useEffect(() => {
-    i18next.changeLanguage(language.language);
-  }, [language.language]);
+    i18next.changeLanguage(language);
+  }, [language]);
 
   useFlipper(navigationRef);
 
   return (
-    <NavigationContainer ref={navigationRef} linking={linking}>
-      {isSignedIn.isAuth ? <AppNavigation /> : <AuthNavigation />}
+    <NavigationContainer ref={navigationRef} linking={linking} fallback={<BaseLoadingLottie />}>
+      {isAuth ? <AppNavigation /> : <AuthNavigation />}
     </NavigationContainer>
   );
 }

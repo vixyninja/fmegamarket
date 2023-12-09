@@ -1,6 +1,14 @@
 import { isPlatForm, useAppDispatch, useAppSelector, useGoogleSignin } from "@/common";
 import { useFCM } from "@/configuration";
-import { AlertAction, AuthAction, LoadingAction, UserAction, authSelector, useSignInGoogleMutation } from "@/core";
+import {
+  AlertAction,
+  AppAction,
+  AuthAction,
+  LoadingAction,
+  UserAction,
+  authSelector,
+  useSignInGoogleMutation,
+} from "@/core";
 import auth from "@react-native-firebase/auth";
 import { statusCodes } from "@react-native-google-signin/google-signin";
 import { useCallback, useEffect, useState } from "react";
@@ -22,6 +30,7 @@ export const useSignIn = () => {
   const [signInGoogle] = useSignInGoogleMutation();
 
   useEffect(() => {
+    dispatch(AppAction.setFirstTime(true));
     if (authState.isRememberMe) {
       switch (authState.provider) {
         case "google":

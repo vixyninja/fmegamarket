@@ -23,8 +23,6 @@ const reducer = createSlice({
   name: STORE_ENUM.AUTH,
   initialState: initialState,
   reducers: {
-    signInEmail: (state: AuthStateType) => {},
-    signOut: (state: AuthStateType) => {},
     setCredentials: (state: AuthStateType, action: PayloadAction<Partial<AuthStateType>>) => {
       return {
         ...state,

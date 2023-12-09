@@ -49,9 +49,22 @@ export function AuthNavigation() {
           animation: "slide_from_right",
         }}
       />
-
-      <AuthStack.Screen key={"SIGN_IN_SCREEN"} name={"SIGN_IN_SCREEN"} component={SignInScreen} />
-      <AuthStack.Screen key={"SIGN_UP_SCREEN"} name={"SIGN_UP_SCREEN"} component={SignUpScreen} />
+      <AuthStack.Screen
+        key={"SIGN_IN_SCREEN"}
+        name={"SIGN_IN_SCREEN"}
+        component={SignInScreen}
+        options={{
+          animation: "fade_from_bottom",
+        }}
+      />
+      <AuthStack.Screen
+        key={"SIGN_UP_SCREEN"}
+        name={"SIGN_UP_SCREEN"}
+        component={SignUpScreen}
+        options={{
+          animation: "fade_from_bottom",
+        }}
+      />
     </AuthStack.Navigator>
   );
 }

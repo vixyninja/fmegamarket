@@ -1,6 +1,6 @@
 import { ANIMS_MANAGER } from "@/assets";
-import { BaseRootView, useAppDispatch, useLayoutAnimation } from "@/common";
-import { AppAction, AuthParamList } from "@/core";
+import { BaseRootView, useLayoutAnimation } from "@/common";
+import { AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { BottomSheet, Button, Text } from "@rneui/themed";
 import LottieView from "lottie-react-native";
@@ -13,15 +13,11 @@ type Props = NativeStackScreenProps<AuthParamList, "WELCOME_SCREEN">;
 
 export default function WelcomeScreen({ navigation }: Props) {
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
-  const dispatch = useAppDispatch();
   const styles = useStyles();
   const { t } = useTranslation();
-
   function onPressNext() {
-    dispatch(AppAction.setFirstTime(false));
-    navigation.navigate("LOBBY_SCREEN");
+    navigation.replace("INTRODUCTION_SCREEN");
   }
-
   return (
     <BaseRootView>
       <LottieView

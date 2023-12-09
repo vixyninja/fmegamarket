@@ -51,17 +51,28 @@ const baseApiQueryWithMutex: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQ
 
   if (result.error.status === 401) {
     api.dispatch(LoadingAction.showLoading());
+
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
+
       try {
-        const refreshResult = await baseApiQuery(EndpointEnum.REFRESH_TOKEN, api, extraOptions);
+        let endpointName = `EndpointEnum.REFRESH_TOKEN?token=${
+          (api.getState() as RootState).persisted.auth.refreshToken
+        }`;
+
+        const refreshResult = await baseApiQuery(endpointName, api, extraOptions);
+
         if (refreshResult.data) {
-          //   api.dispatch(
-          //     AuthAction.setCredentials({
-          //       ...(api.getState() as RootState).auth,
-          //       ...refreshResult,
-          //     }),
-          //   );
+          const { refreshToken, accessToken } = refreshResult.data as any;
+
+          api.dispatch(
+            AuthAction.setCredentials({
+              ...(api.getState() as RootState).persisted.auth,
+              accessToken: accessToken,
+              refreshToken: refreshToken,
+            }),
+          );
+
           result = await baseApiQuery(args, api, extraOptions);
         } else {
           api.dispatch(
@@ -74,6 +85,7 @@ const baseApiQueryWithMutex: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQ
               cancel: () => api.dispatch(AlertAction.disposeAlert()),
             }),
           );
+
           api.dispatch(AuthAction.clearCredentials());
         }
       } catch (e) {
@@ -87,6 +99,7 @@ const baseApiQueryWithMutex: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQ
             cancel: () => api.dispatch(AlertAction.disposeAlert()),
           }),
         );
+
         api.dispatch(AuthAction.clearCredentials());
       } finally {
         release();
@@ -104,7 +117,6 @@ export const apiService = createApi({
   baseQuery: baseApiQueryWithMutex,
   endpoints: (_) => ({}),
   tagTypes: ["USER"],
-  refetchOnReconnect: true,
   reducerPath: "apiService",
   serializeQueryArgs: (args) => {
     if (typeof args === "string") {
