@@ -1,36 +1,21 @@
 import { isPlatForm, useAppDispatch, useAppSelector, useGoogleSignin } from "@/common";
 import { useFCM } from "@/configuration";
-import {
-  AlertAction,
-  AppAction,
-  AuthAction,
-  LoadingAction,
-  UserAction,
-  authSelector,
-  useSignInGoogleMutation,
-} from "@/core";
+import { AlertAction, AuthAction, LoadingAction, UserAction, authSelector, useSignInGoogleMutation } from "@/core";
 import auth from "@react-native-firebase/auth";
 import { statusCodes } from "@react-native-google-signin/google-signin";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export const useSignIn = () => {
+  const dispatch = useAppDispatch();
+  const authState = useAppSelector(authSelector);
+  const { getToken, saveTokenToFirestore, pushNotification } = useFCM();
+  const { signIn, getTokens, signOut } = useGoogleSignin();
+  const [signInGoogle] = useSignInGoogleMutation();
   const [disabled, setDisabled] = useState(false);
-
   const { t } = useTranslation();
 
-  const dispatch = useAppDispatch();
-
-  const authState = useAppSelector(authSelector);
-
-  const { getToken, saveTokenToFirestore, pushNotification } = useFCM();
-
-  const { signIn, getTokens, signOut } = useGoogleSignin();
-
-  const [signInGoogle] = useSignInGoogleMutation();
-
   useEffect(() => {
-    dispatch(AppAction.setFirstTime(true));
     if (authState.isRememberMe) {
       switch (authState.provider) {
         case "google":
@@ -49,17 +34,11 @@ export const useSignIn = () => {
   const onGoogleButtonPress = useCallback(async () => {
     try {
       setDisabled(true);
-
       dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_in")));
-
       await signOut();
-
       await signIn();
-
       const { idToken, accessToken } = await getTokens();
-
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
       const credential = await auth().signInWithCredential(googleCredential);
 
       if (!credential) {
@@ -94,7 +73,6 @@ export const useSignIn = () => {
               }),
             );
             dispatch(UserAction.setUser({ ...res.data.user }));
-            dispatch(LoadingAction.hideLoading());
           } else {
             dispatch(
               AlertAction.showAlert({
@@ -104,20 +82,9 @@ export const useSignIn = () => {
               }),
             );
           }
-        })
-        .catch((_) => {
-          dispatch(
-            AlertAction.showAlert({
-              title: t("alert.sign_in_failed.title"),
-              message: t("alert.sign_in_failed.message"),
-              type: "error",
-            }),
-          );
         });
-      dispatch(LoadingAction.hideLoading());
     } catch (error: any) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-        console.log("user cancelled the login flow");
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
         dispatch(
           AlertAction.showAlert({
@@ -135,8 +102,6 @@ export const useSignIn = () => {
           }),
         );
       }
-      setDisabled(false);
-      dispatch(LoadingAction.hideLoading());
     } finally {
       setDisabled(false);
       dispatch(LoadingAction.hideLoading());

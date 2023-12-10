@@ -9,7 +9,7 @@ type AppStateType = {
 
 const initialState: AppStateType = {
   language: "en",
-  firstTime: true,
+  firstTime: false,
   fontFamily: "roboto",
 };
 

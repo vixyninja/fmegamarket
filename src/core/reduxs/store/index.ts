@@ -15,8 +15,8 @@ const persistConfig: PersistConfig<RootState> = {
   storage: EncryptedStorage,
   timeout: 30000,
   stateReconciler: autoMergeLevel2,
-  blacklist: [STORE_ENUM.LOADING, STORE_ENUM.ALERT, STORE_ENUM.PERSISTED, apiService.reducerPath, STORE_ENUM.APP],
-  whitelist: [STORE_ENUM.AUTH, STORE_ENUM.USER],
+  blacklist: [STORE_ENUM.LOADING, STORE_ENUM.ALERT, STORE_ENUM.PERSISTED, apiService.reducerPath],
+  whitelist: [STORE_ENUM.AUTH, STORE_ENUM.USER, STORE_ENUM.APP],
 };
 
 const rootReducers = combineReducers({

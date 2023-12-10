@@ -35,7 +35,12 @@ const reducer = createSlice({
       state.isShow = false;
     },
     disposeAlert: (state: AlertStateType) => {
-      Object.assign(state, initialState);
+      state.type = "success";
+      state.title = "Notification";
+      state.message = "Notification message";
+      state.callback = () => {};
+      state.cancel = () => {};
+      state.isShow = false;
     },
   },
 });

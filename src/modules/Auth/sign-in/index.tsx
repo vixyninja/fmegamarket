@@ -4,7 +4,7 @@ import { AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { CheckBox, Divider } from "@rneui/base";
 import { Button, Icon, Image, Text, useTheme } from "@rneui/themed";
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -22,23 +22,25 @@ export default function SignInScreen({ navigation }: Props) {
 
   const { theme } = useTheme();
 
-  const { credential, onChangeEmail, onChangePassword, signInNormal, onChangeRemember, isRemember, disable } =
-    useSignIn();
-
-  const onClickBack = useCallback(() => {
-    navigation.canGoBack() && navigation.goBack();
-  }, []);
-
-  const onClickSignUp = useCallback(() => {
-    navigation.navigate("SIGN_UP_SCREEN");
-  }, []);
+  const {
+    credential,
+    onChangeEmail,
+    onChangePassword,
+    signInNormal,
+    onChangeRemember,
+    isRemember,
+    disable,
+    onClickBack,
+    onClickOtherLogin,
+    onClickSignUp,
+  } = useSignIn({ navigation: navigation });
 
   return (
     <BaseRootView touchWithoutFeedback>
       <ScrollView scrollEnabled={false}>
         <BackHeader onPress={onClickBack} />
 
-        <Image source={IMAGE_MANAGER.signIn} style={styles.image} containerStyle={styles.imageContainer} />
+        <Image source={{ uri: IMAGE_MANAGER.signIn }} style={styles.image} containerStyle={styles.imageContainer} />
 
         <Text h3 h3Style={styles.titleStyle}>
           {t("signIn.title")}
@@ -89,6 +91,7 @@ export default function SignInScreen({ navigation }: Props) {
           title={t("signIn.remember")}
           textStyle={styles.checkBoxText}
           containerStyle={styles.checkBoxContainer}
+          wrapperStyle={styles.checkBoxWrapper}
           checkedIcon={
             <Icon
               name="checkmark-circle-outline"
@@ -110,7 +113,6 @@ export default function SignInScreen({ navigation }: Props) {
           }
           checked={isRemember}
           onPress={onChangeRemember}
-          disabled={disable}
         />
 
         <Button
@@ -134,21 +136,21 @@ export default function SignInScreen({ navigation }: Props) {
 
         <View style={styles.selectionGroup}>
           <Button
-            onPress={onClickBack}
+            onPress={onClickOtherLogin}
             disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
             title={<Icon name="facebook" type="feather" size={20} color={theme.colors.facebook} />}
           />
 
           <Button
-            onPress={onClickBack}
+            onPress={onClickOtherLogin}
             disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
             title={<Icon name="google" type="font-awesome" size={20} color={theme.colors.google} />}
           />
 
           <Button
-            onPress={onClickBack}
+            onPress={onClickOtherLogin}
             disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
             title={<Icon name="twitter" type="feather" size={20} color={theme.colors.twitter} />}

@@ -2,36 +2,35 @@ import { isEmail, isPassword, isPlatForm, useAppDispatch } from "@/common";
 import { useFCM } from "@/configuration";
 import {
   AlertAction,
-  AuthAction,
-  AuthParamList,
-  ISignInNormalCredential,
+  ISignUpNormalCredential,
   LoadingAction,
-  UserAction,
-  useSignInNormalMutation,
+  NavigationServices,
+  useSignUpNormalMutation,
 } from "@/core";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import lodash from "lodash";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export type UseSignInType = {
-  navigation: NativeStackNavigationProp<AuthParamList, "SIGN_IN_SCREEN", undefined>;
-};
-
-export const useSignIn = (props: UseSignInType) => {
-  const { navigation } = props;
+export const useSignUp = () => {
   const dispatch = useAppDispatch();
+
   const { t } = useTranslation();
-  const [signInNormalMutation] = useSignInNormalMutation();
-  const { getToken, pushNotification, saveTokenToFirestore } = useFCM();
-  const [disable, setDisable] = useState<boolean>(false);
-  const [isRemember, setIsRemember] = useState<boolean>(false);
-  const [credential, setCredential] = useState<ISignInNormalCredential>({
+
+  const { getToken, pushNotification } = useFCM();
+
+  const [credential, setCredential] = useState<ISignUpNormalCredential>({
+    firstName: "Guest ",
+    lastName: Math.floor(Math.random() * 1000000).toString(),
+    confirmPassword: "",
     email: "",
     password: "",
     deviceToken: "",
     deviceType: isPlatForm(),
   });
+
+  const [disable, setDisable] = useState<boolean>(false);
+
+  const [signUpNormalMutation] = useSignUpNormalMutation();
 
   const validatorForm = useCallback(() => {
     if (lodash.isEmpty(credential.email)) {
@@ -78,52 +77,78 @@ export const useSignIn = (props: UseSignInType) => {
       return false;
     }
 
+    if (lodash.isEmpty(credential.confirmPassword)) {
+      dispatch(
+        AlertAction.showAlert({
+          title: t("alert.default.title"),
+          message: t("validation.confirm_password.required"),
+          type: "error",
+        }),
+      );
+      return false;
+    }
+
+    if (credential.password !== credential.confirmPassword) {
+      dispatch(
+        AlertAction.showAlert({
+          title: t("alert.default.title"),
+          message: t("validation.confirm_password.not_match"),
+          type: "error",
+        }),
+      );
+      return false;
+    }
+
     return true;
   }, [credential]);
 
-  const signInNormal = useCallback(async () => {
+  const signUpNormal = useCallback(async () => {
     try {
       if (!validatorForm()) {
         return;
       }
       setDisable(true);
-      dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_in") + "..."));
-      const res = await signInNormalMutation({
+      dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_up") + "..."));
+      const res = await signUpNormalMutation({
         email: credential.email,
         password: credential.password,
+        firstName: credential.firstName,
+        confirmPassword: credential.confirmPassword,
+        lastName: credential.lastName,
         deviceToken: await getToken(),
         deviceType: isPlatForm(),
       }).unwrap();
-      if (res.statusCode === 200) {
-        await pushNotification({
-          title: t("notification.sign_in_success.title"),
-          body: t("notification.sign_in_success.message"),
+
+      if (res.statusCode === 201) {
+        pushNotification({
+          title: t("notification.sign_up_success.title"),
+          body: t("notification.sign_up_success.message"),
         });
-        await saveTokenToFirestore(res.data.user?.uuid!);
+
         dispatch(
-          AuthAction.setCredentials({
-            accessToken: res.data.accessToken,
-            refreshToken: res.data.refreshToken,
-            provider: "email",
-            isAuth: true,
-            isRememberMe: isRemember,
+          AlertAction.showAlert({
+            title: t("alert.sign_up_success.title"),
+            message: t("alert.sign_up_success.message"),
+            type: "success",
+            callback: () => {
+              NavigationServices.goBack();
+            },
           }),
         );
-        dispatch(UserAction.setUser({ ...res.data.user }));
       } else {
         dispatch(
           AlertAction.showAlert({
-            title: t("alert.sign_in_failed.title"),
+            title: t("alert.sign_up_failed.title"),
             message: res.message,
             type: "error",
           }),
         );
       }
-    } catch (error) {
+    } catch (e) {
       dispatch(
         AlertAction.showAlert({
-          title: t("alert.sign_in_failed.title"),
-          message: t("alert.sign_in_failed.message"),
+          title: t("alert.sign_up_failed.title"),
+          message: t("alert.sign_up_failed.message"),
           type: "error",
         }),
       );
@@ -141,33 +166,16 @@ export const useSignIn = (props: UseSignInType) => {
     setCredential((prev) => ({ ...prev, password: password.trim() }));
   };
 
-  const onChangeRemember = () => {
-    setIsRemember((prev) => !prev);
+  const onChangeConfirmPassword = (confirmPassword: string) => {
+    setCredential((prev) => ({ ...prev, confirmPassword: confirmPassword.trim() }));
   };
 
-  const onClickBack = useCallback(() => {
-    navigation.canGoBack() && navigation.goBack();
-  }, []);
-
-  const onClickSignUp = useCallback(() => {
-    navigation.navigate("SIGN_UP_SCREEN");
-  }, []);
-
-  const onClickOtherLogin = useCallback(() => {
-    navigation.navigate("LOBBY_SCREEN");
-  }, []);
-
   return {
+    signUpNormal,
     credential,
+    disable,
     onChangeEmail,
     onChangePassword,
-    onChangeRemember,
-    signInNormal,
-    setCredential,
-    isRemember,
-    disable,
-    onClickBack,
-    onClickSignUp,
-    onClickOtherLogin,
+    onChangeConfirmPassword,
   };
 };

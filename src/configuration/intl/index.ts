@@ -14,15 +14,15 @@ export const resource = {
 i18next.use(initReactI18next).init(
   {
     compatibilityJSON: "v3",
-    lng: "en",
-    fallbackLng: "en",
+    lng: "vi",
+    fallbackLng: "vi",
     resources: resource,
     cache: {
       enabled: true,
     },
     cleanCode: true,
     i18nFormat: {
-      localeData: "en",
+      localeData: "vi",
       format: "json",
     },
   },

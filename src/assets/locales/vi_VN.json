@@ -18,6 +18,14 @@
     "sign_in_success": {
       "title": "Đăng nhập thành công",
       "message": "Đăng nhập thành công, xin chào."
+    },
+    "sign_out_success": {
+      "title": "Đăng xuất thành công",
+      "message": "Đăng xuất thành công, hẹn gặp lại."
+    },
+    "sign_up_success": {
+      "title": "Đăng ký thành công",
+      "message": "Đăng ký thành công, vui lòng đăng nhập."
     }
   },
   "alert": {
@@ -25,7 +33,8 @@
       "title": "Thông báo",
       "message": "Đây là thông báo mặc định.",
       "cancel": "Đóng",
-      "ok": "Đồng ý"
+      "ok": "Đồng ý",
+      "error": "Có lỗi xảy ra. Vui lòng thử lại."
     },
     "play_services_not_available": {
       "title": "Google Play Services không khả dụng",
@@ -40,6 +49,20 @@
       "message": "Bạn có chắc chắn muốn thoát ứng dụng không?",
       "cancel": "Không",
       "ok": "Đồng ý"
+    },
+    "sign_out": {
+      "title": "Đăng xuất",
+      "message": "Bạn có chắc chắn muốn đăng xuất không?",
+      "cancel": "Không",
+      "ok": "Đồng ý"
+    },
+    "sign_up_success": {
+      "title": "Đăng ký thành công",
+      "message": "Đăng ký thành công, vui lòng đăng nhập."
+    },
+    "sign_up_failed": {
+      "title": "Đăng ký thất bại",
+      "message": "Đăng ký thất bại, vui lòng thử lại."
     }
   },
   "validation": {

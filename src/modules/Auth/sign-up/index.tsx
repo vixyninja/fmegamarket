@@ -1,50 +1,44 @@
 import { ANIMS_MANAGER, IMAGE_MANAGER } from "@/assets";
-import { BackHeader, BaseInput, BasePrivateInput, BaseRootView, useAppDispatch, useLayoutAnimation } from "@/common";
+import { BackHeader, BaseInput, BasePrivateInput, BaseRootView, useLayoutAnimation } from "@/common";
 import { AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Divider, Icon, Image, Text, useTheme } from "@rneui/themed";
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { useSignUp } from "./hook";
 import useStyles from "./styles";
 
 type Props = NativeStackScreenProps<AuthParamList, "SIGN_UP_SCREEN">;
 
 export default function SignUpScreen({ navigation, route }: Props) {
-  console.log(route.name);
-
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
 
-  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const styles = useStyles();
   const { theme } = useTheme();
 
-  const [text, setText] = useState("");
-  const [text2, setText2] = useState("");
-  const [text3, setText3] = useState("");
+  const { credential, disable, onChangeConfirmPassword, onChangeEmail, onChangePassword, signUpNormal } = useSignUp();
 
-  const onPasswordChange = useCallback(
-    (value: string) => {
-      setText2(value);
-    },
-    [text2],
-  );
+  const onPressBack = useCallback(() => {
+    navigation.canGoBack() && navigation.goBack();
+  }, []);
 
-  const onEmailChange = useCallback(
-    (value: string) => {
-      setText(value);
-    },
-    [text],
-  );
+  const onClickOtherLogin = useCallback(() => {
+    navigation.navigate("LOBBY_SCREEN");
+  }, []);
+
+  const onClickSignIn = useCallback(() => {
+    navigation.navigate("SIGN_IN_SCREEN");
+  }, []);
 
   return (
     <BaseRootView touchWithoutFeedback>
       <ScrollView scrollEnabled contentContainerStyle={styles.root}>
-        <BackHeader />
+        <BackHeader onPress={onPressBack} />
 
-        <Image source={IMAGE_MANAGER.signUp} style={styles.image} containerStyle={styles.imageContainer} />
+        <Image source={{ uri: IMAGE_MANAGER.signUp }} style={styles.image} containerStyle={styles.imageContainer} />
 
         <Text h3 h3Style={styles.titleStyle}>
           {t("signUp.title")}
@@ -52,8 +46,9 @@ export default function SignUpScreen({ navigation, route }: Props) {
 
         <View style={styles.buttonForm}>
           <BaseInput
-            callBack={onEmailChange}
+            callBack={onChangeEmail}
             placeholder={t("signUp.email")}
+            value={credential.email}
             leftIcon={{
               name: "email",
               type: "material",
@@ -77,8 +72,18 @@ export default function SignUpScreen({ navigation, route }: Props) {
             }}
           />
 
-          <BasePrivateInput callBack={onPasswordChange} autoFocus={false} placeholder={t("signUp.password")} />
-          <BasePrivateInput callBack={onPasswordChange} autoFocus={false} placeholder={t("signUp.confirm")} />
+          <BasePrivateInput
+            callBack={onChangePassword}
+            autoFocus={false}
+            placeholder={t("signUp.password")}
+            value={credential.password}
+          />
+          <BasePrivateInput
+            callBack={onChangeConfirmPassword}
+            autoFocus={false}
+            placeholder={t("signUp.confirm")}
+            value={credential.confirmPassword}
+          />
         </View>
 
         <Button
@@ -86,7 +91,7 @@ export default function SignUpScreen({ navigation, route }: Props) {
           title={t("signUp.button")}
           containerStyle={styles.signUpButtonContainer}
           radius={99}
-          onPress={() => {}}
+          onPress={signUpNormal}
         />
         <View style={styles.dividerContainer}>
           <Divider style={styles.divider} />
@@ -97,18 +102,21 @@ export default function SignUpScreen({ navigation, route }: Props) {
         <View style={styles.selectionGroup}>
           <Button
             TouchableComponent={TouchableOpacity}
+            onPress={onClickOtherLogin}
             buttonStyle={styles.selectionButtonContainer}
             title={<Icon name="facebook" type="feather" size={20} color={theme.colors.facebook} />}
           />
 
           <Button
             TouchableComponent={TouchableOpacity}
+            onPress={onClickOtherLogin}
             buttonStyle={styles.selectionButtonContainer}
             title={<Icon name="google" type="font-awesome" size={20} color={theme.colors.google} />}
           />
 
           <Button
             TouchableComponent={TouchableOpacity}
+            onPress={onClickOtherLogin}
             buttonStyle={styles.selectionButtonContainer}
             title={<Icon name="twitter" type="feather" size={20} color={theme.colors.twitter} />}
           />
@@ -116,7 +124,7 @@ export default function SignUpScreen({ navigation, route }: Props) {
 
         <View style={styles.footer}>
           <Text style={styles.footerText}>{t("signUp.already")}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onClickSignIn}>
             <Text h4Style={styles.footerTextClick} h4>
               {" "}
               {t("signUp.signin")}

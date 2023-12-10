@@ -1,7 +1,13 @@
-export * from "./components/customs";
-export * from "./components/shared";
+export { BackHeader, BaseInput, BasePrivateInput } from "./components/customs";
+
+export { BaseAlert, BaseHeader, BaseLoadingLottie, BaseStatusBar } from "./components/shared";
+
 export * from "./hooks";
-export * from "./wrappers/hoc";
-export * from "./wrappers/providers";
+
+export { BaseModal, BaseRootView } from "./wrappers/hoc";
+
+export { ThemeProvider } from "./wrappers/providers";
+
 export * from "./utils";
+
 export * from "./types";

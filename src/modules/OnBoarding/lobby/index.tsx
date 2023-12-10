@@ -13,13 +13,9 @@ type Props = NativeStackScreenProps<AuthParamList, "LOBBY_SCREEN">;
 
 export default function LobbyScreen({ navigation }: Props) {
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutVerticalEaseInEase);
-
   const styles = useStyles();
-
   const { theme } = useTheme();
-
   const { t } = useTranslation();
-
   const { disabled, onGoogleButtonPress } = useSignIn();
 
   const onClickSignInEmail = useCallback(() => {

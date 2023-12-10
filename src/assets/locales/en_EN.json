@@ -18,6 +18,14 @@
     "sign_in_success": {
       "title": "Sign in success",
       "message": "Sign in success, hello."
+    },
+    "sign_out_success": {
+      "title": "Sign out success",
+      "message": "Sign out success, goodbye."
+    },
+    "sign_up_success": {
+      "title": "Sign up success",
+      "message": "Sign up success, please sign in."
     }
   },
   "alert": {
@@ -40,6 +48,20 @@
       "message": "Are you sure you want to exit the app?",
       "cancel": "Cancel",
       "ok": "Exit"
+    },
+    "sign_out": {
+      "title": "Sign out",
+      "message": "Are you sure you want to sign out?",
+      "cancel": "Cancel",
+      "ok": "Sign out"
+    },
+    "sign_up_success": {
+      "title": "Sign up success",
+      "message": "Sign up success, please sign in."
+    },
+    "sign_up_failed": {
+      "title": "Sign up failed",
+      "message": "Sign up failed, please try again."
     }
   },
   "validation": {

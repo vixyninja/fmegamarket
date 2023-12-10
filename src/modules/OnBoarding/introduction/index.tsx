@@ -19,7 +19,8 @@ import useStyles from "./styles";
 type Props = NativeStackScreenProps<AuthParamList, "INTRODUCTION_SCREEN">;
 
 export default function IntroductionScreen({ navigation }: Props) {
-  useLayoutAnimation(ANIMS_MANAGER.layout.LayoutEaseInEase);
+  useLayoutAnimation(ANIMS_MANAGER.layout.LayoutVerticalEaseInEase);
+
   const styles = useStyles();
   const scrollX = useSharedValue(0);
   const dispatch = useAppDispatch();
@@ -37,9 +38,9 @@ export default function IntroductionScreen({ navigation }: Props) {
         animated: true,
       });
     } else {
+      dispatch(AppAction.setFirstTime(false));
       listRef.current?.setNativeProps({ scrollEnabled: false });
       navigation.replace("LOBBY_SCREEN");
-      dispatch(AppAction.setFirstTime(false));
     }
   }, []);
 

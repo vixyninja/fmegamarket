@@ -6,7 +6,7 @@ export const useGoogleSignin = () => {
       await GoogleSignin.hasPlayServices();
       return await GoogleSignin.signIn();
     } catch (error: any) {
-      throw new Error("Sign in failed");
+      throw error;
     }
   }
 
@@ -14,7 +14,7 @@ export const useGoogleSignin = () => {
     try {
       await GoogleSignin.signOut();
     } catch (error) {
-      throw new Error("Sign out failed");
+      throw error;
     }
   }
 
@@ -22,7 +22,7 @@ export const useGoogleSignin = () => {
     try {
       return await GoogleSignin.isSignedIn();
     } catch (error) {
-      throw new Error("Sign in failed");
+      throw error;
     }
   }
 
@@ -30,7 +30,7 @@ export const useGoogleSignin = () => {
     try {
       return await GoogleSignin.getTokens();
     } catch (error) {
-      throw new Error("Get tokens failed");
+      throw error;
     }
   }
 
@@ -38,7 +38,7 @@ export const useGoogleSignin = () => {
     try {
       return await GoogleSignin.getCurrentUser();
     } catch (error) {
-      throw new Error("Get current user failed");
+      throw error;
     }
   }
 
@@ -46,7 +46,7 @@ export const useGoogleSignin = () => {
     try {
       await GoogleSignin.revokeAccess();
     } catch (error) {
-      throw new Error("Revoke access failed");
+      throw error;
     }
   }
 
