@@ -30,11 +30,17 @@ const useFCM = () => {
     const permission = await notification.requestPermission();
     if (permission.authorizationStatus === AuthorizationStatus.DENIED) {
       await requestPermission("android.permission.POST_NOTIFICATIONS");
-    } else if (permission.authorizationStatus === AuthorizationStatus.NOT_DETERMINED) {
+    } else if (
+      permission.authorizationStatus === AuthorizationStatus.NOT_DETERMINED
+    ) {
       await requestPermission("android.permission.POST_NOTIFICATIONS");
-    } else if (permission.authorizationStatus === AuthorizationStatus.PROVISIONAL) {
+    } else if (
+      permission.authorizationStatus === AuthorizationStatus.PROVISIONAL
+    ) {
       await requestPermission("android.permission.POST_NOTIFICATIONS");
-    } else if (permission.authorizationStatus === AuthorizationStatus.AUTHORIZED) {
+    } else if (
+      permission.authorizationStatus === AuthorizationStatus.AUTHORIZED
+    ) {
       return;
     }
   }
@@ -52,7 +58,10 @@ const useFCM = () => {
 
     const fcmToken = await getToken();
 
-    const existUser = await firestore().collection("users").where("id", "==", userId).get();
+    const existUser = await firestore()
+      .collection("users")
+      .where("id", "==", userId)
+      .get();
 
     if (existUser.empty) {
       await firestore().collection("users").doc(userId).set({

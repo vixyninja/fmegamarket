@@ -1,6 +1,12 @@
 import { useTranslation } from "react-i18next";
 import { Alert, Platform } from "react-native";
-import { Permission, RESULTS, check, openSettings, request } from "react-native-permissions";
+import {
+  Permission,
+  RESULTS,
+  check,
+  openSettings,
+  request,
+} from "react-native-permissions";
 
 export const usePermission = () => {
   const { t } = useTranslation();

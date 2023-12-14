@@ -10,9 +10,16 @@ export const isPassword = (password: string) => {
   return password.match(regex);
 };
 
-export const isComparePassword = (password: string, confirmPassword: string) => {
+export const isComparePassword = (
+  password: string,
+  confirmPassword: string,
+) => {
   const regex = "^[a-zA-Z0-9]{6,}$";
-  return password.match(regex) && confirmPassword.match(regex) && password === confirmPassword;
+  return (
+    password.match(regex) &&
+    confirmPassword.match(regex) &&
+    password === confirmPassword
+  );
 };
 
 export const isPhoneNumber = (phoneNumber: string) => {

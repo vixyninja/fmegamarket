@@ -1,5 +1,11 @@
 import { ANIMS_MANAGER, IMAGE_MANAGER } from "@/assets";
-import { BackHeader, BaseInput, BasePrivateInput, BaseRootView, useLayoutAnimation } from "@/common";
+import {
+  BackHeader,
+  BaseInput,
+  BasePrivateInput,
+  BaseRootView,
+  useLayoutAnimation,
+} from "@/common";
 import { AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { CheckBox, Divider } from "@rneui/base";
@@ -40,7 +46,11 @@ export default function SignInScreen({ navigation }: Props) {
       <ScrollView scrollEnabled={false}>
         <BackHeader onPress={onClickBack} />
 
-        <Image source={{ uri: IMAGE_MANAGER.signIn }} style={styles.image} containerStyle={styles.imageContainer} />
+        <Image
+          source={{ uri: IMAGE_MANAGER.signIn }}
+          style={styles.image}
+          containerStyle={styles.imageContainer}
+        />
 
         <Text h3 h3Style={styles.titleStyle}>
           {t("signIn.title")}
@@ -124,7 +134,11 @@ export default function SignInScreen({ navigation }: Props) {
           disabled={disable}
         />
 
-        <TouchableOpacity onPress={() => {}} style={styles.forgotContainer} disabled={disable}>
+        <TouchableOpacity
+          onPress={() => {}}
+          style={styles.forgotContainer}
+          disabled={disable}
+        >
           <Text>{t("signIn.forgot")}</Text>
         </TouchableOpacity>
 
@@ -139,21 +153,42 @@ export default function SignInScreen({ navigation }: Props) {
             onPress={onClickOtherLogin}
             disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
-            title={<Icon name="facebook" type="feather" size={20} color={theme.colors.facebook} />}
+            title={
+              <Icon
+                name="facebook"
+                type="feather"
+                size={20}
+                color={theme.colors.facebook}
+              />
+            }
           />
 
           <Button
             onPress={onClickOtherLogin}
             disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
-            title={<Icon name="google" type="font-awesome" size={20} color={theme.colors.google} />}
+            title={
+              <Icon
+                name="google"
+                type="font-awesome"
+                size={20}
+                color={theme.colors.google}
+              />
+            }
           />
 
           <Button
             onPress={onClickOtherLogin}
             disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
-            title={<Icon name="twitter" type="feather" size={20} color={theme.colors.twitter} />}
+            title={
+              <Icon
+                name="twitter"
+                type="feather"
+                size={20}
+                color={theme.colors.twitter}
+              />
+            }
           />
         </View>
 

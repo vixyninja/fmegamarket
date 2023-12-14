@@ -23,7 +23,10 @@ const reducer = createSlice({
   name: STORE_ENUM.AUTH,
   initialState: initialState,
   reducers: {
-    setCredentials: (state: AuthStateType, action: PayloadAction<Partial<AuthStateType>>) => {
+    setCredentials: (
+      state: AuthStateType,
+      action: PayloadAction<Partial<AuthStateType>>,
+    ) => {
       return {
         ...state,
         ...action.payload,

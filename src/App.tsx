@@ -7,7 +7,13 @@ import LottieSplashScreen from "react-native-lottie-splash-screen";
 import { Metrics, SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { BaseAlert, BaseLoadingLottie, BaseStatusBar, ThemeProvider, initialLayoutAnimation } from "./common";
+import {
+  BaseAlert,
+  BaseLoadingLottie,
+  BaseStatusBar,
+  ThemeProvider,
+  initialLayoutAnimation,
+} from "./common";
 import { ENVIRONMENT_MANAGER, useFCM } from "./configuration";
 import i18Config from "./configuration/intl";
 import { RootNavigation, persistor, store } from "./core";

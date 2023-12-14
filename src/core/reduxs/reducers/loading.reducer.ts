@@ -23,7 +23,10 @@ const reducer = createSlice({
       state.loading = false;
       state.title = "";
     },
-    showLoadingWithTitle: (state: LoadingStateType, action: PayloadAction<string>) => {
+    showLoadingWithTitle: (
+      state: LoadingStateType,
+      action: PayloadAction<string>,
+    ) => {
       state.loading = true;
       state.title = action.payload;
     },

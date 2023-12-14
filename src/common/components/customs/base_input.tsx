@@ -1,33 +1,37 @@
 import { FONT_MANAGER } from "@/assets";
-import { Colors, Input, InputProps, Theme, makeStyles, normalize, useThemeMode } from "@rneui/themed";
+import {
+  Colors,
+  Input,
+  InputProps,
+  Theme,
+  makeStyles,
+  normalize,
+  useThemeMode,
+} from "@rneui/themed";
 import React, { useCallback, useState } from "react";
 
 interface BaseInputProps extends InputProps {
   callBack(value: string): void;
   autoFocus?: boolean;
   placeholder?: string;
+  value: string;
 }
 
 export default function BaseInput(props: BaseInputProps) {
-  const { callBack, autoFocus, placeholder } = props;
-
+  const { callBack, autoFocus, placeholder, value } = props;
   const styles = useStyles();
   const { mode } = useThemeMode();
-
-  const [text, setText] = useState("");
   const [isFocus, setIsFocus] = useState(false);
-
   const onTextChange = useCallback(
     (value: string) => {
-      setText(value);
       callBack(value);
     },
-    [text],
+    [value],
   );
 
   const onTextSubmit = useCallback(() => {
-    callBack(text);
-  }, [text]);
+    callBack(value);
+  }, [value]);
 
   const onFocusBorderTrue = useCallback(() => {
     setIsFocus(true);
@@ -40,7 +44,7 @@ export default function BaseInput(props: BaseInputProps) {
   return (
     <Input
       {...props}
-      value={text}
+      value={value}
       onChangeText={onTextChange}
       keyboardType="default"
       keyboardAppearance={mode}

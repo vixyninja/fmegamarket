@@ -1,24 +1,30 @@
 import { useBackHandler } from "@/common/hooks";
-import { Colors, Theme, makeStyles, normalize } from "@rneui/themed";
+import { Colors, Theme, makeStyles } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, BackHandler, Keyboard, TouchableWithoutFeedback, View, ViewProps } from "react-native";
+import {
+  Alert,
+  BackHandler,
+  Keyboard,
+  TouchableWithoutFeedback,
+  View,
+  ViewProps,
+} from "react-native";
 
 interface BaseRootViewProps extends ViewProps {
   children: React.ReactNode;
-  enableBackButton?: boolean;
-  padding?: number | boolean;
+  enableBackHandler?: boolean;
   touchWithoutFeedback?: boolean;
 }
 
 export default function BaseRootView(props: BaseRootViewProps) {
-  const { children, enableBackButton, padding, touchWithoutFeedback } = props;
+  const { children, enableBackHandler, touchWithoutFeedback } = props;
   const styles = useStyles();
   const { t } = useTranslation();
   const [backButtonEnabled, setBackButtonEnabled] = useState(false);
 
   useBackHandler(() => {
-    if (!enableBackButton) {
+    if (!enableBackHandler) {
       return false;
     }
     Alert.alert(
@@ -55,18 +61,9 @@ export default function BaseRootView(props: BaseRootViewProps) {
       onPress={() => {
         touchWithoutFeedback && Keyboard.dismiss();
       }}
+      style={styles.root}
     >
-      <View
-        style={[
-          styles.root,
-          {
-            padding: padding ? normalize(16 || padding) : 0,
-          },
-        ]}
-        {...props}
-      >
-        {children}
-      </View>
+      <View {...props}>{children}</View>
     </TouchableWithoutFeedback>
   );
 }

@@ -178,5 +178,18 @@
     "already": "Already have an account? ",
     "signin": "Sign in",
     "or": "or continue with"
+  },
+  "home": {
+    "search": "Search",
+    "hello": "Hello",
+    "categories": "Categories",
+    "products": "Products",
+    "see_all": "See all",
+    "see_more": "See more",
+    "see_less": "See less",
+    "new_products": "New products",
+    "best_seller": "Best seller",
+    "top_rate": "Top rate",
+    "recommended": "Recommended"
   }
 }

@@ -1,6 +1,15 @@
 import { useAppSelector } from "@/common";
-import { IntroductionScreen, LobbyScreen, SignInScreen, SignUpScreen, WelcomeScreen } from "@/modules";
-import { NativeStackNavigationOptions, createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  IntroductionScreen,
+  LobbyScreen,
+  SignInScreen,
+  SignUpScreen,
+  WelcomeScreen,
+} from "@/modules";
+import {
+  NativeStackNavigationOptions,
+  createNativeStackNavigator,
+} from "@react-navigation/native-stack";
 import React from "react";
 import { appSelector } from "../reduxs";
 import { AuthParamList } from "./types.navigation";
@@ -29,7 +38,11 @@ export function AuthNavigation() {
     >
       {appState.firstTime && (
         <AuthStack.Group>
-          <AuthStack.Screen key={"WELCOME_SCREEN"} name={"WELCOME_SCREEN"} component={WelcomeScreen} />
+          <AuthStack.Screen
+            key={"WELCOME_SCREEN"}
+            name={"WELCOME_SCREEN"}
+            component={WelcomeScreen}
+          />
           <AuthStack.Screen
             key={"INTRODUCTION_SCREEN"}
             name={"INTRODUCTION_SCREEN"}

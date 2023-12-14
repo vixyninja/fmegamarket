@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { AppState, AppStateStatus } from "react-native";
 
-const isForeground = (appState: AppStateStatus): boolean => appState === "active";
+const isForeground = (appState: AppStateStatus): boolean =>
+  appState === "active";
 
 type AppStateType = {
   appIsInForeground: boolean;

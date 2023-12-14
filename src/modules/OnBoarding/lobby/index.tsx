@@ -50,7 +50,14 @@ export default function LobbyScreen({ navigation }: Props) {
           title={t("lobby.fb")}
           titleStyle={styles.buttonTitle}
           iconPosition="left"
-          icon={<Icon name="facebook" type="feather" size={20} color={theme.colors.facebook} />}
+          icon={
+            <Icon
+              name="facebook"
+              type="feather"
+              size={20}
+              color={theme.colors.facebook}
+            />
+          }
           buttonStyle={styles.buttonContainer}
           disabled={disabled}
           onPress={() => {}}
@@ -60,7 +67,14 @@ export default function LobbyScreen({ navigation }: Props) {
           title={t("lobby.gg")}
           titleStyle={styles.buttonTitle}
           iconPosition="left"
-          icon={<Icon name="google" type="font-awesome" size={20} color={theme.colors.google} />}
+          icon={
+            <Icon
+              name="google"
+              type="font-awesome"
+              size={20}
+              color={theme.colors.google}
+            />
+          }
           buttonStyle={styles.buttonContainer}
           disabled={disabled}
           onPress={onGoogleButtonPress}
@@ -70,7 +84,14 @@ export default function LobbyScreen({ navigation }: Props) {
           title={t("lobby.tw")}
           titleStyle={styles.buttonTitle}
           iconPosition="left"
-          icon={<Icon name="twitter" type="feather" size={20} color={theme.colors.twitter} />}
+          icon={
+            <Icon
+              name="twitter"
+              type="feather"
+              size={20}
+              color={theme.colors.twitter}
+            />
+          }
           buttonStyle={styles.buttonContainer}
           disabled={disabled}
         />

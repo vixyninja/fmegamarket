@@ -15,7 +15,15 @@ export type BaseModalProps = {
 const BaseModal = (props: BaseModalProps) => {
   const styles = useStyles();
 
-  const { isVisible, onBackButtonPress, onBackdropPress, onDismiss, onSwipeComplete, children, style } = props;
+  const {
+    isVisible,
+    onBackButtonPress,
+    onBackdropPress,
+    onDismiss,
+    onSwipeComplete,
+    children,
+    style,
+  } = props;
 
   const CloseIcon = () => {
     return (

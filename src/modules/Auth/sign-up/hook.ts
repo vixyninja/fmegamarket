@@ -108,7 +108,9 @@ export const useSignUp = () => {
         return;
       }
       setDisable(true);
-      dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_up") + "..."));
+      dispatch(
+        LoadingAction.showLoadingWithTitle(t("loading.sign_up") + "..."),
+      );
       const res = await signUpNormalMutation({
         email: credential.email,
         password: credential.password,
@@ -167,7 +169,10 @@ export const useSignUp = () => {
   };
 
   const onChangeConfirmPassword = (confirmPassword: string) => {
-    setCredential((prev) => ({ ...prev, confirmPassword: confirmPassword.trim() }));
+    setCredential((prev) => ({
+      ...prev,
+      confirmPassword: confirmPassword.trim(),
+    }));
   };
 
   return {

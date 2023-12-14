@@ -1,15 +1,30 @@
 import { ANIMS_MANAGER } from "@/assets";
-import { BaseRootView, useAppDispatch, useAppSelector, useGoogleSignin, useLayoutAnimation } from "@/common";
-import { useFCM } from "@/configuration";
-import { AppParamList, AuthAction, BottomParamList, authSelector } from "@/core";
+import {
+  BaseInput,
+  BaseRootView,
+  UserHeader,
+  useAppDispatch,
+  useAppSelector,
+  useGoogleSignin,
+  useLayoutAnimation,
+} from "@/common";
+import {
+  AppParamList,
+  AuthAction,
+  BottomParamList,
+  authSelector,
+  userSelector,
+} from "@/core";
 import { UserAction } from "@/core/reduxs/reducers";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
-import { CompositeScreenProps, useLinkTo } from "@react-navigation/native";
+import { CompositeScreenProps } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
-import { Button } from "@rneui/themed";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import useStyles from "./styles";
+import { View } from "react-native";
+import { Text } from "@rneui/themed";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<BottomParamList, "HOME">,
@@ -20,48 +35,51 @@ export default function HomeScreen({ navigation }: Props) {
   useLayoutAnimation(ANIMS_MANAGER.layout.LayoutVerticalEaseInEase);
 
   const dispatch = useAppDispatch();
-
   const { t } = useTranslation();
-
-  const { isAuth } = useAppSelector(authSelector);
-
+  const { user } = useAppSelector(userSelector);
   const { signOut } = useGoogleSignin();
+  const styles = useStyles();
 
-  const { pushNotification } = useFCM();
-
-  function _handleLogout() {
-    signOut();
-    dispatch(AuthAction.clearCredentials());
-    dispatch(UserAction.clearUser());
-  }
-  const linkTo = useLinkTo();
+  const [searchText, setSearchText] = useState("");
 
   return (
-    <BaseRootView padding>
-      {isAuth && <Button onPress={_handleLogout} title={t("button.sign_out")} />}
-      <Button
-        onPress={() => {
-          dispatch(AuthAction.clearCredentials());
-        }}
-        title={"Logout"}
-      />
-      <Button
-        title={"PUSH NOTIFICATION"}
-        onPress={async () => {
-          await pushNotification({});
-        }}
-      />
-      <Button
-        onPress={() => {
-          navigation.navigate("BOTTOM_TAB", {
-            screen: "ORDER",
-            params: {
-              userId: "123123",
+    <BaseRootView
+      enableBackHandler={true}
+      style={styles.root}
+      touchWithoutFeedback
+    >
+      <View style={styles.paddingRoot}>
+        <UserHeader
+          userAvatar={user?.avatar}
+          userName={user?.firstName}
+          onPressHeart={() => {}}
+          onPressNotification={() => {}}
+        />
+      </View>
+
+      <View style={styles.paddingRoot}>
+        <BaseInput
+          value={searchText}
+          placeholder={t("home.search")}
+          callBack={setSearchText}
+          leftIcon={{
+            type: "feather",
+            name: "search",
+          }}
+          rightIcon={{
+            type: "feather",
+            name: searchText ? "x" : "filter",
+            onPress: () => {
+              setSearchText("");
             },
-          });
-        }}
-        title={"Notification"}
-      />
+          }}
+        />
+      </View>
+
+      <View style={[styles.paddingRoot, styles.textIntroContainer]}>
+        <Text style={styles.textIntro1}>Special Offers</Text>
+        <Text style={styles.textIntro2}>See All</Text>
+      </View>
     </BaseRootView>
   );
 }

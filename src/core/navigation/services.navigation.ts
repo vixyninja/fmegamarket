@@ -42,7 +42,10 @@ export class NavigationServices {
     }
   }
 
-  static navigateAndReset(routes: { name: string; params?: any }[], index: number) {
+  static navigateAndReset(
+    routes: { name: string; params?: any }[],
+    index: number,
+  ) {
     navigationRef.current?.dispatch(
       CommonActions.reset({
         index,
@@ -55,26 +58,37 @@ export class NavigationServices {
     navigationRef.current?.dispatch(StackActions.push(name, params));
   }
 
-  static replace = (name: string, params?: any) => navigationRef.current?.dispatch(StackActions.replace(name, params));
+  static replace = (name: string, params?: any) =>
+    navigationRef.current?.dispatch(StackActions.replace(name, params));
 
-  static popToTop = () => navigationRef.current?.dispatch(StackActions.popToTop());
+  static popToTop = () =>
+    navigationRef.current?.dispatch(StackActions.popToTop());
 
-  static pop = (count?: number) => navigationRef.current?.dispatch(StackActions.pop(count));
+  static pop = (count?: number) =>
+    navigationRef.current?.dispatch(StackActions.pop(count));
 
-  static drawerOpen = () => navigationRef.current?.dispatch(DrawerActions.openDrawer());
+  static drawerOpen = () =>
+    navigationRef.current?.dispatch(DrawerActions.openDrawer());
 
-  static drawerClose = () => navigationRef.current?.dispatch(DrawerActions.closeDrawer());
+  static drawerClose = () =>
+    navigationRef.current?.dispatch(DrawerActions.closeDrawer());
 
-  static drawerToggle = () => navigationRef.current?.dispatch(DrawerActions.toggleDrawer());
+  static drawerToggle = () =>
+    navigationRef.current?.dispatch(DrawerActions.toggleDrawer());
 
-  static drawerJumpTo = (route: string) => navigationRef.current?.dispatch(DrawerActions.jumpTo(route));
+  static drawerJumpTo = (route: string) =>
+    navigationRef.current?.dispatch(DrawerActions.jumpTo(route));
 
-  static bottomTabJumpTo = (route: string) => navigationRef.current?.dispatch(CommonActions.navigate(route));
+  static bottomTabJumpTo = (route: string) =>
+    navigationRef.current?.dispatch(CommonActions.navigate(route));
 
   static bottomTabJumpToWithParams = (route: string, params: any) =>
     navigationRef.current?.dispatch(CommonActions.navigate(route, params));
 
-  static bottomTabReset = (routes: { name: string; params?: any }[], index: number) =>
+  static bottomTabReset = (
+    routes: { name: string; params?: any }[],
+    index: number,
+  ) =>
     navigationRef.current?.dispatch(
       CommonActions.reset({
         index,

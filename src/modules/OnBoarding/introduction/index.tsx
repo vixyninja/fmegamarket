@@ -52,7 +52,11 @@ export default function IntroductionScreen({ navigation }: Props) {
 
   return (
     <BaseRootView>
-      <StatusBar backgroundColor={"transparent"} translucent barStyle={"light-content"} />
+      <StatusBar
+        backgroundColor={"transparent"}
+        translucent
+        barStyle={"light-content"}
+      />
       <BackDrop />
       <CarouselFlatList />
       <IndicatorFlatList />
@@ -82,18 +86,29 @@ export default function IntroductionScreen({ navigation }: Props) {
     return (
       <Animated.View style={styles.indicatorContainer}>
         {data.map((_, index) => {
-          const inputRange = [(index - 1) * dimens.width, index * dimens.width, (index + 1) * dimens.width];
+          const inputRange = [
+            (index - 1) * dimens.width,
+            index * dimens.width,
+            (index + 1) * dimens.width,
+          ];
           const scaleStyle = useAnimatedStyle(() => {
             return {
               transform: [
                 {
-                  scale: interpolate(scrollX.value, inputRange, [0.6, 1.4, 0.6], "clamp"),
+                  scale: interpolate(
+                    scrollX.value,
+                    inputRange,
+                    [0.6, 1.4, 0.6],
+                    "clamp",
+                  ),
                 },
               ],
             };
           });
 
-          return <Animated.View key={index} style={[styles.indicator, scaleStyle]} />;
+          return (
+            <Animated.View key={index} style={[styles.indicator, scaleStyle]} />
+          );
         })}
       </Animated.View>
     );
@@ -122,7 +137,12 @@ export default function IntroductionScreen({ navigation }: Props) {
         renderItem={({ item }) => {
           return (
             <View style={styles.imageCard}>
-              <Image source={{ uri: item }} style={styles.image} resizeMethod="resize" resizeMode="stretch" />
+              <Image
+                source={{ uri: item }}
+                style={styles.image}
+                resizeMethod="resize"
+                resizeMode="stretch"
+              />
             </View>
           );
         }}

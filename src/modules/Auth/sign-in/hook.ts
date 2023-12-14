@@ -15,7 +15,11 @@ import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type UseSignInType = {
-  navigation: NativeStackNavigationProp<AuthParamList, "SIGN_IN_SCREEN", undefined>;
+  navigation: NativeStackNavigationProp<
+    AuthParamList,
+    "SIGN_IN_SCREEN",
+    undefined
+  >;
 };
 
 export const useSignIn = (props: UseSignInType) => {
@@ -87,7 +91,9 @@ export const useSignIn = (props: UseSignInType) => {
         return;
       }
       setDisable(true);
-      dispatch(LoadingAction.showLoadingWithTitle(t("loading.sign_in") + "..."));
+      dispatch(
+        LoadingAction.showLoadingWithTitle(t("loading.sign_in") + "..."),
+      );
       const res = await signInNormalMutation({
         email: credential.email,
         password: credential.password,
