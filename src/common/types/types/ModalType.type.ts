@@ -1,11 +1,9 @@
-export type ModalSignUpType = {
-  visible: boolean;
+export type ModalType = {
   title: string;
-  message: string;
-};
-
-export type ModalSignInType = {
-  visible: boolean;
-  title: string;
-  message: string;
+  content: string;
+  isShow: boolean;
+  leftButtonTitle: string;
+  onLeftPress: () => void;
+  rightButtonTitle: string;
+  onRightPress: () => void;
 };

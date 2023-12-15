@@ -1,3 +1,3 @@
 export { StorageType } from "./StorageType.type";
 
-export { ModalSignInType, ModalSignUpType } from "./ModalType.type";
+export { ModalType } from "./ModalType.type";

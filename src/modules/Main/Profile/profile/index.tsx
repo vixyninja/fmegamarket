@@ -1,4 +1,5 @@
-import { AppParamList, BottomParamList } from "@/core";
+import { useAppDispatch } from "@/common";
+import { AppParamList, AuthAction, BottomParamList, UserAction } from "@/core";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
@@ -12,8 +13,13 @@ type Props = CompositeScreenProps<
 >;
 
 export default function ProfileScreen({ navigation, route }: Props) {
-  console.log(route.name);
-  console.log(route.params);
+  const dispatch = useAppDispatch();
+
+  function handleSignOut() {
+    dispatch(AuthAction.clearCredentials());
+    dispatch(UserAction.clearUser());
+  }
+
   return (
     <View>
       <Text>ProfileScreen</Text>
@@ -29,6 +35,7 @@ export default function ProfileScreen({ navigation, route }: Props) {
           navigation.navigate("NOTIFICATION_SCREEN");
         }}
       />
+      <Button title={"Sign out"} onPress={handleSignOut} />
     </View>
   );
 }

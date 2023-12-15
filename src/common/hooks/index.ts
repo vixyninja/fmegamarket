@@ -9,3 +9,4 @@ export * from "./usePermission";
 export * from "./useLayoutAnimation";
 export * from "./useRedux";
 export * from "./useAppState";
+export * from "./useSocialSignIn";

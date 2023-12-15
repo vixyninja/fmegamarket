@@ -6,7 +6,6 @@ import {
 } from "@/common";
 import { useFCM } from "@/configuration";
 import {
-  AlertAction,
   AuthAction,
   LoadingAction,
   UserAction,
@@ -18,7 +17,7 @@ import { statusCodes } from "@react-native-google-signin/google-signin";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export const useSignIn = () => {
+export const useSocialSignIn = () => {
   const dispatch = useAppDispatch();
   const authState = useAppSelector(authSelector);
   const { getToken, saveTokenToFirestore, pushNotification } = useFCM();
@@ -54,14 +53,7 @@ export const useSignIn = () => {
       const credential = await auth().signInWithCredential(googleCredential);
 
       if (!credential) {
-        dispatch(
-          AlertAction.showAlert({
-            title: t("alert.sign_in_failed.title"),
-            message: t("alert.sign_in_failed.message"),
-            type: "error",
-          }),
-        );
-        return;
+        throw new Error("Credential is null");
       }
 
       await signInGoogle({
@@ -77,42 +69,25 @@ export const useSignIn = () => {
             await saveTokenToFirestore(res.data.user?.uuid!);
             dispatch(
               AuthAction.setCredentials({
+                isAuth: true,
                 provider: "google",
                 idToken: idToken,
-                isAuth: true,
                 accessToken: res.data.accessToken,
                 refreshToken: res.data.refreshToken,
               }),
             );
             dispatch(UserAction.setUser({ ...res.data.user }));
           } else {
-            dispatch(
-              AlertAction.showAlert({
-                title: t("alert.sign_in_failed.title"),
-                message: t("alert.sign_in_failed.message"),
-                type: "error",
-              }),
-            );
+            throw new Error("Sign in failed");
           }
         });
     } catch (error: any) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        throw new Error("User cancelled the login flow");
       } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        dispatch(
-          AlertAction.showAlert({
-            title: t("alert.play_services_not_available.title"),
-            message: t("alert.play_services_not_available.message"),
-            type: "error",
-          }),
-        );
+        throw new Error("Play services not available");
       } else {
-        dispatch(
-          AlertAction.showAlert({
-            title: t("alert.sign_in_failed.title"),
-            message: t("alert.sign_in_failed.message"),
-            type: "error",
-          }),
-        );
+        throw new Error("Something went wrong");
       }
     } finally {
       setDisabled(false);

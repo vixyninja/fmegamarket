@@ -13,7 +13,7 @@ import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import { useSignUp } from "./hook";
+import { useSignUp } from "./useSignUp";
 import useStyles from "./styles";
 
 type Props = NativeStackScreenProps<AuthParamList, "SIGN_UP_SCREEN">;

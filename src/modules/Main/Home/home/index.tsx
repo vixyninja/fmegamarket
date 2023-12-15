@@ -8,23 +8,16 @@ import {
   useGoogleSignin,
   useLayoutAnimation,
 } from "@/common";
-import {
-  AppParamList,
-  AuthAction,
-  BottomParamList,
-  authSelector,
-  userSelector,
-} from "@/core";
-import { UserAction } from "@/core/reduxs/reducers";
+import { AppParamList, BottomParamList, userSelector } from "@/core";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import { CompositeScreenProps } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
 
+import { Text } from "@rneui/themed";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import useStyles from "./styles";
 import { View } from "react-native";
-import { Text } from "@rneui/themed";
+import useStyles from "./styles";
 
 type Props = CompositeScreenProps<
   BottomTabScreenProps<BottomParamList, "HOME">,
@@ -32,8 +25,6 @@ type Props = CompositeScreenProps<
 >;
 
 export default function HomeScreen({ navigation }: Props) {
-  useLayoutAnimation(ANIMS_MANAGER.layout.LayoutVerticalEaseInEase);
-
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { user } = useAppSelector(userSelector);
@@ -61,7 +52,7 @@ export default function HomeScreen({ navigation }: Props) {
         <BaseInput
           value={searchText}
           placeholder={t("home.search")}
-          callBack={setSearchText}
+          onChangeText={setSearchText}
           leftIcon={{
             type: "feather",
             name: "search",

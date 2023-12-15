@@ -10,28 +10,12 @@ import {
 } from "@rneui/themed";
 import React, { useCallback, useState } from "react";
 
-interface BaseInputProps extends InputProps {
-  callBack(value: string): void;
-  autoFocus?: boolean;
-  placeholder?: string;
-  value: string;
-}
-
-export default function BaseInput(props: BaseInputProps) {
-  const { callBack, autoFocus, placeholder, value } = props;
+export default function BaseInput(props: InputProps) {
   const styles = useStyles();
-  const { mode } = useThemeMode();
-  const [isFocus, setIsFocus] = useState(false);
-  const onTextChange = useCallback(
-    (value: string) => {
-      callBack(value);
-    },
-    [value],
-  );
 
-  const onTextSubmit = useCallback(() => {
-    callBack(value);
-  }, [value]);
+  const { mode } = useThemeMode();
+
+  const [isFocus, setIsFocus] = useState(false);
 
   const onFocusBorderTrue = useCallback(() => {
     setIsFocus(true);
@@ -43,26 +27,21 @@ export default function BaseInput(props: BaseInputProps) {
 
   return (
     <Input
-      {...props}
-      value={value}
-      onChangeText={onTextChange}
       keyboardType="default"
       keyboardAppearance={mode}
       enterKeyHint="done"
       autoCorrect={false}
-      autoFocus={autoFocus && autoFocus}
       autoCapitalize="none"
       showSoftInputOnFocus={true}
       secureTextEntry={false}
       inputMode="text"
-      onSubmitEditing={onTextSubmit}
       inputStyle={styles.inputContainer}
       containerStyle={[styles.container, isFocus && styles.focusedContainer]}
       underlineColorAndroid={"transparent"}
       inputContainerStyle={styles.inputContainerStyle}
-      placeholder={placeholder}
       onFocus={onFocusBorderTrue}
       onBlur={onFocusBorderFalse}
+      {...props}
     />
   );
 }

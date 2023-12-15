@@ -61,9 +61,10 @@ export default function BaseRootView(props: BaseRootViewProps) {
       onPress={() => {
         touchWithoutFeedback && Keyboard.dismiss();
       }}
-      style={styles.root}
     >
-      <View {...props}>{children}</View>
+      <View style={styles.root} {...props}>
+        {children}
+      </View>
     </TouchableWithoutFeedback>
   );
 }

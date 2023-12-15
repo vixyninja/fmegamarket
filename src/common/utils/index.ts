@@ -21,3 +21,5 @@ export {
   isNotEmpty,
   isPlatForm,
 } from "./strings.util";
+
+export { validateSignInNormal, validateSignUpNormal } from "./validator.util";

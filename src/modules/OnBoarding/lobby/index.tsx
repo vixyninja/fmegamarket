@@ -1,22 +1,35 @@
-import { ANIMS_MANAGER, IMAGE_MANAGER } from "@/assets";
-import { BaseRootView, BaseStatusBar, useLayoutAnimation } from "@/common";
+import { IMAGE_MANAGER } from "@/assets";
+import {
+  BaseModal,
+  BaseRootView,
+  BaseStatusBar,
+  ModalType,
+  useSocialSignIn,
+} from "@/common";
 import { AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Divider, Icon, Image, Text, useTheme } from "@rneui/themed";
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, TouchableOpacity, View } from "react-native";
-import { useSignIn } from "./hook";
 import useStyles from "./styles";
-
 type Props = NativeStackScreenProps<AuthParamList, "LOBBY_SCREEN">;
 
 export default function LobbyScreen({ navigation }: Props) {
-  useLayoutAnimation(ANIMS_MANAGER.layout.LayoutVerticalEaseInEase);
   const styles = useStyles();
   const { theme } = useTheme();
   const { t } = useTranslation();
-  const { disabled, onGoogleButtonPress } = useSignIn();
+  const { disabled, onGoogleButtonPress } = useSocialSignIn();
+
+  const [showModal, setShowModal] = useState<ModalType>({
+    isShow: false,
+    content: "Title",
+    title: "Title",
+    leftButtonTitle: "Cancel",
+    onLeftPress: () => {},
+    onRightPress: () => {},
+    rightButtonTitle: "Try again",
+  });
 
   const onClickSignInEmail = useCallback(() => {
     navigation.navigate("SIGN_IN_SCREEN");
@@ -26,9 +39,34 @@ export default function LobbyScreen({ navigation }: Props) {
     navigation.navigate("SIGN_UP_SCREEN");
   }, []);
 
+  const onClickSignInGoogle = useCallback(async () => {
+    try {
+      await onGoogleButtonPress();
+    } catch (error: any) {
+      setShowModal({
+        ...showModal,
+        isShow: true,
+        title: "Error",
+        content: error.message,
+      });
+    }
+  }, []);
+
   return (
     <BaseRootView>
       <BaseStatusBar />
+
+      <BaseModal
+        isVisible={showModal.isShow}
+        content={showModal.content}
+        onBackdropPress={() => setShowModal({ ...showModal, isShow: false })}
+        onBackButtonPress={() => setShowModal({ ...showModal, isShow: false })}
+        onLeftPress={() => setShowModal({ ...showModal, isShow: false })}
+        onRightPress={() => setShowModal({ ...showModal, isShow: false })}
+        title={showModal.title}
+        leftButtonTitle={showModal.leftButtonTitle}
+        rightButtonTitle={showModal.rightButtonTitle}
+      />
 
       <Image
         source={IMAGE_MANAGER.appIcon}
@@ -77,7 +115,7 @@ export default function LobbyScreen({ navigation }: Props) {
           }
           buttonStyle={styles.buttonContainer}
           disabled={disabled}
-          onPress={onGoogleButtonPress}
+          onPress={onClickSignInGoogle}
         />
 
         <Button

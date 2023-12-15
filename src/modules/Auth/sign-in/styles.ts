@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({
     borderRadius: normalize(99),
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: theme.colors.background,
   },
   checkBoxText: {
     fontSize: normalize(14),
@@ -74,8 +75,7 @@ const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({
   },
   checkBoxWrapper: {
     borderRadius: normalize(99),
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: theme.colors.background,
   },
   forgotContainer: {
     flexDirection: "row",
