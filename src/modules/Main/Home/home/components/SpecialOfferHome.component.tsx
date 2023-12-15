@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import useStyles from "../styles";
 import { Text } from "@rneui/themed";
+import React from "react";
 
 export const SpecialOfferHomeComponent = () => {
   const styles = useStyles();
