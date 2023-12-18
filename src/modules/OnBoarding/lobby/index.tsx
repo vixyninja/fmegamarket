@@ -30,7 +30,6 @@ export default function LobbyScreen({ navigation }: Props) {
     onRightPress: () => {},
     rightButtonTitle: "Try again",
   });
-
   const onClickSignInEmail = useCallback(() => {
     navigation.navigate("SIGN_IN_SCREEN");
   }, []);
