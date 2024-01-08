@@ -109,6 +109,22 @@ const baseApiQueryWithMutex: BaseQueryFn<string | FetchArgs, unknown, FetchBaseQ
       result = await baseApiQuery(args, api, extraOptions);
     }
   }
+
+  if (result.error?.status === 500) {
+    api.dispatch(
+      AlertAction.showAlert({
+        type: "error",
+        message: "Oops! Something went wrong. Please try again later.",
+        title: "System Error",
+        isShow: true,
+        callback: () => api.dispatch(AlertAction.disposeAlert()),
+        cancel: () => api.dispatch(AlertAction.disposeAlert()),
+      }),
+    );
+
+    api.dispatch(AuthAction.clearCredentials());
+  }
+
   api.dispatch(LoadingAction.hideLoading());
   return result;
 };

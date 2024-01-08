@@ -54,7 +54,10 @@ export const useSocialSignIn = () => {
         .unwrap()
         .then(async (res) => {
           if (res.statusCode === 200) {
-            await pushNotification({});
+            await pushNotification({
+              title: "Sign in successfully",
+              body: "Welcome to the app",
+            });
             await saveTokenToFirestore(res.data.user?.uuid!);
             dispatch(
               AuthAction.setCredentials({

@@ -52,7 +52,7 @@ export default function IntroductionScreen({ navigation }: Props) {
 
   return (
     <BaseRootView>
-      <StatusBar backgroundColor={'transparent'} translucent barStyle={'light-content'} />
+      <StatusBar backgroundColor={"transparent"} translucent barStyle={"light-content"} />
       <BackDrop />
       <CarouselFlatList />
       <IndicatorFlatList />
@@ -87,7 +87,7 @@ export default function IntroductionScreen({ navigation }: Props) {
             return {
               transform: [
                 {
-                  scale: interpolate(scrollX.value, inputRange, [0.6, 1.4, 0.6], 'clamp'),
+                  scale: interpolate(scrollX.value, inputRange, [0.6, 1.4, 0.6], "clamp"),
                 },
               ],
             };

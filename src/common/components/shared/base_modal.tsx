@@ -24,18 +24,18 @@ const BaseModal = (props: Partial<Props>) => {
       useNativeDriver={true}
       useNativeDriverForBackdrop={true}
       avoidKeyboard={true}
-      backdropColor="transparent"
-      backdropOpacity={0}
-      animationInTiming={0}
-      animationOutTiming={0}
-      focusable={true}
+      focusable
+      animationIn={"fadeIn"}
+      animationOut={"fadeOut"}
+      backdropTransitionOutTiming={0}
+      backdropTransitionInTiming={0}
+      backdropOpacity={0.5}
       children={
         <View style={styles.container}>
           <View style={styles.contentContainer}>
             <View style={styles.titleContainer}>
               <Text style={styles.titleText}>{title}</Text>
             </View>
-
             <View style={styles.mainContainer}>
               <Text>{content}</Text>
             </View>
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: { colors: Colors } & Theme) => ({
   container: {
     borderRadius: normalize(20),
     marginHorizontal: normalize(20),
-    elevation: 5,
+    elevation: 0,
   },
   contentContainer: {
     backgroundColor: theme.colors.background,
