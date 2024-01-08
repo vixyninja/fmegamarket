@@ -28,13 +28,7 @@ export default function UserHeader(props: Partial<UserHeaderProps>) {
       </View>
 
       <View style={styles.suffixContainer}>
-        <Icon
-          name="bell"
-          size={normalize(24)}
-          style={styles.suffixIcon}
-          type="feather"
-          onPress={onPressHeart}
-        />
+        <Icon name="bell" size={normalize(24)} style={styles.suffixIcon} type="feather" onPress={onPressHeart} />
         <Icon
           name="heart"
           size={normalize(24)}

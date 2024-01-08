@@ -88,9 +88,7 @@ export const theme = createTheme({
         fadeDuration: 500,
         resizeMode: "center",
         alt: "image",
-        PlaceholderContent: (
-          <ActivityIndicator size={"large"} color={themes.colors.secondary} />
-        ),
+        PlaceholderContent: <ActivityIndicator size={'large'} color={themes.colors.secondary} />,
         ...props,
       };
     },

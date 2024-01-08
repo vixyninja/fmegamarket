@@ -1,12 +1,6 @@
 import { isPlatForm, useAppDispatch } from "@/common";
 import { useFCM } from "@/configuration";
-import {
-  AuthAction,
-  ISignInNormalCredential,
-  LoadingAction,
-  UserAction,
-  useSignInNormalMutation
-} from "@/core";
+import { AuthAction, ISignInNormalCredential, LoadingAction, UserAction, useSignInNormalMutation } from "@/core";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -27,9 +21,7 @@ export const useSignIn = () => {
   const signInNormal = useCallback(async () => {
     try {
       setDisable(true);
-      dispatch(
-        LoadingAction.showLoadingWithTitle(t("loading.sign_in") + "..."),
-      );
+      dispatch(LoadingAction.showLoadingWithTitle(t('loading.sign_in') + '...'));
       const res = await signInNormalMutation({
         email: credential.email,
         password: credential.password,

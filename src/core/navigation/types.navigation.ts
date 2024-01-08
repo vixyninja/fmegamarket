@@ -36,9 +36,7 @@ type BottomParamList = {
 
 // ROOT MODULE
 type AppParamList = {
-  [AppScreenKeys.BOTTOM_TAB]:
-    | NavigatorScreenParams<BottomParamList>
-    | undefined;
+  [AppScreenKeys.BOTTOM_TAB]: NavigatorScreenParams<BottomParamList> | undefined;
   [AppScreenKeys.NOT_FOUND]: undefined;
   [AppScreenKeys.ERROR_BOUNDARY]: undefined;
 

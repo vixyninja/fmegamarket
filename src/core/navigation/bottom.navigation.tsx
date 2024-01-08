@@ -1,15 +1,5 @@
-import {
-  CartScreen,
-  ExploreScreen,
-  HomeScreen,
-  OrderScreen,
-  ProfileScreen,
-  bottomTabScreenStack,
-} from "@/modules";
-import {
-  BottomTabNavigationOptions,
-  createBottomTabNavigator,
-} from "@react-navigation/bottom-tabs";
+import { CartScreen, ExploreScreen, HomeScreen, OrderScreen, ProfileScreen, bottomTabScreenStack } from "@/modules";
+import { BottomTabNavigationOptions, createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { LabelPosition } from "@react-navigation/bottom-tabs/lib/typescript/src/types";
 import { Icon, Text, normalize, useTheme } from "@rneui/themed";
 import React from "react";
@@ -60,12 +50,7 @@ export function BottomTabNavigation() {
     );
   };
 
-  const IconCustom = (props: {
-    focused: boolean;
-    color: string;
-    size: number;
-    index: number;
-  }) => {
+  const IconCustom = (props: { focused: boolean; color: string; size: number; index: number }) => {
     return (
       <Icon
         name={bottomTabScreenStack[props.index].icon}
@@ -77,11 +62,7 @@ export function BottomTabNavigation() {
   };
 
   return (
-    <BottomTab.Navigator
-      screenOptions={bottomTabNavigationOptions}
-      backBehavior="initialRoute"
-      initialRouteName="HOME"
-    >
+    <BottomTab.Navigator screenOptions={bottomTabNavigationOptions} backBehavior="initialRoute" initialRouteName="HOME">
       <BottomTab.Screen
         key={"HOME"}
         name={"HOME"}

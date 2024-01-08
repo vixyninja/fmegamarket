@@ -24,9 +24,7 @@ export default function ControllingAnimationProgress() {
         speed={0.7}
         useNativeLooping={true}
       />
-      {loading?.title !== "" && (
-        <Text style={styles.text}>{loading?.title}</Text>
-      )}
+      {loading?.title !== "" && <Text style={styles.text}>{loading?.title}</Text>}
     </View>
   );
 }

@@ -1,17 +1,6 @@
-import {
-  isPlatForm,
-  useAppDispatch,
-  useAppSelector,
-  useGoogleSignin,
-} from "@/common";
+import { isPlatForm, useAppDispatch, useAppSelector, useGoogleSignin } from "@/common";
 import { useFCM } from "@/configuration";
-import {
-  AuthAction,
-  LoadingAction,
-  UserAction,
-  authSelector,
-  useSignInGoogleMutation,
-} from "@/core";
+import { AuthAction, LoadingAction, UserAction, authSelector, useSignInGoogleMutation } from "@/core";
 import auth from "@react-native-firebase/auth";
 import { statusCodes } from "@react-native-google-signin/google-signin";
 import { useCallback, useEffect, useState } from "react";

@@ -27,11 +27,7 @@ export default function HomeScreen({}: Props) {
   console.log("RE RENDER HOME SCREEN");
 
   return (
-    <BaseRootView
-      enableBackHandler={true}
-      style={styles.root}
-      touchWithoutFeedback
-    >
+    <BaseRootView enableBackHandler={true} style={styles.root} touchWithoutFeedback>
       <HeaderHomeComponent />
       <SearchHomeComponent />
       <SpecialOfferHomeComponent />

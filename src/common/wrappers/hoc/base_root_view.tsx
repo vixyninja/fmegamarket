@@ -2,14 +2,7 @@ import { useBackHandler } from "@/common/hooks";
 import { Colors, Theme, makeStyles } from "@rneui/themed";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Alert,
-  BackHandler,
-  Keyboard,
-  TouchableWithoutFeedback,
-  View,
-  ViewProps,
-} from "react-native";
+import { Alert, BackHandler, Keyboard, TouchableWithoutFeedback, View, ViewProps } from "react-native";
 
 interface BaseRootViewProps extends ViewProps {
   children: React.ReactNode;

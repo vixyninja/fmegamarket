@@ -19,11 +19,7 @@ export function RootNavigation() {
   useFlipper(navigationRef);
 
   return (
-    <NavigationContainer
-      ref={navigationRef}
-      linking={linking}
-      fallback={<BaseLoadingLottie />}
-    >
+    <NavigationContainer ref={navigationRef} linking={linking} fallback={<BaseLoadingLottie />}>
       {isAuth ? <AppNavigation /> : <AuthNavigation />}
     </NavigationContainer>
   );

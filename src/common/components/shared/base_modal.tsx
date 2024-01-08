@@ -41,19 +41,11 @@ const BaseModal = (props: Partial<Props>) => {
             </View>
           </View>
           <View style={styles.actionContainer}>
-            <TouchableOpacity
-              onPress={onLeftPress}
-              style={styles.cancelButtonContainer}
-              activeOpacity={0.9}
-            >
+            <TouchableOpacity onPress={onLeftPress} style={styles.cancelButtonContainer} activeOpacity={0.9}>
               <Text style={styles.cancelText}>{leftButtonTitle}</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={onRightPress}
-              activeOpacity={0.9}
-              style={styles.doSomethingButtonContainer}
-            >
+            <TouchableOpacity onPress={onRightPress} activeOpacity={0.9} style={styles.doSomethingButtonContainer}>
               <Text style={styles.doSomethingText}>{rightButtonTitle}</Text>
             </TouchableOpacity>
           </View>

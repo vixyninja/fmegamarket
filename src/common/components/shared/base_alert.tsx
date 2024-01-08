@@ -6,8 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Alert } from "react-native";
 
 export default function BaseAlert() {
-  const { callback, cancel, isShow, message, title, type } =
-    useAppSelector(alertSelector);
+  const { callback, cancel, isShow, message, title, type } = useAppSelector(alertSelector);
 
   const { t } = useTranslation();
   const { mode } = useThemeMode();

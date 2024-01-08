@@ -14,14 +14,7 @@ export function FormSignIn(props: {
   isRemember: boolean;
   onChangeRemember: () => void;
 }) {
-  const {
-    credential,
-    onChangeEmail,
-    onChangePassword,
-    disable,
-    isRemember,
-    onChangeRemember,
-  } = props;
+  const { credential, onChangeEmail, onChangePassword, disable, isRemember, onChangeRemember } = props;
   const styles = useStyles();
   const { t } = useTranslation();
   const [secure, setSecure] = useState(true);

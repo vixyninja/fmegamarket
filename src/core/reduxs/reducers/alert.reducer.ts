@@ -23,10 +23,7 @@ const reducer = createSlice({
   name: STORE_ENUM.ALERT,
   initialState,
   reducers: {
-    showAlert: (
-      state: AlertStateType,
-      action: PayloadAction<Partial<AlertStateType>>,
-    ) => {
+    showAlert: (state: AlertStateType, action: PayloadAction<Partial<AlertStateType>>) => {
       state.type = action.payload.type || "core";
       state.title = action.payload.title || "Notification";
       state.message = action.payload.message || "Notification message";

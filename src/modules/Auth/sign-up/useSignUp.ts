@@ -108,9 +108,7 @@ export const useSignUp = () => {
         return;
       }
       setDisable(true);
-      dispatch(
-        LoadingAction.showLoadingWithTitle(t("loading.sign_up") + "..."),
-      );
+      dispatch(LoadingAction.showLoadingWithTitle(t('loading.sign_up') + '...'));
       const res = await signUpNormalMutation({
         email: credential.email,
         password: credential.password,

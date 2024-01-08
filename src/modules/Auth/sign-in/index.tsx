@@ -1,12 +1,5 @@
 import { ANIMS_MANAGER, IMAGE_MANAGER } from "@/assets";
-import {
-  BackHeader,
-  BaseModal,
-  BaseRootView,
-  ModalType,
-  useLayoutAnimation,
-  validateSignInNormal,
-} from "@/common";
+import { BackHeader, BaseModal, BaseRootView, ModalType, useLayoutAnimation, validateSignInNormal } from "@/common";
 import { AuthParamList } from "@/core";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Button, Divider, Icon, Image, Text, useTheme } from "@rneui/themed";
@@ -35,15 +28,8 @@ export default function SignInScreen({ navigation }: Props) {
     rightButtonTitle: "Done",
   });
 
-  const {
-    signInNormal,
-    credential,
-    isRemember,
-    disable,
-    onChangeEmail,
-    onChangePassword,
-    onChangeRemember,
-  } = useSignIn();
+  const { signInNormal, credential, isRemember, disable, onChangeEmail, onChangePassword, onChangeRemember } =
+    useSignIn();
 
   const onClickBack = useCallback(() => {
     navigation.canGoBack() && navigation.goBack();
@@ -80,9 +66,7 @@ export default function SignInScreen({ navigation }: Props) {
           isVisible={showModal.isShow}
           content={showModal.content}
           onBackdropPress={() => setShowModal({ ...showModal, isShow: false })}
-          onBackButtonPress={() =>
-            setShowModal({ ...showModal, isShow: false })
-          }
+          onBackButtonPress={() => setShowModal({ ...showModal, isShow: false })}
           onLeftPress={() => setShowModal({ ...showModal, isShow: false })}
           onRightPress={() => setShowModal({ ...showModal, isShow: false })}
           title={showModal.title}
@@ -92,11 +76,7 @@ export default function SignInScreen({ navigation }: Props) {
 
         <BackHeader onPress={onClickBack} />
 
-        <Image
-          source={{ uri: IMAGE_MANAGER.signIn }}
-          style={styles.image}
-          containerStyle={styles.imageContainer}
-        />
+        <Image source={{ uri: IMAGE_MANAGER.signIn }} style={styles.image} containerStyle={styles.imageContainer} />
 
         <Text h3 h3Style={styles.titleStyle}>
           {t("signIn.title")}
@@ -120,11 +100,7 @@ export default function SignInScreen({ navigation }: Props) {
           disabled={disable}
         />
 
-        <TouchableOpacity
-          onPress={() => {}}
-          style={styles.forgotContainer}
-          disabled={disable}
-        >
+        <TouchableOpacity onPress={() => {}} style={styles.forgotContainer} disabled={disable}>
           <Text>{t("signIn.forgot")}</Text>
         </TouchableOpacity>
 
@@ -139,42 +115,21 @@ export default function SignInScreen({ navigation }: Props) {
             onPress={onClickOtherLogin}
             disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
-            title={
-              <Icon
-                name="facebook"
-                type="feather"
-                size={20}
-                color={theme.colors.facebook}
-              />
-            }
+            title={<Icon name="facebook" type="feather" size={20} color={theme.colors.facebook} />}
           />
 
           <Button
             onPress={onClickOtherLogin}
             disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
-            title={
-              <Icon
-                name="google"
-                type="font-awesome"
-                size={20}
-                color={theme.colors.google}
-              />
-            }
+            title={<Icon name="google" type="font-awesome" size={20} color={theme.colors.google} />}
           />
 
           <Button
             onPress={onClickOtherLogin}
             disabled={disable}
             buttonStyle={styles.selectionButtonContainer}
-            title={
-              <Icon
-                name="twitter"
-                type="feather"
-                size={20}
-                color={theme.colors.twitter}
-              />
-            }
+            title={<Icon name="twitter" type="feather" size={20} color={theme.colors.twitter} />}
           />
         </View>
 

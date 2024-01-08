@@ -21,8 +21,4 @@ export function validateSignInNormal(email: string, password: string) {
   return true;
 }
 
-export const validateSignUpNormal = (
-  email: string,
-  password: string,
-  confirmPassword: string,
-) => {};
+export const validateSignUpNormal = (email: string, password: string, confirmPassword: string) => {};

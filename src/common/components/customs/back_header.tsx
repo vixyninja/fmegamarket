@@ -2,11 +2,7 @@ import { Colors, Icon, Theme, makeStyles, normalize } from "@rneui/themed";
 import React from "react";
 import { View, ViewProps } from "react-native";
 
-export default function BackHeader(props: {
-  onPress?: () => void;
-  color?: string;
-  style?: ViewProps["style"];
-}) {
+export default function BackHeader(props: { onPress?: () => void; color?: string; style?: ViewProps['style'] }) {
   const styles = useStyles();
   const { onPress, color, style } = props;
   return (

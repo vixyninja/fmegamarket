@@ -1,13 +1,5 @@
 import { FONT_MANAGER } from "@/assets";
-import {
-  Colors,
-  Input,
-  InputProps,
-  Theme,
-  makeStyles,
-  normalize,
-  useThemeMode,
-} from "@rneui/themed";
+import { Colors, Input, InputProps, Theme, makeStyles, normalize, useThemeMode } from "@rneui/themed";
 import React, { useCallback, useState } from "react";
 
 export default function BaseInput(props: InputProps) {
