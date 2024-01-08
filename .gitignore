@@ -29,6 +29,10 @@ render.experimental.xml
 # Google Services (e.g. APIs or Firebase)
 google-services.json
 
+# env
+.env.development
+.env.production
+
 # Android Profiling
 *.hprof
 # OSX
@@ -108,3 +112,4 @@ android/app/src/main/res/mipmap-xxxhdpi
 android/app/src/main/res/values/ic_launcher_background.xml
 android/app/src/main/res/ic_launcher-web.png
 android/app/src/main/res/playstore-icon.png
+
